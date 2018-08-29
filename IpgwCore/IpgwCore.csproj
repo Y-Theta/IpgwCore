@@ -23,7 +23,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>2</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,6 +74,9 @@
     <Compile Include="Controls\AreaWindow\YT_SizeBorder.cs" />
     <Compile Include="Controls\AreaWindow\YT_TitleBar.cs" />
     <Compile Include="Controls\AreaWindow\YT_Window.cs" />
+    <Compile Include="Controls\Dialogs\YT_DialogBase.cs" />
+    <Compile Include="Controls\Dialogs\YT_FormDialog.cs" />
+    <Compile Include="Controls\Dialogs\YT_GeneralDialog.cs" />
     <Compile Include="Controls\DllFuncs.cs" />
     <Compile Include="Model\BasicModel\Course.cs" />
     <Compile Include="Model\BasicModel\Flux.cs" />
@@ -88,7 +91,21 @@
     <Compile Include="Services\HttpServices\ILogin.cs" />
     <Compile Include="Services\HttpServices\LoginServices.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
-    <Page Include="View\MainWindow.xaml">
+    <Compile Include="View\Pages\InfoPage.xaml.cs">
+      <DependentUpon>InfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\InfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -96,10 +113,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="Controls\Buttons.cs" />
+    <Compile Include="View\Pages\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styles\BasicStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styles\ControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styles\DefaultTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -130,16 +164,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="透明 .ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="DataLogs\CourseData.xml" />
-    <Resource Include="DataLogs\FluxLog.xml" />
-    <Resource Include="DataLogs\Web-config.xml" />
+    <Resource Include="DataLogs\CourseData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DataLogs\FluxLog.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DataLogs\Web-config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

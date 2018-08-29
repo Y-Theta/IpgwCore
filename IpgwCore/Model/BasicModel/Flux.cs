@@ -25,7 +25,26 @@ namespace IpgwCore.Model.BasicModel {
         /// </summary>
         public DateTime InfoTime { get; set; }
         #endregion
-
     }
 
+    /// <summary>
+    /// 流量趋势
+    /// </summary>
+    internal class FluxTrendGroup {
+        /// <summary>
+        /// 流量组
+        /// </summary>
+        public Flux[] FluxInfos { get; set; }
+
+        /// <summary>
+        /// 绘制时坐标值
+        /// </summary>
+        public double[] PointData { get; set; }
+
+        /// <summary>
+        /// 坐标值
+        /// </summary>
+        public double[] VTicks { get; set; }
+
+    }
 }

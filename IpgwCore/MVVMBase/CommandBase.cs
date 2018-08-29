@@ -34,6 +34,9 @@ namespace IpgwCore.MVVMBase {
         #endregion
 
         #region Constructors
+        public CommandBase(CommandAction action) {
+            _execution += action;
+        }
         #endregion
     }
 

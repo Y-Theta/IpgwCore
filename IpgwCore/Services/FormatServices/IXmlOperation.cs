@@ -16,7 +16,7 @@ namespace IpgwCore.Services.FormatServices {
         /// <typeparam name="T">元素类型</typeparam>
         /// <param name="path">节点路径</param>
         /// <returns></returns>
-        object GetNode<T>(XmlPath path);
+        T GetNode<T>(XmlPath path) where T : class;
 
         /// <summary>
         /// 通过路径设置某个节点的元素
@@ -26,12 +26,12 @@ namespace IpgwCore.Services.FormatServices {
         /// <summary>
         /// 通过路径删除某个节点的元素
         /// </summary>
-        bool DeleteNode<T>(T Item, XmlPath path);
+        bool DeleteNode(XmlPath path);
 
         /// <summary>
         /// 通过路径更新某个节点的元素
         /// </summary>
-        bool UpdateNode<T>(T Item, XmlPath path);
+        bool UpdateNode(object Item, XmlPath path);
 
     }
 

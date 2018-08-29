@@ -1,0 +1,435 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:IpgwCore.Controls"
+                    xmlns:local="clr-namespace:IpgwCore">
+
+
+    <!--IconButtons-->
+
+    <!--IconButton-->
+    <Style TargetType="{x:Type controls:YT_IconButton}">
+        <Setter Property="FontWeight"
+                Value="Light" />
+        <Setter Property="Padding"
+                Value="0" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="ToolTipVisiblity"
+                Value="Collapsed" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip Style="{DynamicResource DefaultToolTip}"
+                         Visibility="{Binding ToolTipVisiblity}">
+                    <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                        <TextBlock Text="{Binding ForeToolTip}"
+                                   Style="{DynamicResource DefaultToolTipText}" />
+                    </Grid>
+                </ToolTip>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:YT_IconButton}">
+                    <Border x:Name="RootBorder"
+                            SnapsToDevicePixels="True">
+                        <Grid x:Name="RootGrid"
+                              Margin="{TemplateBinding Padding}"
+                              Background="{TemplateBinding IconMaskN}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="ContentIcon"
+                                       Text="{TemplateBinding Content}"
+                                       FontFamily="{DynamicResource Segoe}"
+                                       Foreground="{TemplateBinding IconN}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       Visibility="{TemplateBinding IconVisiblity}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       RenderTransformOrigin=".5 .5">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform x:Name="ContentIconRotateTransform" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <TextBlock x:Name="ContentTexts"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="{TemplateBinding ContentHorizontalAlignment}"
+                                       VerticalAlignment="{TemplateBinding ContentVerticalAlignment}"
+                                       TextAlignment="{TemplateBinding ContentTextAlignment}"
+                                       Margin="{TemplateBinding LabelPadding}"
+                                       Text="{TemplateBinding ContentText}"
+                                       Foreground="{TemplateBinding IconN}"
+                                       FontSize="{TemplateBinding ContentTextFontSize}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       Visibility="{TemplateBinding ContentTextVisiblity}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted"
+                                 Value="True">
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver"
+                                           Value="True" />
+                                <Condition Property="AllowAni"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ContentIcon"
+                                        Property="Foreground"
+                                        Value="{Binding IconR,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="ContentTexts"
+                                        Property="Foreground"
+                                        Value="{Binding IconR,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="RootBorder"
+                                        Property="Background"
+                                        Value="{Binding IconMaskR,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </MultiTrigger.Setters>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentIconRotateTransform"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         To="-90"
+                                                         Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentIconRotateTransform"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         To="0"
+                                                         Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver"
+                                           Value="True" />
+                                <Condition Property="AllowAni"
+                                           Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ContentIcon"
+                                        Property="Foreground"
+                                        Value="{Binding IconR,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="ContentTexts"
+                                        Property="Foreground"
+                                        Value="{Binding IconR,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="RootBorder"
+                                        Property="Background"
+                                        Value="{Binding IconMaskR,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="ContentIcon"
+                                    Property="Foreground"
+                                    Value="{Binding IconP,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="ContentTexts"
+                                    Property="Foreground"
+                                    Value="{Binding IconP,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="RootBorder"
+                                    Property="Background"
+                                    Value="{Binding IconMaskP,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="Textloc"
+                                 Value="True">
+                            <Setter TargetName="ContentTexts"
+                                    Property="Grid.Column"
+                                    Value="0" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Grid.Column"
+                                    Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--IconToggelButton-->
+    <Style TargetType="{x:Type controls:YT_IconToggelButton}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Style="{DynamicResource DefaultToolTip}"
+                                 Visibility="{Binding ToolTipVisiblity}">
+                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                                <TextBlock Text="{Binding BackToolTip}"
+                                           Style="{DynamicResource DefaultToolTipText}" />
+                            </Grid>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked"
+                     Value="False">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Style="{DynamicResource DefaultToolTip}"
+                                 Visibility="{Binding ToolTipVisiblity}">
+                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                                <TextBlock Text="{Binding ForeToolTip}"
+                                           Style="{DynamicResource DefaultToolTipText}" />
+                            </Grid>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:YT_IconToggelButton}">
+                    <Border x:Name="RootBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding IconMaskN}">
+                        <Grid x:Name="RootGrid"
+                              Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="ContentIcon"
+                                       Grid.Column="1"
+                                       Style="{DynamicResource IconTextBlock}"
+                                       Text="{TemplateBinding ForeIcon}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Foreground="{TemplateBinding IconN}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       Visibility="{TemplateBinding IconVisiblity}"
+                                       RenderTransformOrigin=".5 .5"
+                                       RenderTransform="{TemplateBinding IconRotate}" />
+                            <TextBlock x:Name="Label"
+                                       HorizontalAlignment="{TemplateBinding ContentHorizontalAlignment}"
+                                       VerticalAlignment="{TemplateBinding ContentVerticalAlignment}"
+                                       TextAlignment="{TemplateBinding ContentTextAlignment}"
+                                       Margin="{TemplateBinding LabelPadding}"
+                                       Text="{TemplateBinding Content}"
+                                       FontSize="{TemplateBinding LabelFontSize}"
+                                       Foreground="{TemplateBinding IconN}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       Visibility="{TemplateBinding LabelVisibility}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Textloc"
+                                 Value="True">
+                            <Setter TargetName="Label"
+                                    Property="Grid.Column"
+                                    Value="1" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Grid.Column"
+                                    Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="ContentIcon"
+                                    Property="Text"
+                                    Value="{Binding BackIcon, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Label"
+                                    Property="Text"
+                                    Value="{Binding BackText, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="RootBorder"
+                                    Property="Background"
+                                    Value="{Binding IconMaskS, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Foreground"
+                                    Value="{Binding IconS, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="RootBorder"
+                                    Property="Background"
+                                    Value="{Binding IconMaskP, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Foreground"
+                                    Value="{Binding IconP, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition  Property="IsMouseOver"
+                                            Value="True" />
+                                <Condition  Property="IsChecked"
+                                            Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="RootBorder"
+                                        Property="Background"
+                                        Value="{Binding IconMaskR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="ContentIcon"
+                                        Property="Foreground"
+                                        Value="{Binding IconR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--IconRadioButton-->
+    <Style TargetType="{x:Type controls:YT_IconRadioButton}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Style="{DynamicResource DefaultToolTip}"
+                                 Visibility="{Binding ToolTipVisiblity}">
+                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                                <TextBlock Text="{Binding BackToolTip}"
+                                           Style="{DynamicResource DefaultToolTipText}" />
+                            </Grid>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked"
+                     Value="False">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Style="{DynamicResource DefaultToolTip}"
+                                 Visibility="{Binding ToolTipVisiblity}">
+                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                                <TextBlock Text="{Binding ForeToolTip}"
+                                           Style="{DynamicResource DefaultToolTipText}" />
+                            </Grid>
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:YT_IconRadioButton}">
+                    <Border x:Name="RootBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding IconMaskN}">
+                        <Grid x:Name="RootGrid"
+                              Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="ContentIcon"
+                                       Grid.Column="1"
+                                       Style="{DynamicResource IconTextBlock}"
+                                       Text="{TemplateBinding ForeIcon}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Foreground="{TemplateBinding IconN}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       Visibility="{TemplateBinding IconVisiblity}"
+                                       SnapsToDevicePixels="True" />
+                            <TextBlock x:Name="Label"
+                                       HorizontalAlignment="{TemplateBinding ContentHorizontalAlignment}"
+                                       VerticalAlignment="{TemplateBinding ContentVerticalAlignment}"
+                                       TextAlignment="{TemplateBinding ContentTextAlignment}"
+                                       Margin="{TemplateBinding LabelPadding}"
+                                       Text="{TemplateBinding Content}"
+                                       FontSize="{TemplateBinding LabelFontSize}"
+                                       Foreground="{TemplateBinding IconN}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       Visibility="{TemplateBinding LabelVisibility}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Textloc"
+                                 Value="True">
+                            <Setter TargetName="Label"
+                                    Property="Grid.Column"
+                                    Value="1" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Grid.Column"
+                                    Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="ContentIcon"
+                                    Property="Text"
+                                    Value="{Binding BackIcon, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="RootBorder"
+                                    Property="Background"
+                                    Value="{Binding IconMaskS, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Foreground"
+                                    Value="{Binding IconS, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Label"
+                                    Property="Foreground"
+                                    Value="{Binding IconS, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="RootBorder"
+                                    Property="Background"
+                                    Value="{Binding IconMaskP, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="ContentIcon"
+                                    Property="Foreground"
+                                    Value="{Binding IconP, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Label"
+                                    Property="Foreground"
+                                    Value="{Binding IconP, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter TargetName="ContentIcon"
+                                    Property="Text"
+                                    Value="{Binding DisIcon, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition  Property="IsMouseOver"
+                                            Value="True" />
+                                <Condition  Property="IsChecked"
+                                            Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="RootBorder"
+                                        Property="Background"
+                                        Value="{Binding IconMaskR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="ContentIcon"
+                                        Property="Foreground"
+                                        Value="{Binding IconR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Setter TargetName="Label"
+                                        Property="Foreground"
+                                        Value="{Binding IconR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled"
+                                           Value="false" />
+                                <Condition Property="IsChecked"
+                                           Value="false" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ContentIcon"
+                                        Property="Text"
+                                        Value="{Binding DisIconBack, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

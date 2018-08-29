@@ -1,9 +1,14 @@
 ﻿<Application x:Class="IpgwCore.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:IpgwCore"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:IpgwCore">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Styles/DefaultTheme.xaml" />
+                <ResourceDictionary Source="/View/Styles/BasicStyles.xaml" />
+                <ResourceDictionary Source="/View/Styles/ControlStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

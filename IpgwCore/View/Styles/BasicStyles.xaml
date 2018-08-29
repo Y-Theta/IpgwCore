@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:IpgwCore.View.Styles">
+    <!--Font-->
+    <FontFamily x:Key="Segoe">/FontLibrary;Component/#Segoe</FontFamily>
+    <FontFamily x:Key="RectNum">/FontLibrary;Component/#RectNum</FontFamily>
+    
+</ResourceDictionary>
