@@ -34,5 +34,17 @@ namespace IpgwCore.Properties {
                 this["WeekNowSet"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("160, 8, 8, 8")]
+        public global::System.Drawing.Color MainColor {
+            get {
+                return ((global::System.Drawing.Color)(this["MainColor"]));
+            }
+            set {
+                this["MainColor"] = value;
+            }
+        }
     }
 }

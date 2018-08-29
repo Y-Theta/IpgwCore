@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace OS_CD {
+namespace IpgwCore.Controls.Dialogs {
     /// <summary>
     /// 对话框基类
     /// </summary>
     public class YT_DialogBase : Window {
-        public delegate void CommandAction(object obj = null);
-
         #region Properties
         public double ContentWidth {
             get { return (double)GetValue(ContentWidthProperty); }
@@ -63,7 +61,7 @@ namespace OS_CD {
         }
         public static readonly DependencyProperty CancelCommandProperty =
             DependencyProperty.Register("CancelCommand", typeof(CommandBase),
-                typeof(YT_DialogBase), new PropertyMetadata(null));
+                typeof(YT_DialogBase), new FrameworkPropertyMetadata(null,FrameworkPropertyMetadataOptions.Inherits));
 
         public CommandBase YesCommand {
             get { return (CommandBase)GetValue(YesCommandProperty); }
@@ -71,7 +69,7 @@ namespace OS_CD {
         }
         public static readonly DependencyProperty YesCommandProperty =
             DependencyProperty.Register("YesCommand", typeof(CommandBase),
-                typeof(YT_DialogBase), new PropertyMetadata(null));
+                typeof(YT_DialogBase), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
         public CommandBase NoCommand {
             get { return (CommandBase)GetValue(NoCommandProperty); }
@@ -79,7 +77,7 @@ namespace OS_CD {
         }
         public static readonly DependencyProperty NoCommandProperty =
             DependencyProperty.Register("NoCommand", typeof(CommandBase),
-                typeof(YT_DialogBase), new PropertyMetadata(null));
+                typeof(YT_DialogBase), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
 
         private CommandAction yesAction;
@@ -117,13 +115,13 @@ namespace OS_CD {
 
         protected virtual void NoCommand_Commandaction(object para) {
             DialogResult = false;
-            noAction?.Invoke(this);
+            noAction?.Invoke(para);
             Close();
         }
 
         protected virtual void YesCommand_Commandaction(object para) {
             DialogResult = true;
-            yesAction?.Invoke(this);
+            yesAction?.Invoke(para);
             Close();
         }
 

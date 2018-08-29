@@ -91,6 +91,7 @@
     <Compile Include="Services\HttpServices\ILogin.cs" />
     <Compile Include="Services\HttpServices\LoginServices.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="View\Converter.cs" />
     <Compile Include="View\Pages\InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
     </Compile>
@@ -119,6 +120,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Res.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

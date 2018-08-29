@@ -1,5 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:settings="clr-namespace:IpgwCore.Properties"
+                    xmlns:view="clr-namespace:IpgwCore.View"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
+
+    <!--Button-->
+    <SolidColorBrush x:Key="DefaultButton_Icon_BG"
+                     Color="#808080" />
+    <SolidColorBrush x:Key="DefaultButton_Icon_BG_R"
+                     Color="#EFEFEF" />
+    <SolidColorBrush x:Key="DefaultButton_Icon_BG_P"
+                     Color="#EFEFEF" />
+    <SolidColorBrush x:Key="DefaultButton_IconMask_BG_N"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="DefaultButton_IconMask_BG_R"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="DefaultButton_IconMask_BG_P"
+                     Color="Transparent" />
     
+    
+
 </ResourceDictionary>

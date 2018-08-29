@@ -1,8 +1,61 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:control="clr-namespace:IpgwCore.Controls"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
     <!--Font-->
     <FontFamily x:Key="Segoe">/FontLibrary;Component/#Segoe</FontFamily>
     <FontFamily x:Key="RectNum">/FontLibrary;Component/#RectNum</FontFamily>
+
+    <!--ToolTips-->
+
+    <!--DefaultToolTip-->
+    <Style x:Key="DefaultToolTip"
+           TargetType="ToolTip">
+        <Setter Property="Padding"
+                Value="0" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource MainWindow_Border_Normal}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="DataContext"
+                Value="{Binding PlacementTarget, RelativeSource={RelativeSource Mode=Self}}" />
+    </Style>
+
+    <!--DefaultToolTipText-->
+    <Style x:Key="DefaultToolTipText"
+           TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="Foreground"
+                Value="{StaticResource MainWindow_Border_Normal}" />
+        <Setter Property="Margin"
+                Value="5,2,5,2" />
+    </Style>
     
+    <!--Buttons-->
+    <Style x:Key="CloseButton" TargetType="control:YT_IconButton">
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Width"
+                Value="24" />
+        <Setter Property="Height"
+                Value="24" />
+        <Setter Property="Content"
+                Value="&#xE711;" />
+        <Setter Property="IconN"
+                Value="{DynamicResource DefaultButton_Icon_BG}" />
+        <Setter Property="IconR"
+                Value="{DynamicResource DefaultButton_Icon_BG_R}" />
+        <Setter Property="IconP"
+                Value="{DynamicResource DefaultButton_Icon_BG_P}" />
+        <Setter Property="IconMaskN"
+                Value="{DynamicResource DefaultButton_IconMask_BG_N}" />
+        <Setter Property="IconMaskR"
+                Value="{DynamicResource DefaultButton_IconMask_BG_R}" />
+        <Setter Property="IconMaskP"
+                Value="{DynamicResource DefaultButton_IconMask_BG_P}" />
+    </Style>
+
+
+
 </ResourceDictionary>

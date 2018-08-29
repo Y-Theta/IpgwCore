@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace IpgwCore.AWindow {
+namespace IpgwCore.Controls.AreaWindow {
     public class YT_Window : Window {
+
         #region ExtendToTitleBar
         public bool ExtendToTitleBar {
             get { return (bool)GetValue(ExtendToTitleBarProperty); }

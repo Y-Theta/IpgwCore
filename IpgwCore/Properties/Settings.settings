@@ -5,5 +5,8 @@
     <Setting Name="WeekNowSet" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2000-01-01</Value>
     </Setting>
+    <Setting Name="MainColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">160, 8, 8, 8</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

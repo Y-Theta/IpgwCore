@@ -1,7 +1,172 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:IpgwCore.Controls"
+                    xmlns:dialogs="clr-namespace:IpgwCore.Controls.Dialogs"
+                    xmlns:areawindow="clr-namespace:IpgwCore.Controls.AreaWindow"
                     xmlns:local="clr-namespace:IpgwCore">
+
+    <!--WindowBase-->
+
+    <!--YT_TitleBar-->
+    <Style TargetType="{x:Type areawindow:YT_TitleBar}">
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type areawindow:YT_TitleBar}">
+                    <ContentPresenter x:Name="ContentPresenter"
+                                      ContentSource="{TemplateBinding Content}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--YT_SizeBorder-->
+    <Style TargetType="{x:Type areawindow:YT_SizeBorder}">
+        <Setter Property="BorderThickness"
+                Value="{DynamicResource MainWindow_SizeBorder_Thickness}" />
+        <Setter Property="BorderBrush"
+                Value="#00000000" />
+    </Style>
+
+    <!--YT_Window-->
+    <Style TargetType="{x:Type areawindow:YT_Window}">
+        <Setter Property="WindowStyle"
+                Value="None" />
+        <Setter Property="AllowsTransparency"
+                Value="True" />
+        <Setter Property="Width"
+                Value="540" />
+        <Setter Property="Height"
+                Value="320" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type areawindow:YT_Window}">
+                    <Border BorderBrush="{DynamicResource MainWindow_Border_Normal}"
+                            BorderThickness="1"
+                            Margin="2">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <AdornerDecorator x:Name="Content"
+                                              Grid.Row="1">
+                                <ContentPresenter Content="{TemplateBinding Content}" />
+                            </AdornerDecorator>
+                            <areawindow:YT_TitleBar x:Name="TitleBar"
+                                                    Content="{TemplateBinding TitleArea}" />
+                            <areawindow:YT_SizeBorder Grid.Row="0"
+                                                      Grid.RowSpan="2"
+                                                      AttachedWindow="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=areawindow:YT_Window}}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ExtendToTitleBar"
+                                 Value="true">
+                            <Setter TargetName="Content"
+                                    Property="Grid.Row"
+                                    Value="0" />
+                            <Setter TargetName="Content"
+                                    Property="Grid.RowSpan"
+                                    Value="2" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <!--Dialogs-->
+
+    <!--DialogBase-->
+    <ControlTemplate x:Key="YT_GeneralDialog_Default"
+                     TargetType="dialogs:YT_DialogBase">
+        <Border x:Name="RootBorder"
+                Width="{TemplateBinding ContentWidth}"
+                Height="{TemplateBinding ContentHeight}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid x:Name="RootGrid"
+                  Background="{TemplateBinding Background}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid x:Name="TitleArea"
+                      Height="{StaticResource Dialog_TileBar_Height}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <controls:YT_IconButton x:Name="CancleButton"
+                                            Grid.Column="1"
+                                            Content="&#xE711;"
+                                            Visibility="{TemplateBinding CancelButtonVisibility}"
+                                            Command="{TemplateBinding CancelCommand}" />
+                </Grid>
+                <AdornerDecorator x:Name="Content"
+                                  Grid.Row="1">
+                    <ContentPresenter />
+                </AdornerDecorator>
+                <controls:YT_IconButton x:Name="YesButton"
+                                        Grid.Row="1"
+                                        ContentText="是"
+                                        Margin="0,0,68,8"
+                                        Visibility="{TemplateBinding YseButtonVisibility}"
+                                        Command="{TemplateBinding YesCommand}" />
+                <controls:YT_IconButton x:Name="NoButton"
+                                        Grid.Row="1"
+                                        ContentText="否"
+                                        Margin="0,0,8,8"
+                                        Visibility="{TemplateBinding NoButtonVisibility}"
+                                        Command="{TemplateBinding NoCommand}" />
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <!--YT_GeneralDialog-->
+    <Style TargetType="dialogs:YT_GeneralDialog">
+        <Setter Property="ResizeMode"
+                Value="NoResize" />
+        <Setter Property="SizeToContent"
+                Value="WidthAndHeight" />
+        <Setter Property="ShowInTaskbar"
+                Value="False" />
+        <Setter Property="Background"
+                Value="{StaticResource MainWindow_BG}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource MainWindow_Border_Normal}" />
+        <Setter Property="Template"
+                Value="{StaticResource YT_GeneralDialog_Default}" />
+    </Style>
+
+    <!--YT_FormDialog-->
+    <Style TargetType="dialogs:YT_FormDialog">
+        <Setter Property="ResizeMode"
+                Value="NoResize" />
+        <Setter Property="SizeToContent"
+                Value="WidthAndHeight" />
+        <Setter Property="ShowInTaskbar"
+                Value="False" />
+        <Setter Property="Background"
+                Value="{StaticResource MainWindow_BG}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource MainWindow_Border_Normal}" />
+        <Setter Property="Template"
+                Value="{StaticResource YT_GeneralDialog_Default}" />
+    </Style>
+
 
 
     <!--IconButtons-->

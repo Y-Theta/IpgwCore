@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IpgwCore.AWindow {
+namespace IpgwCore.Controls.AreaWindow {
     internal interface IDrawicon {
         Icon Drawicon();
     }

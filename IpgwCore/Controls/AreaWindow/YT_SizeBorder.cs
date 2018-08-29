@@ -10,7 +10,7 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using IpgwCore.Controls;
 
-namespace IpgwCore.AWindow {
+namespace IpgwCore.Controls.AreaWindow {
     public class YT_SizeBorder : Border {
         private int resDirection;
         public int ResDirection {

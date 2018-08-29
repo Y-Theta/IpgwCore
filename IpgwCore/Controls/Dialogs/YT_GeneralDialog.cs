@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace OS_CD {
+namespace IpgwCore.Controls.Dialogs {
     /// <summary>
-    /// 窗口关闭对话框
+    /// 基本对话框
     /// 一般用于提醒保存操作或进行一些选择
     /// </summary>
     public class YT_GeneralDialog : YT_DialogBase {

@@ -10,13 +10,13 @@ namespace IpgwCore.MVVMBase {
     /// </summary>
     /// <param name="para"></param>
     /// <returns></returns>
-    public delegate bool EnableAction(object para);
+    public delegate bool EnableAction(object para = null);
 
     /// <summary>
     /// 命令执行回调,用于绑定Command
     /// </summary>
     /// <param name="para">命令参数</param>
-    public delegate void CommandAction(object para);
+    public delegate void CommandAction(object para = null);
 
     /// <summary>
     /// 属性变更回调

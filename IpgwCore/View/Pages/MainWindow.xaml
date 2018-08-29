@@ -1,14 +1,30 @@
-﻿<Window x:Class="IpgwCore.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IpgwCore"
-        mc:Ignorable="d"
-        Title="MainWindow"
-        Height="450"
-        Width="800">
-    <Grid Background="White">
-
+﻿<areawindow:YT_Window x:Class="IpgwCore.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:settings="clr-namespace:IpgwCore.Properties"
+                      xmlns:local="clr-namespace:IpgwCore"
+                      xmlns:areawindow="clr-namespace:IpgwCore.Controls.AreaWindow"
+                      xmlns:controls="clr-namespace:IpgwCore.Controls"
+                      ExtendToTitleBar="True"
+                      Background="Transparent"
+                      mc:Ignorable="d">
+    <areawindow:YT_Window.TitleArea>
+        <Grid Height="32"
+              Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <controls:YT_IconButton x:Name="Close"
+                                    Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type areawindow:YT_TitleBar}}}"
+                                    Style="{StaticResource CloseButton}"
+                                    Grid.Column="2" />
+        </Grid>
+    </areawindow:YT_Window.TitleArea>
+    <Grid Background="{Binding MainColor, Source={x:Static settings:Settings.Default},Converter={StaticResource ColorConv}}">
+        
     </Grid>
-</Window>
+</areawindow:YT_Window>
