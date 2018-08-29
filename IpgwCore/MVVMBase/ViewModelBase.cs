@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IpgwCore.MVVMBase {
+    /// <summary>
+    /// 基本的ViewModel
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged {
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
