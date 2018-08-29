@@ -14,10 +14,9 @@ using System.Threading.Tasks;
 namespace IpgwCore.AWindow {
     internal interface IDrawicon {
         Icon Drawicon();
-
     }
 
-    public class YT_AreaIcon: UIElement, IDisposable
+    public class YT_AreaIcon: UIElement, IDisposable,IDrawicon
     {
         //NormalProperties
         private System.Windows.Forms.NotifyIcon FlowIcon;
@@ -95,7 +94,9 @@ namespace IpgwCore.AWindow {
         #endregion
 
         #region GraphUpdata -- 托盘画图
-
+        public Icon Drawicon() {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region 公共方法

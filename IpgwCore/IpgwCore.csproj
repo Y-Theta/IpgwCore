@@ -38,7 +38,15 @@
     <ApplicationIcon>透明 .ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontLibrary">
+      <HintPath>..\..\..\Visual C#\FontLibrary1\FontLibrary1\bin\Release\FontLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.2.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.2\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
@@ -67,9 +75,18 @@
     <Compile Include="Controls\AreaWindow\YT_TitleBar.cs" />
     <Compile Include="Controls\AreaWindow\YT_Window.cs" />
     <Compile Include="Controls\DllFuncs.cs" />
+    <Compile Include="Model\BasicModel\Course.cs" />
+    <Compile Include="Model\BasicModel\Flux.cs" />
+    <Compile Include="Model\BasicModel\InfoSet.cs" />
+    <Compile Include="Model\BasicModel\XmlPath.cs" />
     <Compile Include="MVVMBase\CommandBase.cs" />
     <Compile Include="MVVMBase\EventArgsandHandler.cs" />
     <Compile Include="MVVMBase\ViewModelBase.cs" />
+    <Compile Include="Services\FormatServices\Formater.cs" />
+    <Compile Include="Services\FormatServices\IXmlOperation.cs" />
+    <Compile Include="Services\FormatServices\XmlDocService.cs" />
+    <Compile Include="Services\HttpServices\ILogin.cs" />
+    <Compile Include="Services\HttpServices\LoginServices.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,10 +119,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Res\Font\Digital.ttf" />
+    <Resource Include="Res\Font\Rect.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -115,6 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="透明 .ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DataLogs\CourseData.xml" />
+    <Resource Include="DataLogs\FluxLog.xml" />
+    <Resource Include="DataLogs\Web-config.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

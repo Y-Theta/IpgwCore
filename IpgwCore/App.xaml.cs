@@ -11,5 +11,10 @@ namespace IpgwCore {
     /// App.xaml 的交互逻辑
     /// </summary>
     public partial class App : Application {
+        public static string RootPath = AppDomain.CurrentDomain.BaseDirectory;
+        public const string WebConfig = @"\Configs\Web-config.xml";
+        public const string FluxLog = @"\Configs\FluxLog.xml";
+        public const string CourseData = @"\Configs\CourseData.xml";
+
     }
 }

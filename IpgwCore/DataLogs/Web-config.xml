@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configs name="WebTable">
+  <Web id="0" name="NEUIpgw" login="true" gzip="false" charset="UTF-8" needverifycode="false">
+    <Inf type="action" name="password" value=""/>
+    <Inf type="action" name="username" value=""/>
+    <Inf type="action" name="action" value="login"/>
+    <Inf type="uri" name="Login" uri="http://ipgw.neu.edu.cn/srun_portal_pc.php?ac_id=1&amp;"/>
+    <Inf type="uri" name="DataUsage" uri="http://ipgw.neu.edu.cn/include/auth_action.php?k=12345&amp;action=get_online_info"/>
+  </Web>
+  <Web id="1" name="NEUZhjw" login="true" gzip="false" charset="GBK" needverifycode="true">
+    <Inf type="action" name="Password" value=""/>
+    <Inf type="action" name="WebUserNO" value=""/>
+    <Inf type="action" name="Agnomen" value=""/>
+    <Inf type="idcode" name="action" value="action=&quot;(\S*)&quot;"/>
+    <Inf type="uri" name="Login" uri="https://zhjw.neu.edu.cn/"/>
+    <Inf type="uri" name="DataUsage" uri="https://zhjw.neu.edu.cn/ACTIONQUERYSTUDENTSCHEDULEBYSELF.APPPROCESS?m=1"/>
+    <Inf type="verify" name="Verify" value="src=&quot;(\S*\?id=\S*)&quot;"/>
+  </Web>
+  <Web id="2" name="One" login="false" gzip="true" charset="UTF-8" needverifycode="false">
+    <Inf type="uri" name="DataUsage" uri="http://wufazhuce.com/"/>
+  </Web>
+</Configs>

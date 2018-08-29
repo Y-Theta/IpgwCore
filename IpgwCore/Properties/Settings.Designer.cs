@@ -22,5 +22,17 @@ namespace IpgwCore.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000-01-01")]
+        public global::System.DateTime WeekNowSet {
+            get {
+                return ((global::System.DateTime)(this["WeekNowSet"]));
+            }
+            set {
+                this["WeekNowSet"] = value;
+            }
+        }
     }
 }
