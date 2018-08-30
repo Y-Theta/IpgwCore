@@ -81,6 +81,39 @@
         </Setter>
     </Style>
 
+    <!--TextBox-->
+    <Style TargetType="controls:YT_TextBox">
+        <Setter Property="TextWrapping"
+                Value="NoWrap" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="Padding"
+                Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:YT_TextBox">
+                    <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="RootGrid"
+                              Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False"
+                                          Padding="{Binding ContentPadding,RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Margin="{Binding ContentMargin,RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          Style="{DynamicResource SC_ScrollViewer}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 
 
     <!--Dialogs-->
@@ -204,11 +237,11 @@
                                                         Grid.Column="2" />
                             </Grid>
                             <Grid x:Name="ContentArea"
-                                  Margin="8,8,12,0"
+                                  Margin="8,6,12,0"
                                   VerticalAlignment="Top"
                                   Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="64" />
+                                    <ColumnDefinition Width="72" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -217,11 +250,15 @@
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <Rectangle x:Name="ColorID"
-                                           Width="50"
-                                           Height="50"
+                                           Width="52"
+                                           Height="52"
+                                           HorizontalAlignment="Left"
+                                           Margin="6,0,0,0"
+                                           StrokeThickness="1"
+                                           Stroke="{DynamicResource ColorPickerLabel}"
                                            Fill="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ColorNumConv},ConverterParameter=Brush }" />
                                 <Grid Grid.Column="1"
-                                      Height="48">
+                                      Height="50">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
@@ -236,7 +273,7 @@
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Style="{StaticResource ColorSliderLabel}"
                                                    Padding="0,0,0,10"
-                                                   Text="R"/>
+                                                   Text="R" />
                                         <Slider Grid.Column="1"
                                                 Margin="4,0,0,0"
                                                 VerticalAlignment="Top"
@@ -280,8 +317,7 @@
                                       Grid.ColumnSpan="2"
                                       Grid.Row="1"
                                       Margin="6,8,0,0"
-                                      Height="16"
-                                      VerticalAlignment="Center">
+                                      Height="16">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="12" />
                                         <ColumnDefinition Width="*" />
@@ -297,9 +333,69 @@
                                 </Grid>
                                 <Grid x:Name="EditBlocks"
                                       Grid.Row="2"
+                                      Margin="6,2,0,0"
+                                      Height="20"
                                       Grid.ColumnSpan="2">
-                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0"
+                                                Margin="0,0,8,0"
+                                                Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Text="HEX " />
+                                        <controls:YT_TextBox Style="{StaticResource ColorSliderValue}"
+                                                             Width="64"
+                                                             Text="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=HEX,UpdateSourceTrigger=PropertyChanged}" />
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1"
+                                                Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Text="A " />
+                                        <controls:YT_TextBox Style="{StaticResource ColorSliderValue}"
+                                                             Text="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=AS,UpdateSourceTrigger=PropertyChanged}" />
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2"
+                                                Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Text="R " />
+                                        <controls:YT_TextBox Style="{StaticResource ColorSliderValue}"
+                                                             Text="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=RS,UpdateSourceTrigger=PropertyChanged}" />
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="3"
+                                                Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Text="G " />
+                                        <controls:YT_TextBox Style="{StaticResource ColorSliderValue}"
+                                                             Text="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=GS,UpdateSourceTrigger=PropertyChanged}" />
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4"
+                                                Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Text="B " />
+                                        <controls:YT_TextBox Style="{StaticResource ColorSliderValue}"
+                                                             Text="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=BS,UpdateSourceTrigger=PropertyChanged}" />
+
+                                    </StackPanel>
                                 </Grid>
+                            </Grid>
+                            <Grid x:Name="FootArea"
+                                  Grid.Row="2">
+                                <controls:YT_IconButton x:Name="Submit"
+                                                        ForeToolTip="选取当前颜色"
+                                                        ContentText="确定"
+                                                        Style="{StaticResource TextButton}"
+                                                        Command="{Binding YesCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                        HorizontalAlignment="Stretch"
+                                                        VerticalAlignment="Stretch" />
                             </Grid>
                         </Grid>
                     </Border>

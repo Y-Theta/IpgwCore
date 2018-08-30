@@ -105,6 +105,7 @@
     <Compile Include="Controls\DllFuncs.cs" />
     <Compile Include="Controls\FlowControls\YT_ContextMenu.cs" />
     <Compile Include="Controls\FlowControls\YT_Popup.cs" />
+    <Compile Include="Controls\OtherControls\YT_TextBox.cs" />
     <Compile Include="Model\BasicModel\Course.cs" />
     <Compile Include="Model\BasicModel\Flux.cs" />
     <Compile Include="Model\BasicModel\InfoSet.cs" />
@@ -149,7 +150,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons.cs" />
+    <Compile Include="Controls\OtherControls\Buttons.cs" />
     <Compile Include="View\Pages\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

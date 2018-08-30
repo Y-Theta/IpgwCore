@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using IpgwCore.View;
 
 namespace IpgwCore.Controls.Dialogs {
     internal class YT_ColorPicker : YT_DialogBase {
@@ -20,13 +22,11 @@ namespace IpgwCore.Controls.Dialogs {
         #endregion
 
         #region Methods
-        protected override void OnClosing(CancelEventArgs e) {
 
-        }
-
-        public void ShowDialog(Window Holder, Color color) {
+        public void ShowDialog(Window Holder, Color color,out Color selected) {
             base.ShowDialog(Holder);
             Argb = color.ToArgb();
+            
         }
         #endregion
 

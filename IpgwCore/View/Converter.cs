@@ -58,6 +58,20 @@ namespace IpgwCore.View {
     }
 
     internal class ColorNumConv: IValueConverter {
+        public static Color ToColor(int cp) {
+            int a = cp >> 24, r = (cp >> 16) & 0xff, g = (cp >> 8) & 0xff, b = cp & 0xff;
+            if (a < 0)
+                a = a + 256;
+            return Color.FromArgb((Byte)a, (Byte)r, (Byte)g, (Byte)b);
+        }
+
+        public static SolidColorBrush ToSolidColorBrush(int cp) {
+            int a = cp >> 24, r = (cp >> 16) & 0xff, g = (cp >> 8) & 0xff, b = cp & 0xff;
+            if (a < 0)
+                a = a + 256;
+            return new SolidColorBrush(Color.FromArgb((Byte)a, (Byte)r, (Byte)g, (Byte)b));
+        }
+
         private int _color;
     
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
@@ -85,6 +99,14 @@ namespace IpgwCore.View {
                 case "G":
                     return g;
                 case "B":
+                    return b;
+                case "AS":
+                    return a;
+                case "RS":
+                    return r;
+                case "GS":
+                    return g;
+                case "BS":
                     return b;
                 default: return value;
             }
@@ -146,6 +168,58 @@ namespace IpgwCore.View {
                             return _color;
                     }
                     catch (Exception) {
+                        return _color;
+                    }
+                case "AS":
+                    try
+                    {
+                        _argb = Int32.Parse(value.ToString());
+                        if (_argb < 256)
+                            return (int)((_argb << 24) + (_color & 0x00ffffff));
+                        else
+                            return _color;
+                    }
+                    catch (Exception)
+                    {
+                        return _color;
+                    }
+                case "RS":
+                    try
+                    {
+                        _argb = Int32.Parse(value.ToString());
+                        if (_argb < 256)
+                            return (int)((_argb << 16) + (_color & 0xff00ffff));
+                        else
+                            return _color;
+                    }
+                    catch (Exception)
+                    {
+                        return _color;
+                    }
+                case "GS":
+                    try
+                    {
+                        _argb = Int32.Parse(value.ToString());
+                        if (_argb < 256)
+                            return (int)((_argb << 8) + (_color & 0xffff00ff));
+                        else
+                            return _color;
+                    }
+                    catch (Exception)
+                    {
+                        return _color;
+                    }
+                case "BS":
+                    try
+                    {
+                        _argb = Int32.Parse(value.ToString());
+                        if (_argb < 256)
+                            return (int)(_argb + (_color & 0xffffff00));
+                        else
+                            return _color;
+                    }
+                    catch (Exception)
+                    {
                         return _color;
                     }
                 default: return value;

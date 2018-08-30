@@ -15,6 +15,17 @@
                      Color="#E0E0E0" />
     <!--#endregion-->
 
+    <!--#region                                                ScrollView-->
+    
+    <SolidColorBrush x:Key="ScrollViewThumb__Bg_N"
+                     Color="#1e1e1e" />
+    <SolidColorBrush x:Key="ScrollViewThumb__Bg_R"
+                     Color="#E0E0E0" />
+    <SolidColorBrush x:Key="ScrollViewThumb__Bg_P"
+                     Color="#808080" />
+    
+    <!--#endregion-->
+
     <!--#region                                                TitleBar  -->
     
     <!--Button-->
@@ -76,6 +87,29 @@
     
     <SolidColorBrush x:Key="ColorPickerLabel"
                      Color="#404040" />
+
+    <SolidColorBrush x:Key="ColorPickerValueBox_Bg"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="ColorPickerValueBox_Fg"
+                     Color="#404040" />
+    <SolidColorBrush x:Key="ColorPickerValueBox_BFg"
+                     Color="#323232" />
+    <SolidColorBrush x:Key="ColorPickerValueBox_FFg"
+                     Color="#E0E0E0" />
+
+    <SolidColorBrush x:Key="TextButton_Icon_BG"
+                     Color="#404040" />
+    <SolidColorBrush x:Key="TextButton_Icon_BG_R"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="TextButton_Icon_BG_P"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="TextButton_IconMask_BG_N"
+                     Color="#1E1E1E" />
+    <SolidColorBrush x:Key="TextButton_IconMask_BG_R"
+                     Color="#2E2E2E" />
+    <SolidColorBrush x:Key="TextButton_IconMask_BG_P"
+                     Color="#1E1E1E" />
+
     <!--#endregion-->
 
 
