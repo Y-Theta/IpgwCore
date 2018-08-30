@@ -37,13 +37,25 @@ namespace IpgwCore.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("160, 8, 8, 8")]
-        public global::System.Drawing.Color MainColor {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double MainOpacity {
             get {
-                return ((global::System.Drawing.Color)(this["MainColor"]));
+                return ((double)(this["MainOpacity"]));
             }
             set {
-                this["MainColor"] = value;
+                this["MainOpacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("160, 8, 8, 8")]
+        public global::System.Drawing.Color AreaIconColor {
+            get {
+                return ((global::System.Drawing.Color)(this["AreaIconColor"]));
+            }
+            set {
+                this["AreaIconColor"] = value;
             }
         }
     }

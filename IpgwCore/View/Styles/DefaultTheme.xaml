@@ -3,21 +3,80 @@
                     xmlns:settings="clr-namespace:IpgwCore.Properties"
                     xmlns:view="clr-namespace:IpgwCore.View"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
+    <!--#region-->
+    <!--#endregion-->
 
+
+    <!--#region                                                Basic  -->
+
+    <SolidColorBrush x:Key="MainWindow_Bg"
+                     Color="#080808" />
+    <SolidColorBrush x:Key="MainWindow_Fg"
+                     Color="#E0E0E0" />
+    <!--#endregion-->
+
+    <!--#region                                                TitleBar  -->
+    
     <!--Button-->
     <SolidColorBrush x:Key="DefaultButton_Icon_BG"
-                     Color="#808080" />
+                     Color="#A0A0A0" />
     <SolidColorBrush x:Key="DefaultButton_Icon_BG_R"
-                     Color="#EFEFEF" />
+                     Color="#E0E0E0" />
     <SolidColorBrush x:Key="DefaultButton_Icon_BG_P"
-                     Color="#EFEFEF" />
+                     Color="#E0E0E0" />
     <SolidColorBrush x:Key="DefaultButton_IconMask_BG_N"
                      Color="Transparent" />
     <SolidColorBrush x:Key="DefaultButton_IconMask_BG_R"
-                     Color="Transparent" />
+                     Color="#606060" />
     <SolidColorBrush x:Key="DefaultButton_IconMask_BG_P"
-                     Color="Transparent" />
+                     Color="#404040" />
     
+    <!--Text-->
+    <SolidColorBrush x:Key="DefaultMainLabel_Fg"
+                     Color="#A0A0A0" />
+
+    <!--#endregion-->
+
+
+    <!--#region                                                ToolTips  -->
     
+    <SolidColorBrush x:Key="DefaultToolTip_Bg"
+                     Color="#080808" />
+    <SolidColorBrush x:Key="DefaultToolTip_Fg"
+                     Color="#E0E0E0" />
+    <SolidColorBrush x:Key="DefaultToolTip_Bc"
+                     Color="#323232" />
+    <!--#endregion-->
+
+
+    <!--#region                                                Dialogs  -->
+    
+    <SolidColorBrush x:Key="DefaultDialogs_Bg"
+                     Color="#080808" />
+    <SolidColorBrush x:Key="DefaultDialogs_Fg"
+                     Color="#E0E0E0" />
+    <SolidColorBrush x:Key="DefaultDialogs_Bc"
+                     Color="#323232" />
+    <!--#endregion-->
+
+    <!--#region                                                ColorPicker  -->
+    
+    <!--Slider-->
+    <SolidColorBrush x:Key="ColorPickerThumb_Bg_N"
+                     Color="#1e1e1e" />
+    <SolidColorBrush x:Key="ColorPickerThumb_Bg_R"
+                     Color="#E0E0E0" />
+    <SolidColorBrush x:Key="ColorPickerThumb_Bg_P"
+                     Color="#808080" />
+    
+    <SolidColorBrush x:Key="ColorPickerTrack_Bg_N"
+                     Color="#2a2a2a" />
+    <SolidColorBrush x:Key="ColorPickerTrack_Bg_P"
+                     Color="#1e1e1e" />
+    
+    <SolidColorBrush x:Key="ColorPickerLabel"
+                     Color="#404040" />
+    <!--#endregion-->
+
 
 </ResourceDictionary>

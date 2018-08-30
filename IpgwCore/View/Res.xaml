@@ -1,8 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:view="clr-namespace:IpgwCore.View"
                     xmlns:local="clr-namespace:IpgwCore.View">
+    <!--Font-->
+    <FontFamily x:Key="Segoe">/FontLibrary;Component/#Segoe</FontFamily>
+    <FontFamily x:Key="RectNum">/FontLibrary;Component/#RectNum</FontFamily>
 
     <view:ColorConv x:Key="ColorConv" />
+    <view:ColorNumConv x:Key="ColorNumConv" />
 
 </ResourceDictionary>

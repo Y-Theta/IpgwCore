@@ -40,13 +40,13 @@
         <Setter Property="AllowsTransparency"
                 Value="True" />
         <Setter Property="Width"
-                Value="540" />
+                Value="560" />
         <Setter Property="Height"
-                Value="320" />
+                Value="360" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type areawindow:YT_Window}">
-                    <Border BorderBrush="{DynamicResource MainWindow_Border_Normal}"
+                    <Border BorderBrush="{DynamicResource DefaultDialogs_Bc}"
                             BorderThickness="1"
                             Margin="2">
                         <Grid Background="{TemplateBinding Background}">
@@ -144,7 +144,7 @@
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="BorderBrush"
-                Value="{StaticResource MainWindow_Border_Normal}" />
+                Value="{StaticResource DefaultDialogs_Bc}" />
         <Setter Property="Template"
                 Value="{StaticResource YT_GeneralDialog_Default}" />
     </Style>
@@ -162,9 +162,150 @@
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="BorderBrush"
-                Value="{StaticResource MainWindow_Border_Normal}" />
+                Value="{StaticResource DefaultDialogs_Bc}" />
         <Setter Property="Template"
                 Value="{StaticResource YT_GeneralDialog_Default}" />
+    </Style>
+
+    <!--YT_ColorPicker-->
+    <Style TargetType="dialogs:YT_ColorPicker">
+        <Setter Property="ResizeMode"
+                Value="NoResize" />
+        <Setter Property="SizeToContent"
+                Value="WidthAndHeight" />
+        <Setter Property="ShowInTaskbar"
+                Value="False" />
+        <Setter Property="AllowsTransparency"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dialogs:YT_ColorPicker">
+                    <Border Width="300"
+                            Height="160"
+                            Background="{DynamicResource MainWindow_Bg}"
+                            BorderBrush="{DynamicResource DefaultDialogs_Bc}"
+                            BorderThickness="1">
+                        <Grid x:Name="RootGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="24" />
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="TitleArea">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <controls:YT_IconButton x:Name="Close"
+                                                        Command="{Binding CancelCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                        ForeToolTip="关闭"
+                                                        ToolTipVisiblity="Visible"
+                                                        Style="{StaticResource CloseButton}"
+                                                        Grid.Column="2" />
+                            </Grid>
+                            <Grid x:Name="ContentArea"
+                                  Margin="8,8,12,0"
+                                  VerticalAlignment="Top"
+                                  Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="64" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Rectangle x:Name="ColorID"
+                                           Width="50"
+                                           Height="50"
+                                           Fill="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ColorNumConv},ConverterParameter=Brush }" />
+                                <Grid Grid.Column="1"
+                                      Height="48">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="R"
+                                          Grid.Row="0"
+                                          VerticalAlignment="Top">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="12" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Padding="0,0,0,10"
+                                                   Text="R"/>
+                                        <Slider Grid.Column="1"
+                                                Margin="4,0,0,0"
+                                                VerticalAlignment="Top"
+                                                Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=R}"
+                                                Style="{StaticResource ColorPickerSlider}" />
+                                    </Grid>
+                                    <Grid x:Name="G"
+                                          Grid.Row="1"
+                                          VerticalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="12" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Padding="0,0,0,4"
+                                                   Text="G" />
+                                        <Slider Grid.Column="1"
+                                                Margin="4,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=G}"
+                                                Style="{StaticResource ColorPickerSlider}" />
+                                    </Grid>
+                                    <Grid x:Name="B"
+                                          Grid.Row="2"
+                                          VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="12" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                                   Padding="0,4,0,0"
+                                                   Text="B" />
+                                        <Slider Grid.Column="1"
+                                                VerticalAlignment="Bottom"
+                                                Margin="4,0,0,0"
+                                                Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=B}"
+                                                Style="{StaticResource ColorPickerSlider}" />
+                                    </Grid>
+                                </Grid>
+                                <Grid x:Name="A"
+                                      Grid.ColumnSpan="2"
+                                      Grid.Row="1"
+                                      Margin="6,8,0,0"
+                                      Height="16"
+                                      VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="12" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Style="{StaticResource ColorSliderLabel}"
+                                               Padding="0,0,0,4"
+                                               Text="A" />
+                                    <Slider Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Margin="4,0,0,0"
+                                            Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=A}"
+                                            Style="{StaticResource ColorPickerSlider}" />
+                                </Grid>
+                                <Grid x:Name="EditBlocks"
+                                      Grid.Row="2"
+                                      Grid.ColumnSpan="2">
+                                    
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 
@@ -191,7 +332,7 @@
             <Setter.Value>
                 <ToolTip Style="{DynamicResource DefaultToolTip}"
                          Visibility="{Binding ToolTipVisiblity}">
-                    <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                    <Grid Background="{DynamicResource DefaultToolTip_Bg}">
                         <TextBlock Text="{Binding ForeToolTip}"
                                    Style="{DynamicResource DefaultToolTipText}" />
                     </Grid>
@@ -335,7 +476,7 @@
                     <Setter.Value>
                         <ToolTip Style="{DynamicResource DefaultToolTip}"
                                  Visibility="{Binding ToolTipVisiblity}">
-                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                            <Grid Background="{DynamicResource DefaultToolTip_Bg}">
                                 <TextBlock Text="{Binding BackToolTip}"
                                            Style="{DynamicResource DefaultToolTipText}" />
                             </Grid>
@@ -349,7 +490,7 @@
                     <Setter.Value>
                         <ToolTip Style="{DynamicResource DefaultToolTip}"
                                  Visibility="{Binding ToolTipVisiblity}">
-                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                            <Grid Background="{DynamicResource DefaultToolTip_Bg}">
                                 <TextBlock Text="{Binding ForeToolTip}"
                                            Style="{DynamicResource DefaultToolTipText}" />
                             </Grid>
@@ -458,7 +599,7 @@
                     <Setter.Value>
                         <ToolTip Style="{DynamicResource DefaultToolTip}"
                                  Visibility="{Binding ToolTipVisiblity}">
-                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                            <Grid Background="{DynamicResource DefaultToolTip_Bg}">
                                 <TextBlock Text="{Binding BackToolTip}"
                                            Style="{DynamicResource DefaultToolTipText}" />
                             </Grid>
@@ -472,7 +613,7 @@
                     <Setter.Value>
                         <ToolTip Style="{DynamicResource DefaultToolTip}"
                                  Visibility="{Binding ToolTipVisiblity}">
-                            <Grid Background="{DynamicResource DefaultToolTip_BG}">
+                            <Grid Background="{DynamicResource DefaultToolTip_Bg}">
                                 <TextBlock Text="{Binding ForeToolTip}"
                                            Style="{DynamicResource DefaultToolTipText}" />
                             </Grid>

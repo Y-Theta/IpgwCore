@@ -16,11 +16,11 @@ namespace IpgwCore.Services.HttpServices {
         #region Properties
 
         private static LoginServices _instence;
-        private static object Singleton_Lock = new object();
+        private static readonly object _singleton_Lock = new object();
         public static LoginServices Instence {
             get {
                 if (_instence == null)
-                    lock (Singleton_Lock)
+                    lock (_singleton_Lock)
                         if (_instence == null)
                             _instence = new LoginServices();
                 return _instence;

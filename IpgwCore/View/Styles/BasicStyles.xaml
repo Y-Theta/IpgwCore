@@ -2,11 +2,92 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:control="clr-namespace:IpgwCore.Controls"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
-    <!--Font-->
-    <FontFamily x:Key="Segoe">/FontLibrary;Component/#Segoe</FontFamily>
-    <FontFamily x:Key="RectNum">/FontLibrary;Component/#RectNum</FontFamily>
+    <!--#region                                                -->
+    <!--#endregion-->
 
-    <!--ToolTips-->
+    <!--#region                                                TextBlock-->
+
+    <!--IconTextBlock-->
+    <Style x:Key="IconTextBlock"
+           TargetType="TextBlock">
+        <Setter Property="FontFamily"
+                Value="{DynamicResource Segoe}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MainWindow_Fg}" />
+        <Setter Property="TextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+    </Style>
+
+    <!--MainLabel-->
+    <Style x:Key="MainLabel"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{DynamicResource DefaultMainLabel_Fg}" />
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="TextAlignment"
+                Value="Left" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+    </Style>
+
+    <!--ColorSliderLabel-->
+    <Style x:Key="ColorSliderLabel"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{DynamicResource ColorPickerLabel}" />
+        <Setter Property="FontFamily"
+                Value="{DynamicResource RectNum}" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="TextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region                                                TextBox-->
+
+    <!--ColorSliderValue-->
+    <Style x:Key="ColorSliderValue"
+           TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          Style="{DynamicResource SC_ScrollViewer}"
+                                          Margin="0,0,0,0" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--#endregion-->
+
+    <!--#region                                                ToolTip-->
 
     <!--DefaultToolTip-->
     <Style x:Key="DefaultToolTip"
@@ -14,7 +95,7 @@
         <Setter Property="Padding"
                 Value="0" />
         <Setter Property="BorderBrush"
-                Value="{StaticResource MainWindow_Border_Normal}" />
+                Value="{StaticResource DefaultToolTip_Bc}" />
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="DataContext"
@@ -25,15 +106,20 @@
     <Style x:Key="DefaultToolTipText"
            TargetType="TextBlock">
         <Setter Property="FontSize"
-                Value="10" />
+                Value="12" />
         <Setter Property="Foreground"
-                Value="{StaticResource MainWindow_Border_Normal}" />
+                Value="{StaticResource DefaultToolTip_Fg}" />
         <Setter Property="Margin"
-                Value="5,2,5,2" />
+                Value="6,3,6,3" />
     </Style>
-    
-    <!--Buttons-->
-    <Style x:Key="CloseButton" TargetType="control:YT_IconButton">
+
+    <!--#endregion-->
+
+    <!--#region                                                Buttons-->
+
+    <!--CloseButton-->
+    <Style x:Key="CloseButton"
+           TargetType="control:YT_IconButton">
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="Width"
@@ -42,6 +128,8 @@
                 Value="24" />
         <Setter Property="Content"
                 Value="&#xE711;" />
+        <Setter Property="Textloc"
+                Value="True" />
         <Setter Property="IconN"
                 Value="{DynamicResource DefaultButton_Icon_BG}" />
         <Setter Property="IconR"
@@ -55,6 +143,9 @@
         <Setter Property="IconMaskP"
                 Value="{DynamicResource DefaultButton_IconMask_BG_P}" />
     </Style>
+
+    <!--#endregion-->
+
 
 
 

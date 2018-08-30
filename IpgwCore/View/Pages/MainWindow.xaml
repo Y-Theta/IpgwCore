@@ -8,23 +8,64 @@
                       xmlns:areawindow="clr-namespace:IpgwCore.Controls.AreaWindow"
                       xmlns:controls="clr-namespace:IpgwCore.Controls"
                       ExtendToTitleBar="True"
-                      Background="Transparent"
+                      DataContext="{StaticResource MainPageVM}"
+                      Opacity="{Binding MainOpacity, Source={x:Static settings:Settings.Default}}"
                       mc:Ignorable="d">
+    <areawindow:YT_Window.AreaIcon>
+        <areawindow:YT_AreaIcon />
+    </areawindow:YT_Window.AreaIcon>
     <areawindow:YT_Window.TitleArea>
-        <Grid Height="32"
+        <Grid Height="24"
               Background="Transparent">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource MainLabel}"
+                       Text="{Binding Msg,Converter={StaticResource ColorNumConv}}"
+                       Margin="8,0,0,0" />
             <controls:YT_IconButton x:Name="Close"
                                     Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type areawindow:YT_TitleBar}}}"
+                                    ForeToolTip="关闭"
+                                    ToolTipVisiblity="Visible"
                                     Style="{StaticResource CloseButton}"
                                     Grid.Column="2" />
         </Grid>
     </areawindow:YT_Window.TitleArea>
-    <Grid Background="{Binding MainColor, Source={x:Static settings:Settings.Default},Converter={StaticResource ColorConv}}">
-        
-    </Grid>
+    <Border Background="{DynamicResource MainWindow_Bg}"
+            BorderBrush="#c0c0c0"
+            BorderThickness="0.5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+            <TextBox  x:Name="Tes"
+                      Text="{Binding Msg,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      Grid.Row="1" />
+            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=HEX}"
+                     Grid.Row="2" />
+            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=A}"
+                     Grid.Row="3" />
+            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=R}"
+                     Grid.Row="4" />
+            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=G}"
+                     Grid.Row="5" />
+            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=B}"
+                     Grid.Row="6" />
+            <controls:YT_IconButton Command="{Binding CancelCommand}"
+                                    ForeToolTip="关闭"
+                                    ToolTipVisiblity="Visible"
+                                    Style="{StaticResource CloseButton}"
+                                    Grid.Row="7" />
+        </Grid>
+    </Border>
+
 </areawindow:YT_Window>

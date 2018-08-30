@@ -16,11 +16,11 @@ namespace IpgwCore.Services.FormatServices {
         #region Properties
 
         private static XmlDocService _instence;
-        private static object Singleton_Lock = new object();
+        private static readonly object _singleton_Lock = new object();
         public static XmlDocService Instence {
             get {
                 if (_instence == null)
-                    lock (Singleton_Lock)
+                    lock (_singleton_Lock)
                         if (_instence == null)
                             _instence = new XmlDocService();
                 return _instence;

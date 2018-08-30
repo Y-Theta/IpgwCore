@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IpgwCore.Controls {
-    class Win32Funcs {
+    internal class Win32Funcs {
         public const int WM_SYSCOMMAND = 0x112;
         public const int CS_MOVE = 0xF012;
 
