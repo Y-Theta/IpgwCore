@@ -48,4 +48,9 @@ namespace IpgwCore {
         }
         #endregion
     }
+
+    public class ConstTable {
+        public const string IPGW = "NEUIpgw";
+        public const string ZJW = "NEUZhjw";
+    }
 }

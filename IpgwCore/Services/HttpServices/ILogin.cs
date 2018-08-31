@@ -11,12 +11,12 @@ namespace IpgwCore.Services.HttpServices {
         /// <summary>
         /// post请求
         /// </summary>
-        void Post(string uri, List<KeyValuePair<string, string>> items);
+        bool Post(string uri, List<KeyValuePair<string, string>> items);
 
         /// <summary>
         /// 带验证post请求
         /// </summary>
-        void Post(string uri, Dictionary<string, string> keyValuePairs);
+        bool Post(string uri, Dictionary<string, string> keyValuePairs);
 
         /// <summary>
         /// 获得字符型返回数据

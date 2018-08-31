@@ -8,6 +8,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using IpgwCore.MVVMBase;
 
@@ -133,7 +134,7 @@ namespace IpgwCore.Controls.FlowControls {
         }
         public static readonly DependencyProperty AutoHideProperty =
             DependencyProperty.Register("AutoHide", typeof(bool),
-                typeof(YT_Popup), new PropertyMetadata(true));
+                typeof(YT_Popup), new PropertyMetadata(false));
 
 
 
@@ -168,16 +169,27 @@ namespace IpgwCore.Controls.FlowControls {
 
         #region Methods
         protected virtual void OnClosed() {
-
+            base.IsOpen = false;
         }
-
 
         protected virtual void OnOpen() {
             if (!_locationSet)
                 OnPlacementTargetChanged(null, null);
-            if(AutoHide)
+            if (AutoHide)
+                _autohide.Enabled = true;
+            base.IsOpen = true;
+        }
 
-            IsOpen = true;
+        protected override void OnMouseMove(MouseEventArgs e) {
+            if (AutoHide)
+                _autohide.Enabled = false;
+            base.OnMouseMove(e);
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs e) {
+            if (AutoHide)
+                _autohide.Enabled = true;
+            base.OnMouseLeave(e);
         }
 
         protected override void OnClosed(EventArgs e) {
@@ -229,7 +241,11 @@ namespace IpgwCore.Controls.FlowControls {
         }
 
         private void InitRes() {
-            _autohide = new Timer { Interval = 3000 };
+            PlacementTargetChanged += OnPlacementTargetChanged;
+            CustomPopupPlacementCallback = new CustomPopupPlacementCallback(Location);
+            _locationSet = false;
+
+            _autohide = new Timer { Interval = 4500 };
             _autohide.Elapsed += _autohide_Elapsed;
         }
 
@@ -241,23 +257,22 @@ namespace IpgwCore.Controls.FlowControls {
         }
         #endregion
 
-        #region
+        #region CallBacks
         private void _autohide_Elapsed(object sender, ElapsedEventArgs e) {
-            
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            {
+                IsOpen = false;
+                _autohide.Enabled = false;
+            }));
         }
 
         #endregion
 
         #region Contructor
         public YT_Popup() {
-            PlacementTargetChanged += OnPlacementTargetChanged;
-            CustomPopupPlacementCallback = new CustomPopupPlacementCallback(Location);
-            _locationSet = false;
+            InitRes();
             InitCommands();
         }
-
-
-
         #endregion
     }
 }

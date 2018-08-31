@@ -206,6 +206,7 @@
                         </Grid.ColumnDefinitions>
                         <complex:MainFluxPopup x:Name="Info" />
                         <Grid x:Name="ControlArea"
+                              Margin="0,4,4,4"
                               DataContext="{DynamicResource FluxInfoVM}"
                               Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -249,7 +250,7 @@
     </Style>
 
     <!--MessageContent-->
-    <sys:Double x:Key="MessageContentWidth">180</sys:Double>
+    <sys:Double x:Key="MessageContentWidth">240</sys:Double>
     <sys:Double x:Key="MessageContentHeight">48</sys:Double>
     <Style x:Key="MessageContent"
            TargetType="flowcontrol:YT_Popup">
@@ -264,9 +265,9 @@
         <Setter Property="BorderBrush"
                 Value="{DynamicResource FluxPopup_Bc}" />
         <Setter Property="AbsOffsetX"
-                Value="{Binding Source={StaticResource MessageContentWidth},Converter={StaticResource OffsetConv},ConverterParameter=8}" />
+                Value="{Binding Source={StaticResource MessageContentWidth},Converter={StaticResource OffsetConv},ConverterParameter=6}" />
         <Setter Property="AbsOffsetY"
-                Value="{Binding Source={StaticResource MessageContentHeight},Converter={StaticResource OffsetConv},ConverterParameter=8}" />
+                Value="{Binding Source={StaticResource MessageContentHeight},Converter={StaticResource OffsetConv},ConverterParameter=6}" />
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="PlacementMargin"
@@ -284,13 +285,13 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="32" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="4,0,0,0"
+                        <TextBlock Margin="12,0,0,0"
                                    Style="{StaticResource MessageContent}"
                                    Text="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type flowcontrol:YT_Popup}}}" />
                         <controls:YT_IconButton Grid.Column="1"
                                                 Margin="0,0,8,0"
-                                                Content="&#xF0D2;"
-                                                ForeToolTip="关闭"
+                                                Content="&#xE70D;"
+                                                ForeToolTip="知道了"
                                                 Style="{StaticResource FluxPopupButton}"
                                                 Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}" />
                     </Grid>

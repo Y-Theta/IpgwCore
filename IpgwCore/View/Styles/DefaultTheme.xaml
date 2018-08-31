@@ -120,6 +120,19 @@
                      Color="#A0A0A0" />
     <SolidColorBrush x:Key="FluxPopup_Bc"
                      Color="#323232" />
+
+    <SolidColorBrush x:Key="FluxPopupButtonIcon_Bg"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="FluxPopupButtonIcon_Bg_R"
+                     Color="#F0F0F0" />
+    <SolidColorBrush x:Key="FluxPopupButtonIcon_Bg_P"
+                     Color="#808080" />
+    <SolidColorBrush x:Key="FluxPopupButton_IconMask_BG_N"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="FluxPopupButton_IconMask_BG_R"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="FluxPopupButton_IconMask_BG_P"
+                     Color="Transparent" />
     <!--#endregion-->
 
 </ResourceDictionary>

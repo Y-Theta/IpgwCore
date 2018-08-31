@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.IO.Compression;
 using System.Net;
+using IpgwCore.MVVMBase;
+using IpgwCore.Services.MessageServices;
+using IpgwCore.Services.FormatServices;
 
 namespace IpgwCore.Services.HttpServices {
     /// <summary>
@@ -25,6 +28,19 @@ namespace IpgwCore.Services.HttpServices {
                         if (_instence == null)
                             _instence = new LoginServices();
                 return _instence;
+            }
+        }
+
+        /// <summary>
+        /// 网络是否连接
+        /// </summary>
+        public event PropertyChangedCallBack IpgwConnectedChanged;
+        private bool _ipgwConnected;
+        public bool IpgwConnected {
+            get => _ipgwConnected;
+            set {
+                IpgwConnectedChanged?.Invoke(_ipgwConnected, value);
+                _ipgwConnected = value;
             }
         }
 
@@ -64,19 +80,20 @@ namespace IpgwCore.Services.HttpServices {
 
         #endregion
 
+
         #region Methods
 
-        private void KeyValuePairsCheck()//请求键值对检查
-       {
+        private void RefrashinfSet(string name) {
+            InfSet = XmlDocService.Instence.GetNode<InfoSet>(new XmlPath { Key = name });
+        }
+
+        private void KeyValuePairsCheck() {
             for (int i = 0; i < InfSet.KeyValuePairs.Count; i++)
-            {
                 if (InfSet.KeyValuePairs[i].Value == "")
                 {
-                    //TODO:
-                    //MessageService.Instence.ShowError(null, "请完善登陆信息");
+                    PopupMessageServices.Instence.ShowContent("请完善登录信息！");
                     break;
                 }
-            }
             if (InfSet.Cookies.Count != 0)
             {
                 foreach (KeyValuePair<string, string> kv in InfSet.Cookies)
@@ -96,7 +113,7 @@ namespace IpgwCore.Services.HttpServices {
             try { temp = _httpClient.GetStreamAsync(uri).Result; }
             catch (AggregateException)
             {
-                //MessageService.Instence.ShowError(null, "请检查网络连接");
+                PopupMessageServices.Instence.ShowContent("请检查网络连接！");
                 return null;
             }
             return temp;
@@ -109,34 +126,48 @@ namespace IpgwCore.Services.HttpServices {
                 try { return _httpClient.GetStringAsync(uri).Result; }
                 catch (AggregateException)
                 {
-                    // MessageService.Instence.ShowError(null, "请检查网络连接");
+                    PopupMessageServices.Instence.ShowContent("请检查网络连接！");
                     return null;
                 }
         }
 
-        public void Post(string uri, List<KeyValuePair<string, string>> items) {
+        public bool Post(string uri, List<KeyValuePair<string, string>> items) {
             try
             {
                 if (InfSet.NeedLogin)
                     _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(items)).Result;
                 else
                     _response = _httpClient.PostAsync(uri, new FormUrlEncodedContent(items)).Result;
+                if (InfSet.name.Equals(ConstTable.IPGW))
+                    IpgwConnected = true;
+                return true;
             }
             catch (AggregateException)
-            { // MessageService.Instence.ShowError(null, "请检查网络连接"); } 
+            {
+                PopupMessageServices.Instence.ShowContent("请检查网络连接！");
+                return false;
             }
         }
 
-        public void Post(string uri, Dictionary<string, string> keyValuePairs) {
+        public bool Post(string uri, Dictionary<string, string> keyValuePairs) {
             for (int kvp = 0; kvp < InfSet.KeyValuePairs.Count; kvp++)
                 if (keyValuePairs.ContainsKey(InfSet.KeyValuePairs[kvp].Key))
                     InfSet.KeyValuePairs[kvp] = new KeyValuePair<string, string>(InfSet.KeyValuePairs[kvp].Key, keyValuePairs[InfSet.KeyValuePairs[kvp].Key]);
-            if (InfSet.NeedLogin)
-                try { _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result; }
-                catch (AggregateException)
-                {
-                    //MessageService.Instence.ShowError(null, "请检查网络连接");
-                }
+            try
+            {
+                if (InfSet.NeedLogin)
+                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result;
+                else
+                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result;
+                if (InfSet.name.Equals(ConstTable.IPGW))
+                    IpgwConnected = false;
+                return true;
+            }
+            catch (AggregateException)
+            {
+                PopupMessageServices.Instence.ShowContent("请检查网络连接！");
+                return false;
+            }
         }
 
         /// <summary>
@@ -151,6 +182,32 @@ namespace IpgwCore.Services.HttpServices {
             }
             return strHTML;
         }
+        #endregion
+
+        #region OuterMethod
+
+        public bool LoginIpgw() {
+            RefrashinfSet(ConstTable.IPGW);
+            return Post(InfSet.Uris[0], InfSet.KeyValuePairs); ;
+        }
+
+        public bool LogoutIpgw() {
+            RefrashinfSet(ConstTable.IPGW);
+            return Post(InfSet.Uris[0], new Dictionary<string, string>() {
+                {"action","logout" }
+            });
+        }
+
+        public string GetFluxInfo() {
+            if (IpgwConnected)
+                return GetString(InfSet.Uris[1]);
+            else
+            {
+                RefrashinfSet(ConstTable.IPGW);
+                return GetString(InfSet.Uris[1]);
+            }
+        }
+
         #endregion
 
         #region Constructors

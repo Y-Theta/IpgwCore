@@ -147,6 +147,7 @@ namespace IpgwCore.Services.FormatServices {
                 Root.AppendChild(xml);
             }
 
+            LastDate = Root.LastChild;
             if (LastDate.HasChildNodes)
                 LastDate.RemoveChild(LastDate.FirstChild);
             var Item = xmlDocument.CreateElement("Item");
@@ -204,19 +205,24 @@ namespace IpgwCore.Services.FormatServices {
                 xmlDocument.Load(reader);
 
             XmlElement Root = xmlDocument.DocumentElement;
-            XmlNode lasest = Root.LastChild.LastChild;
-            if (lasest is null)
-                return null;
-            else
+            if (Root.HasChildNodes)
             {
-                Flux fi = new Flux()
+                XmlNode lasest = Root.LastChild.LastChild;
+                if (lasest is null)
+                    return null;
+                else
                 {
-                    FluxData = Convert.ToDouble(lasest.Attributes["FluxData"].Value),
-                    Balance = Convert.ToDouble(lasest.Attributes["Balance"].Value),
-                    InfoTime = DateTime.FromOADate(Convert.ToDouble(lasest.Attributes["InfoTime"].Value))
-                };
-                return fi;
+                    Flux fi = new Flux()
+                    {
+                        FluxData = Convert.ToDouble(lasest.Attributes["FluxData"].Value),
+                        Balance = Convert.ToDouble(lasest.Attributes["Balance"].Value),
+                        InfoTime = DateTime.FromOADate(Convert.ToDouble(lasest.Attributes["InfoTime"].Value))
+                    };
+                    return fi;
+                }
             }
+            else
+                return null;
         }
 
         /// <summary>

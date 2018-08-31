@@ -10,6 +10,8 @@
                       ExtendToTitleBar="True"
                       DataContext="{StaticResource MainPageVM}"
                       Opacity="{Binding MainOpacity, Source={x:Static settings:Settings.Default}}"
+                      Width="320"
+                      Height="420"
                       mc:Ignorable="d">
     <areawindow:YT_Window.AreaIcon>
         <areawindow:YT_AreaIcon />

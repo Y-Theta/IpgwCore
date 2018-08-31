@@ -264,9 +264,9 @@ namespace IpgwCore.View {
             switch (parameter.ToString())
             {
                 case "Path":
-                    return PercentToCircle(GetFluxPercent((Flux)value));
+                    return PercentToCircle(1 - GetFluxPercent((Flux)value));
                 case "Per":
-                    return (int)(GetFluxPercent((Flux)value) * 100);
+                    return (int)(100 - GetFluxPercent((Flux)value) * 100);
                 case "Used":
                     return GetUsed((Flux)value);
                 case "Bal":
@@ -295,7 +295,7 @@ namespace IpgwCore.View {
         }
 
         /// <summary>
-        /// 根据套餐获得流量百分比
+        /// 根据套餐获得已用流量百分比
         /// </summary>
         public double GetFluxPercent(Flux IpgwInfo) {
             try

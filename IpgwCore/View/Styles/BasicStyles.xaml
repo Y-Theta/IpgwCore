@@ -541,17 +541,17 @@
         <Setter Property="FontWeight"
                 Value="Thin" />
         <Setter Property="IconN"
-                Value="{DynamicResource DefaultButton_Icon_BG}" />
+                Value="{DynamicResource FluxPopupButtonIcon_Bg}" />
         <Setter Property="IconR"
-                Value="{DynamicResource DefaultButton_Icon_BG_R}" />
+                Value="{DynamicResource FluxPopupButtonIcon_Bg_R}" />
         <Setter Property="IconP"
-                Value="{DynamicResource DefaultButton_Icon_BG_P}" />
+                Value="{DynamicResource FluxPopupButtonIcon_Bg_P}" />
         <Setter Property="IconMaskN"
-                Value="{DynamicResource DefaultButton_IconMask_BG_N}" />
+                Value="{DynamicResource FluxPopupButton_IconMask_BG_N}" />
         <Setter Property="IconMaskR"
-                Value="Transparent" />
+                Value="{DynamicResource FluxPopupButton_IconMask_BG_R}" />
         <Setter Property="IconMaskP"
-                Value="Transparent" />
+                Value="{DynamicResource FluxPopupButton_IconMask_BG_P}" />
     </Style>
 
     <!--TextButton-->

@@ -47,7 +47,11 @@ namespace IpgwCore.Model.BasicModel {
         /// 网页所需uri
         /// </summary>
         public List<String> Uris {
-            get => _uris is null ? new List<string>() : _uris;
+            get {
+                if (_uris is null)
+                    _uris = new List<String>();
+                return _uris;
+            }
             set => _uris = value;
         }
 
@@ -56,9 +60,13 @@ namespace IpgwCore.Model.BasicModel {
         /// 网页所需登录信息
         /// </summary>
         public List<KeyValuePair<String, String>> KeyValuePairs {
-            get => NeedLogin ?
-                _keyValuePairs is null ? new List<KeyValuePair<string, string>>() : _keyValuePairs :
-                null;
+            get {
+                if (!NeedLogin)
+                    return null;
+                else if (_keyValuePairs is null)
+                    _keyValuePairs = new List<KeyValuePair<String, String>>();
+                return _keyValuePairs;
+            }
             set => _keyValuePairs = value;
         }
 
@@ -67,9 +75,13 @@ namespace IpgwCore.Model.BasicModel {
         /// 网页所需Cookies
         /// </summary>
         public List<KeyValuePair<String, String>> Cookies {
-            get => NeedLogin ?
-                _cookies is null ? new List<KeyValuePair<String, String>>() : _cookies :
-                null;
+            get {
+                if (!NeedLogin)
+                    return null;
+                else if (_cookies is null)
+                    _cookies = new List<KeyValuePair<String, String>>();
+                return _cookies;
+            }
             set => _cookies = value;
         }
 

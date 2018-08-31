@@ -40,7 +40,7 @@ namespace IpgwCore.Services.MessageServices {
         protected YT_Popup PopupInstence {
             get {
                 if (_popupInstence is null)
-                    _popupInstence = new YT_Popup();
+                    _popupInstence = new YT_Popup { AutoHide = true , AttachedWindow = App.Current.MainWindow };
                 return _popupInstence;
             }
             set => _popupInstence = value;
@@ -58,7 +58,6 @@ namespace IpgwCore.Services.MessageServices {
         public bool ShowContent(Style obj) {
             if (PopupInstence.IsOpen)
                 PopupInstence.IsOpen = false;
-            PopupInstence.AttachedWindow = App.Current.MainWindow;
             PopupInstence.Style = obj;
             if (MainWindowVisibility.Equals(Visibility.Hidden))
                 PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.AbsolutePoint;
@@ -82,13 +81,10 @@ namespace IpgwCore.Services.MessageServices {
         public bool ShowContent(string s) {
             if (PopupInstence.IsOpen)
                 PopupInstence.IsOpen = false;
-            PopupInstence.AttachedWindow = App.Current.MainWindow;
             PopupInstence.TextContent = s;
             PopupInstence.Style = App.Current.Resources["MessageContent"] as Style;
             if (MainWindowVisibility.Equals(Visibility.Hidden))
-            {
                 PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.AbsolutePoint;
-            }
             else
             {
                 PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.RelativePoint;

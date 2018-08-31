@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IpgwCore.Services.HttpServices;
+using IpgwCore.MVVMBase;
 
 namespace IpgwCore.Services.FormatServices {
     /// <summary>
@@ -27,15 +28,6 @@ namespace IpgwCore.Services.FormatServices {
         }
 
         /// <summary>
-        /// 网络是否连接
-        /// </summary>
-        private bool _ipgwConnected;
-        public bool IpgwConnected {
-            get => _ipgwConnected;
-            set => _ipgwConnected = value;
-        }
-
-        /// <summary>
         /// 当前时间
         /// </summary>
         private DateTime _daten { get; set; }
@@ -45,14 +37,17 @@ namespace IpgwCore.Services.FormatServices {
         /// </summary>
         private HtmlDocument _courseInfo { get; set; }
 
-        private Flux ipgwInfo = null;
+        private Flux _ipgwInfo = null;
         /// <summary>
         /// 流量信息
         /// </summary>
+        public event PropertyChangedCallBack IpgwInfoChanged;
         public Flux IpgwInfo {
-            // get => GetIpgwInfo();
-            get => new Flux { Balance = 24, FluxData = 10810.405691, InfoTime = DateTime.Now };
-            set => ipgwInfo = value;
+            get => GetIpgwInfo();
+            set {
+                IpgwInfoChanged?.Invoke(_ipgwInfo, value);
+                _ipgwInfo = value;
+            }
         }
 
         private CourseSet _courseSet { get; set; }
@@ -76,8 +71,8 @@ namespace IpgwCore.Services.FormatServices {
         /// </summary>
         /// <returns></returns>
         private Flux GetIpgwInfo() {
-            if (ipgwInfo != null)
-                return ipgwInfo;
+            if (_ipgwInfo != null)
+                return _ipgwInfo;
             else
             {
                 var flux = XmlDocService.Instence.GetNode<Flux>(null);
@@ -91,7 +86,7 @@ namespace IpgwCore.Services.FormatServices {
         }
 
         private Flux RefreshInfo() {
-            return GetIpgwDataInf(LoginServices.Instence.GetString("NEUIpgw"));
+            return GetIpgwDataInf(LoginServices.Instence.GetFluxInfo());
         }
 
         private Flux GetIpgwDataInf(string data)  //Ipgw网关信息格式化获取
@@ -107,13 +102,11 @@ namespace IpgwCore.Services.FormatServices {
             catch (IndexOutOfRangeException)
             {
                 // MessageService.Instence.ShowError(null, "用户名或密码错误");
-                _ipgwConnected = false;
                 return null;
             }
             catch (NullReferenceException)
             {
                 //  MessageService.Instence.ShowError(null, "网络未连接");
-                _ipgwConnected = false;
                 return null;
             }
 
