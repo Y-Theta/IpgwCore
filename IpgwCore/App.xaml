@@ -16,7 +16,7 @@
 
             <viewmodel:MainPageViewModel x:Key="MainPageVM" />
             <viewmodel:SettingPageViewModel x:Key="SettingPageVM" />
-            
+            <viewmodel:FluxInfoViewModel x:Key="FluxInfoVM" />
         </ResourceDictionary>
     </Application.Resources>
     

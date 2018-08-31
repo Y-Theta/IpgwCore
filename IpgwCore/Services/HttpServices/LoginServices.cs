@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.IO.Compression;
+using System.Net;
 
 namespace IpgwCore.Services.HttpServices {
     /// <summary>
@@ -28,31 +29,71 @@ namespace IpgwCore.Services.HttpServices {
         }
 
         private InfoSet _infSet;
+        /// <summary>
+        /// 网站信息
+        /// </summary>
         public InfoSet InfSet {
             get => _infSet;
-            set => _infSet = value; 
+            set => _infSet = value;
         }
 
+        /// <summary>
+        /// 字符形式的网页
+        /// </summary>
         private String _result { get; set; }
 
+        /// <summary>
+        /// 用于验证的信息
+        /// </summary>
         private String _id { get; set; }
 
+        /// <summary>
+        /// 模拟登录的类
+        /// </summary>
         private HttpClient _httpClient { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private HttpClientHandler _clientHandler { get; set; }
 
+        /// <summary>
+        /// 接收网页返回的类
+        /// </summary>
         private HttpResponseMessage _response { get; set; }
 
         #endregion
 
         #region Methods
 
+        private void KeyValuePairsCheck()//请求键值对检查
+       {
+            for (int i = 0; i < InfSet.KeyValuePairs.Count; i++)
+            {
+                if (InfSet.KeyValuePairs[i].Value == "")
+                {
+                    //TODO:
+                    //MessageService.Instence.ShowError(null, "请完善登陆信息");
+                    break;
+                }
+            }
+            if (InfSet.Cookies.Count != 0)
+            {
+                foreach (KeyValuePair<string, string> kv in InfSet.Cookies)
+                {
+                    Cookie cookie = new Cookie(kv.Key, kv.Value)
+                    {
+                        Expires = DateTime.MaxValue
+                    };
+                    _clientHandler.CookieContainer.Add(new Uri(InfSet.Uris[0]), cookie);
+                }
+                InfSet.HasCookie = true;
+            }
+        }
+
         public Stream GetStream(string uri) {
             Stream temp;
-            try
-            {
-                temp = _httpClient.GetStreamAsync(uri).Result;
-            }
+            try { temp = _httpClient.GetStreamAsync(uri).Result; }
             catch (AggregateException)
             {
                 //MessageService.Instence.ShowError(null, "请检查网络连接");
@@ -65,30 +106,25 @@ namespace IpgwCore.Services.HttpServices {
             if (InfSet.Compressed)
                 return GetDatasetByString(GetStream(uri));
             else
-                try
-                {
-                    return _httpClient.GetStringAsync(uri).Result;
-                }
+                try { return _httpClient.GetStringAsync(uri).Result; }
                 catch (AggregateException)
                 {
-                   // MessageService.Instence.ShowError(null, "请检查网络连接");
+                    // MessageService.Instence.ShowError(null, "请检查网络连接");
                     return null;
                 }
         }
 
-        public void Post(string uri) {
-            //
-            if (InfSet.NeedLogin)
-                try
-                {
-                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result;
-                    //if (!InfSet.HasCookie && InfSet.Verify)
-                    //    SetCookies(InfSet.Uris[0]);
-                }
-                catch (AggregateException)
-                {
-                   // MessageService.Instence.ShowError(null, "请检查网络连接");
-                }
+        public void Post(string uri, List<KeyValuePair<string, string>> items) {
+            try
+            {
+                if (InfSet.NeedLogin)
+                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(items)).Result;
+                else
+                    _response = _httpClient.PostAsync(uri, new FormUrlEncodedContent(items)).Result;
+            }
+            catch (AggregateException)
+            { // MessageService.Instence.ShowError(null, "请检查网络连接"); } 
+            }
         }
 
         public void Post(string uri, Dictionary<string, string> keyValuePairs) {
@@ -96,11 +132,7 @@ namespace IpgwCore.Services.HttpServices {
                 if (keyValuePairs.ContainsKey(InfSet.KeyValuePairs[kvp].Key))
                     InfSet.KeyValuePairs[kvp] = new KeyValuePair<string, string>(InfSet.KeyValuePairs[kvp].Key, keyValuePairs[InfSet.KeyValuePairs[kvp].Key]);
             if (InfSet.NeedLogin)
-                try
-                {
-                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result;
-                    //
-                }
+                try { _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result; }
                 catch (AggregateException)
                 {
                     //MessageService.Instence.ShowError(null, "请检查网络连接");

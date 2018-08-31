@@ -11,5 +11,20 @@
     <Setting Name="AreaIconColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">160, 8, 8, 8</Value>
     </Setting>
+    <Setting Name="C1P" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="C1F" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">27</Value>
+    </Setting>
+    <Setting Name="C2P" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="C2F" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="Package" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

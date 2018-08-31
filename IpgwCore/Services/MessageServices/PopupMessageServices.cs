@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using IpgwCore.ViewModel;
+using IpgwCore.Controls.FlowControls;
 
 namespace IpgwCore.Services.MessageServices {
     internal class PopupMessageServices : IMessageServices {
@@ -22,6 +23,29 @@ namespace IpgwCore.Services.MessageServices {
             }
         }
 
+        public event EventHandler MainWindowVisibilityChanged;
+
+        private Visibility _mainWindowVisibility;
+        public Visibility MainWindowVisibility {
+            get => _mainWindowVisibility;
+            set {
+                MainWindowVisibilityChanged?.Invoke(value, null);
+                if (value.Equals(Visibility.Hidden))
+                    PopupInstence.IsOpen = false;
+                _mainWindowVisibility = value;
+            }
+        }
+
+        private YT_Popup _popupInstence;
+        protected YT_Popup PopupInstence {
+            get {
+                if (_popupInstence is null)
+                    _popupInstence = new YT_Popup();
+                return _popupInstence;
+            }
+            set => _popupInstence = value;
+        }
+
         private IMessagePoster _messageHolder;
         public IMessagePoster MessageHolder {
             get => _messageHolder;
@@ -31,23 +55,54 @@ namespace IpgwCore.Services.MessageServices {
         #endregion
 
         #region Methods
-        public bool ShowContent(object obj) {
-            throw new NotImplementedException();
+        public bool ShowContent(Style obj) {
+            if (PopupInstence.IsOpen)
+                PopupInstence.IsOpen = false;
+            PopupInstence.AttachedWindow = App.Current.MainWindow;
+            PopupInstence.Style = obj;
+            if (MainWindowVisibility.Equals(Visibility.Hidden))
+                PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.AbsolutePoint;
+            else
+            {
+                PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.RelativePoint;
+                PopupInstence.PlacementTarget = App.Current.MainWindow;
+            }
+            PopupInstence.IsOpen = true;
+            return true;
         }
 
         public void ShowString(string str) {
             MessageHolder._message = str;
         }
 
-        public bool ShowContentAt(UIElement obj, object con) {
-            throw new NotImplementedException();
+        public bool ShowContentAt(UIElement obj, Style con) {
+            return true;
+        }
+
+        public bool ShowContent(string s) {
+            if (PopupInstence.IsOpen)
+                PopupInstence.IsOpen = false;
+            PopupInstence.AttachedWindow = App.Current.MainWindow;
+            PopupInstence.TextContent = s;
+            PopupInstence.Style = App.Current.Resources["MessageContent"] as Style;
+            if (MainWindowVisibility.Equals(Visibility.Hidden))
+            {
+                PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.AbsolutePoint;
+            }
+            else
+            {
+                PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.RelativePoint;
+                PopupInstence.PlacementTarget = App.Current.MainWindow;
+            }
+            PopupInstence.IsOpen = true;
+            return true;
         }
 
         #endregion
 
         #region Constructors
         public PopupMessageServices() {
-
+            
         }
 
         #endregion

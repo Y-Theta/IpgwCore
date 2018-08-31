@@ -121,6 +121,7 @@
     <Compile Include="Services\MessageServices\IMessagePoster.cs" />
     <Compile Include="Services\MessageServices\IMessageServices.cs" />
     <Compile Include="Services\MessageServices\PopupMessageServices.cs" />
+    <Compile Include="ViewModel\FluxInfoViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\SettingPageViewModel.cs" />
     <Compile Include="View\Converter.cs" />

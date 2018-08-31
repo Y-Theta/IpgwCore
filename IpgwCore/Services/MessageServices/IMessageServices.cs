@@ -14,11 +14,18 @@ namespace IpgwCore.Services.MessageServices {
         IMessagePoster MessageHolder { get; set; }
 
         /// <summary>
-        /// 在桌面显示控件内容
+        /// 显示控件内容
         /// </summary>
         /// <param name="obj">要显示的控件</param>
         /// <returns>是否已经显示</returns>
-        bool ShowContent(object obj);
+        bool ShowContent(Style obj);
+
+        /// <summary>
+        /// 显示控件内容文本
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        bool ShowContent(string s);
 
         /// <summary>
         /// 在状态栏显示提示
@@ -32,6 +39,6 @@ namespace IpgwCore.Services.MessageServices {
         /// <param name="obj">指定控件</param>
         /// <param name="con">消息内容</param>
         /// <returns>是否成功</returns>
-        bool ShowContentAt(UIElement obj, object con);
+        bool ShowContentAt(UIElement obj, Style con);
     }
 }

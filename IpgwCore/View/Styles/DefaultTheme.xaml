@@ -3,7 +3,7 @@
                     xmlns:settings="clr-namespace:IpgwCore.Properties"
                     xmlns:view="clr-namespace:IpgwCore.View"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
-    <!--#region-->
+    <!--#region                                                -->
     <!--#endregion-->
 
 
@@ -104,13 +104,22 @@
     <SolidColorBrush x:Key="TextButton_Icon_BG_P"
                      Color="#A0A0A0" />
     <SolidColorBrush x:Key="TextButton_IconMask_BG_N"
-                     Color="#1E1E1E" />
+                     Color="#121212" />
     <SolidColorBrush x:Key="TextButton_IconMask_BG_R"
-                     Color="#2E2E2E" />
+                     Color="#323232" />
     <SolidColorBrush x:Key="TextButton_IconMask_BG_P"
                      Color="#1E1E1E" />
 
     <!--#endregion-->
 
+    <!--#region                                                FluxPopup-->
+
+    <SolidColorBrush x:Key="FluxPopup_Bg"
+                     Color="#080808" />
+    <SolidColorBrush x:Key="FluxPopup_Fg"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="FluxPopup_Bc"
+                     Color="#323232" />
+    <!--#endregion-->
 
 </ResourceDictionary>

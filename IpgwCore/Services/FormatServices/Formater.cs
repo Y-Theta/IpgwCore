@@ -13,10 +13,27 @@ namespace IpgwCore.Services.FormatServices {
     /// </summary>
     internal class Formater {
         #region Properties
+
+        private static Formater _instence;
+        private static readonly object _singleton_Lock = new object();
+        public static Formater Instence {
+            get {
+                if (_instence == null)
+                    lock (_singleton_Lock)
+                        if (_instence == null)
+                            _instence = new Formater();
+                return _instence;
+            }
+        }
+
         /// <summary>
         /// 网络是否连接
         /// </summary>
-        private bool _ipgeConnected { get; set; }
+        private bool _ipgwConnected;
+        public bool IpgwConnected {
+            get => _ipgwConnected;
+            set => _ipgwConnected = value;
+        }
 
         /// <summary>
         /// 当前时间
@@ -33,24 +50,27 @@ namespace IpgwCore.Services.FormatServices {
         /// 流量信息
         /// </summary>
         public Flux IpgwInfo {
-            get => GetIpgwInfo();
+            // get => GetIpgwInfo();
+            get => new Flux { Balance = 24, FluxData = 10810.405691, InfoTime = DateTime.Now };
             set => ipgwInfo = value;
         }
 
-        private CourseSet courseSet { get; set; }
+        private CourseSet _courseSet { get; set; }
         /// <summary>
         /// 课程表
         /// </summary>
         public CourseSet CourseSet {
             get => (!_daten.Equals(Properties.Settings.Default.WeekNowSet)) ? GetCourseSet() :
-                courseSet is null ? GetCourseSet() :
-                courseSet;
-            set => courseSet = value;
+                _courseSet is null ? GetCourseSet() :
+                _courseSet;
+            set => _courseSet = value;
         }
 
         #endregion
 
         #region Methods
+
+        #region Flux
         /// <summary>
         /// 获取流量数据
         /// </summary>
@@ -58,7 +78,8 @@ namespace IpgwCore.Services.FormatServices {
         private Flux GetIpgwInfo() {
             if (ipgwInfo != null)
                 return ipgwInfo;
-            else {
+            else
+            {
                 var flux = XmlDocService.Instence.GetNode<Flux>(null);
                 if (flux is null)
                     flux = RefreshInfo();
@@ -70,7 +91,7 @@ namespace IpgwCore.Services.FormatServices {
         }
 
         private Flux RefreshInfo() {
-           return  GetIpgwDataInf(LoginServices.Instence.GetString("NEUIpgw"));
+            return GetIpgwDataInf(LoginServices.Instence.GetString("NEUIpgw"));
         }
 
         private Flux GetIpgwDataInf(string data)  //Ipgw网关信息格式化获取
@@ -86,13 +107,13 @@ namespace IpgwCore.Services.FormatServices {
             catch (IndexOutOfRangeException)
             {
                 // MessageService.Instence.ShowError(null, "用户名或密码错误");
-                _ipgeConnected = false;
+                _ipgwConnected = false;
                 return null;
             }
             catch (NullReferenceException)
             {
                 //  MessageService.Instence.ShowError(null, "网络未连接");
-                _ipgeConnected = false;
+                _ipgwConnected = false;
                 return null;
             }
 
@@ -103,16 +124,14 @@ namespace IpgwCore.Services.FormatServices {
         private double FluxFormater(string flux)//流量信息格式化 in(Byte)
 {
             Int64 a = 0;
-            try
-            {
-                a = Convert.ToInt64(flux);
-            }
+            try { a = Convert.ToInt64(flux); }
             catch (FormatException)
-            {
-                
+            {//
             }
             return a / 1000000.0;
         }
+
+        #endregion
 
         private CourseSet GetCourseSet() {
             throw new NotImplementedException();

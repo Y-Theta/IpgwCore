@@ -41,6 +41,7 @@ namespace IpgwCore.Controls.AreaWindow {
 
         #region override
         protected override void OnInitialized(EventArgs e) {
+            SourceInitialized += new EventHandler(WSInitialized);
             base.OnInitialized(e);
         }
 
@@ -48,12 +49,8 @@ namespace IpgwCore.Controls.AreaWindow {
             (PresentationSource.FromVisual((Visual)sender) as HwndSource).AddHook(new HwndSourceHook(WndProc));
         }
 
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
-            int a = wParam.ToInt32();
-            //switch (msg)
-            //{
+        protected virtual IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
 
-            //}
             return IntPtr.Zero;
         }
         #endregion

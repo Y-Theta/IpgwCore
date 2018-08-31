@@ -366,6 +366,21 @@
                 Value="Center" />
     </Style>
 
+    <!--MessageContent-->
+    <Style x:Key="MessageContent"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{DynamicResource DefaultDialogs_Fg}" />
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="TextAlignment"
+                Value="Left" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+    </Style>
+
     <!--ColorSliderLabel-->
     <Style x:Key="ColorSliderLabel"
            TargetType="TextBlock">
@@ -379,6 +394,40 @@
                 Value="Center" />
         <Setter Property="TextAlignment"
                 Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+    </Style>
+
+    <!--FluxPercent-->
+    <Style x:Key="FluxPercent"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{DynamicResource FluxPopup_Fg}" />
+        <Setter Property="FontFamily"
+                Value="{DynamicResource RectNum}" />
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="TextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+    </Style>
+
+    <!--FluxLabel-->
+    <Style x:Key="FluxLabel"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{DynamicResource FluxPopup_Fg}" />
+        <Setter Property="FontFamily"
+                Value="{DynamicResource Questrial}" />
+        <Setter Property="FontSize"
+                Value="13" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="TextAlignment"
+                Value="Left" />
         <Setter Property="HorizontalAlignment"
                 Value="Left" />
     </Style>
@@ -474,7 +523,37 @@
         <Setter Property="IconMaskP"
                 Value="{DynamicResource DefaultButton_IconMask_BG_P}" />
     </Style>
-    
+
+
+    <!--FluxPopupButton-->
+    <Style x:Key="FluxPopupButton"
+           TargetType="control:YT_IconButton">
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Width"
+                Value="24" />
+        <Setter Property="Height"
+                Value="24" />
+        <Setter Property="ToolTipVisiblity"
+                Value="Visible" />
+        <Setter Property="Textloc"
+                Value="True" />
+        <Setter Property="FontWeight"
+                Value="Thin" />
+        <Setter Property="IconN"
+                Value="{DynamicResource DefaultButton_Icon_BG}" />
+        <Setter Property="IconR"
+                Value="{DynamicResource DefaultButton_Icon_BG_R}" />
+        <Setter Property="IconP"
+                Value="{DynamicResource DefaultButton_Icon_BG_P}" />
+        <Setter Property="IconMaskN"
+                Value="{DynamicResource DefaultButton_IconMask_BG_N}" />
+        <Setter Property="IconMaskR"
+                Value="Transparent" />
+        <Setter Property="IconMaskP"
+                Value="Transparent" />
+    </Style>
+
     <!--TextButton-->
     <Style x:Key="TextButton"
            TargetType="control:YT_IconButton">
@@ -499,7 +578,7 @@
         <Setter Property="IconMaskP"
                 Value="{DynamicResource TextButton_IconMask_BG_P}" />
     </Style>
-    
+
     <!--#endregion-->
 
 

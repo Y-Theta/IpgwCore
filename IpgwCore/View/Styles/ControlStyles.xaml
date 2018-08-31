@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:flowcontrol="clr-namespace:IpgwCore.Controls.FlowControls"
+                    xmlns:controls="clr-namespace:IpgwCore.Controls"
+                    xmlns:complex="clr-namespace:IpgwCore.Controls.ComplexControls"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
-    <!--#region-->
+    <!--#region                                                -->
     <!--#endregion-->
 
 
@@ -160,6 +164,137 @@
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region                                                DialogContent-->
+
+    <!--FluxInfoPopup-->
+    <sys:Double x:Key="FluxPopupWidth">300</sys:Double>
+    <sys:Double x:Key="FluxPopupHeight">120</sys:Double>
+    <Style x:Key="FluxInfoPopup"
+           TargetType="flowcontrol:YT_Popup">
+        <Setter Property="Placement"
+                Value="AbsolutePoint" />
+        <Setter Property="AllowsTransparency"
+                Value="True" />
+        <Setter Property="Background"
+                Value="{DynamicResource FluxPopup_Bg}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource FluxPopup_Fg}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource FluxPopup_Bc}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="PlacementMargin"
+                Value="8" />
+        <Setter Property="Child">
+            <Setter.Value>
+                <Border x:Name="Rootborder"
+                        Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}"
+                        BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}"
+                        BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}"
+                        Width="{StaticResource FluxPopupWidth}"
+                        Height="{StaticResource FluxPopupHeight}">
+                    <Grid x:Name="Rootgrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <complex:MainFluxPopup x:Name="Info" />
+                        <Grid x:Name="ControlArea"
+                              DataContext="{DynamicResource FluxInfoVM}"
+                              Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <controls:YT_IconButton x:Name="Close"
+                                                    Grid.Row="0"
+                                                    Content="&#xEB90;"
+                                                    ForeToolTip="关闭"
+                                                    Style="{StaticResource FluxPopupButton}"
+                                                    Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}" />
+                            <controls:YT_IconButton x:Name="Connect"
+                                                    Grid.Row="1"
+                                                    Content="&#xE704;"
+                                                    ForeToolTip="连接Ipgw"
+                                                    Style="{StaticResource FluxPopupButton}"
+                                                    CommandParameter="Connect"
+                                                    Command="{Binding Operation}" />
+                            <controls:YT_IconButton x:Name="Refresh"
+                                                    Grid.Row="2"
+                                                    Content="&#xEDAB;"
+                                                    ForeToolTip="刷新流量数据"
+                                                    Style="{StaticResource FluxPopupButton}"
+                                                    CommandParameter="Refresh"
+                                                    Command="{Binding Operation}" />
+                            <controls:YT_IconButton x:Name="Disconnect"
+                                                    Grid.Row="3"
+                                                    Content="&#xE7E8;"
+                                                    ForeToolTip="断开全部连接"
+                                                    Style="{StaticResource FluxPopupButton}"
+                                                    CommandParameter="Disconnect"
+                                                    Command="{Binding Operation}" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--MessageContent-->
+    <sys:Double x:Key="MessageContentWidth">180</sys:Double>
+    <sys:Double x:Key="MessageContentHeight">48</sys:Double>
+    <Style x:Key="MessageContent"
+           TargetType="flowcontrol:YT_Popup">
+        <Setter Property="Placement"
+                Value="AbsolutePoint" />
+        <Setter Property="AllowsTransparency"
+                Value="True" />
+        <Setter Property="Background"
+                Value="{DynamicResource FluxPopup_Bg}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource FluxPopup_Fg}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource FluxPopup_Bc}" />
+        <Setter Property="AbsOffsetX"
+                Value="{Binding Source={StaticResource MessageContentWidth},Converter={StaticResource OffsetConv},ConverterParameter=8}" />
+        <Setter Property="AbsOffsetY"
+                Value="{Binding Source={StaticResource MessageContentHeight},Converter={StaticResource OffsetConv},ConverterParameter=8}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="PlacementMargin"
+                Value="8" />
+        <Setter Property="Child">
+            <Setter.Value>
+                <Border x:Name="Rootborder"
+                        Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}"
+                        BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}"
+                        BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}"
+                        Width="{StaticResource MessageContentWidth}"
+                        Height="{StaticResource MessageContentHeight}">
+                    <Grid x:Name="Rootgrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="32" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="4,0,0,0"
+                                   Style="{StaticResource MessageContent}"
+                                   Text="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type flowcontrol:YT_Popup}}}" />
+                        <controls:YT_IconButton Grid.Column="1"
+                                                Margin="0,0,8,0"
+                                                Content="&#xF0D2;"
+                                                ForeToolTip="关闭"
+                                                Style="{StaticResource FluxPopupButton}"
+                                                Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=flowcontrol:YT_Popup}}" />
+                    </Grid>
+                </Border>
             </Setter.Value>
         </Setter>
     </Style>

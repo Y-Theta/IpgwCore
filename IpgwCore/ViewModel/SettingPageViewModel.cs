@@ -14,7 +14,7 @@ namespace IpgwCore.ViewModel {
         #endregion
 
         #region Constructors
+
         #endregion
     }
-
 }

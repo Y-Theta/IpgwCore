@@ -9,6 +9,7 @@ namespace IpgwCore.Controls {
     internal class Win32Funcs {
         public const int WM_SYSCOMMAND = 0x112;
         public const int CS_MOVE = 0xF012;
+        public const int W_HIDE = -20;
 
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();

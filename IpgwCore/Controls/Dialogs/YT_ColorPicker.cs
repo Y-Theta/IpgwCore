@@ -7,7 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using IpgwCore.View;
+using ColorD = System.Drawing.Color;
+using Color = System.Windows.Media.Color;
+
 
 namespace IpgwCore.Controls.Dialogs {
     internal class YT_ColorPicker : YT_DialogBase {
@@ -19,14 +23,19 @@ namespace IpgwCore.Controls.Dialogs {
         public static readonly DependencyProperty ArgbProperty =
             DependencyProperty.Register("Argb", typeof(Int32),
                 typeof(YT_ColorPicker), new PropertyMetadata(Int32.Parse("ff000000", System.Globalization.NumberStyles.HexNumber)));
+
+        
         #endregion
 
         #region Methods
 
-        public void ShowDialog(Window Holder, Color color,out Color selected) {
+        public void ShowDialog(Window Holder, ColorD color,ref Color selected) {
             base.ShowDialog(Holder);
             Argb = color.ToArgb();
-            
+        }
+
+        protected override void OnClosing(CancelEventArgs e) {
+            base.OnClosing(e);
         }
         #endregion
 

@@ -17,6 +17,9 @@ using IpgwCore.ViewModel;
 using IpgwCore.Controls.AreaWindow;
 using IpgwCore.Services.MessageServices;
 using IpgwCore.Controls.Dialogs;
+using IpgwCore.View;
+using IpgwCore.Controls.FlowControls;
+using IpgwCore.Controls;
 
 namespace IpgwCore {
     /// <summary>
@@ -24,6 +27,7 @@ namespace IpgwCore {
     /// </summary>
     public partial class MainWindow : YT_Window {
         private MainPageViewModel _mpvm;
+        YT_Popup pop = new YT_Popup();
 
         public MainWindow() {
             InitializeComponent();
@@ -33,7 +37,18 @@ namespace IpgwCore {
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             _mpvm = DataContext as MainPageViewModel;
             _mpvm.CommandOperation += _mpvm_CommandOperation;
-            Console.WriteLine(Int32.Parse("FFFFFFFF",System.Globalization.NumberStyles.HexNumber));
+            pop.Style = App.Current.Resources["FluxInfoPopup"] as Style;
+        }
+
+        protected override IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
+            int a = wParam.ToInt32();
+            switch (a)
+            {
+                case Win32Funcs.W_HIDE:
+                    PopupMessageServices.Instence.MainWindowVisibility = App.Current.MainWindow.Visibility;
+                    break;
+            }
+            return base.WndProc(hwnd, msg, wParam, lParam, ref handled);
         }
 
         private void _mpvm_CommandOperation(object sender, CommandArgs args) {
@@ -41,8 +56,7 @@ namespace IpgwCore {
             switch (args.Command)
             {
                 case "CancelCommand":
-                    YT_ColorPicker s = new YT_ColorPicker();
-                    s.ShowDialog(App.Current.MainWindow);
+                    pop.IsOpen = true;
                     break;
             }
         }

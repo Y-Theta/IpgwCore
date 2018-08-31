@@ -6,8 +6,12 @@
     <!--Font-->
     <FontFamily x:Key="Segoe">/FontLibrary;Component/#Segoe</FontFamily>
     <FontFamily x:Key="RectNum">/FontLibrary;Component/#RectNum</FontFamily>
+    <FontFamily x:Key="Questrial">/FontLibrary;Component/#Questrial</FontFamily>
 
     <view:ColorConv x:Key="ColorConv" />
     <view:ColorNumConv x:Key="ColorNumConv" />
+    <view:OffsetConv x:Key="OffsetConv" />
+    <view:FluxConv x:Key="FluxConv" />
+    <view:SliderConv x:Key="SliderConv" />
 
 </ResourceDictionary>
