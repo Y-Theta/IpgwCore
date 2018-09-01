@@ -10,7 +10,6 @@
     <!--#region                                                -->
     <!--#endregion-->
 
-
     <!--#region                                                Slider-->
 
     <!--ColorPickerSlider-->
@@ -265,11 +264,11 @@
         <Setter Property="PopupAnimation"
                 Value="Fade" />
         <Setter Property="Background"
-                Value="{DynamicResource FluxPopup_Bg}" />
+                Value="{DynamicResource MessagePopup_Bg}" />
         <Setter Property="Foreground"
-                Value="{DynamicResource FluxPopup_Fg}" />
+                Value="{DynamicResource MessagePopup_Fg}" />
         <Setter Property="BorderBrush"
-                Value="{DynamicResource FluxPopup_Bc}" />
+                Value="{DynamicResource MessagePopup_Bc}" />
         <Setter Property="AbsOffsetX"
                 Value="{Binding Source={StaticResource MessageContentWidth},Converter={StaticResource OffsetConv},ConverterParameter=6}" />
         <Setter Property="AbsOffsetY"
@@ -291,8 +290,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="32" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="12,0,0,0"
-                                   Style="{StaticResource MessageContent}"
+                        <TextBlock Margin="12,0,8,0"
+                                   Style="{StaticResource MessageBlock}"
                                    Text="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type flowcontrol:YT_Popup}}}" />
                         <controls:YT_IconButton Grid.Column="1"
                                                 Margin="0,0,8,0"
@@ -420,7 +419,7 @@
     <Style x:Key="AreaContextMenuSeperator"
            TargetType="{x:Type Separator}">
         <Setter Property="Margin"
-                Value="2,1,2,1" />
+                Value="2,2,2,2" />
         <Setter Property="Focusable"
                 Value="false" />
         <Setter Property="Template">
@@ -505,7 +504,6 @@
         </Setter>
     </Style>
 
-
     <!--AreaContextMenu-->
     <Style x:Key="AreaContextMenu"
            TargetType="flowcontrol:YT_ContextMenu">
@@ -514,35 +512,45 @@
         <Setter Property="DataContext"
                 Value="{DynamicResource MainPageVM}" />
         <Setter Property="BorderThickness"
-                Value="2" />
+                Value="1" />
         <Setter Property="Padding"
-                Value="-1,4,0,4" />
-        <Setter Property="Margin"
-                Value="-1,0,0,0" />
+                Value="0,1,0,1" />
         <Setter Property="Width"
-                Value="128" />
+                Value="160" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="flowcontrol:YT_ContextMenu">
                     <Border x:Name="RootBorder"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Width="{TemplateBinding Width}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Margin="{TemplateBinding Padding}">
+                            BorderBrush="{TemplateBinding BorderBrush}">
                         <Border.Resources>
                             <Style x:Key="SubMenuItem"
                                    TargetType="flowcontrol:YT_MenuItem">
                                 <Setter Property="IconWidth"
-                                        Value="32" />
+                                        Value="42" />
                                 <Setter Property="MinWidth"
                                         Value="120" />
                                 <Setter Property="Height"
-                                        Value="32" />
+                                        Value="26" />
                                 <Setter Property="IconAlignment"
                                         Value="Center" />
                             </Style>
                         </Border.Resources>
-                        <StackPanel Background="{TemplateBinding Background}">
+                        <StackPanel Margin="{TemplateBinding Padding}">
+                            <flowcontrol:YT_MenuItem x:Name="M2"
+                                                     HeadIcon="&#xEA8A;"
+                                                     ContentText="主界面"
+                                                     CommandParameter="Show"
+                                                     Style="{StaticResource SubMenuItem}"
+                                                     Command="{Binding Operation}" />
+                            <flowcontrol:YT_MenuItem x:Name="M3"
+                                                     HeadIcon="&#xEC26;"
+                                                     ContentText="关于"
+                                                     CommandParameter="About"
+                                                     Style="{StaticResource SubMenuItem}"
+                                                     Command="{Binding Operation}" />
                             <Separator Style="{StaticResource AreaContextMenuSeperator }" />
                             <flowcontrol:YT_MenuItem x:Name="M4"
                                                      HeadIcon="&#xEA39;"

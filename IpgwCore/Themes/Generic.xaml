@@ -48,8 +48,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type areawindow:YT_Window}">
                     <Border BorderBrush="{DynamicResource DefaultDialogs_Bc}"
-                            BorderThickness="1"
-                            Margin="2">
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Padding}">
                         <Grid Background="{TemplateBinding Background}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -113,7 +113,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 
 
@@ -350,7 +349,8 @@
                                         <TextBlock Style="{StaticResource ColorSliderLabel}"
                                                    Text="HEX " />
                                         <controls:YT_TextBox Style="{StaticResource ColorSliderValue}"
-                                                             Width="64"
+                                                             Width="72"
+                                                             Padding="-2,0,-5,0"
                                                              Text="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=HEX,UpdateSourceTrigger=PropertyChanged}" />
 
                                     </StackPanel>
@@ -833,8 +833,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
+
+
     <!--ContextMenu-->
 
     <!--DContextMenu-->
@@ -908,10 +908,10 @@
                                    Text="{TemplateBinding HeadIcon}"
                                    Foreground="{TemplateBinding IconN}"
                                    FontSize="{TemplateBinding IconSize}"
-                                   FontWeight="{TemplateBinding FontWeight}"/>
+                                   FontWeight="{TemplateBinding FontWeight}" />
                         <TextBlock x:Name="Content"
                                    Grid.Column="1"
-                                   HorizontalAlignment="Center"
+                                   HorizontalAlignment="{TemplateBinding ContentTextHAlignment}"
                                    VerticalAlignment="Center"
                                    TextAlignment="{TemplateBinding ContentTextAlignment}"
                                    Text="{TemplateBinding ContentText}"
@@ -938,5 +938,33 @@
         </Setter>
     </Style>
 
+
+    <!--HitHolder-->
+
+    <Style TargetType="controls:YT_Hitholder">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:YT_Hitholder">
+                    <Grid>
+                        <Rectangle x:Name="HitContent"
+                                   Fill="{TemplateBinding Background}">
+                            <Rectangle.ToolTip>
+                                <ToolTip Style="{DynamicResource DefaultToolTip}"
+                                         Visibility="{Binding ToolTipText, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay,Converter={StaticResource StringConv},ConverterParameter=Collapsed}">
+                                    <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                                        <TextBlock Style="{StaticResource DefaultToolTipText}"
+                                                   Text="{Binding ToolTipText, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}" />
+                                    </Grid>
+                                </ToolTip>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

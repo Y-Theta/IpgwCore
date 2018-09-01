@@ -12,7 +12,7 @@
                       DataContext="{StaticResource MainPageVM}"
                       Opacity="{Binding MainOpacity, Source={x:Static settings:Settings.Default},Mode=OneWay}"
                       Width="320"
-                      Height="420"
+                      Height="400"
                       mc:Ignorable="d">
     <areawindow:YT_Window.AreaIcon>
         <areawindow:YT_AreaIcon AreaVisibility="True">
@@ -58,11 +58,15 @@
         </Grid>
     </areawindow:YT_Window.TitleArea>
     <Border Background="{DynamicResource MainWindow_Bg}"
-            BorderBrush="{DynamicResource MainWindow_Bc}"
-            Margin="-1"
-            BorderThickness="1">
-        <Frame x:Name="RootFrame"
-               Style="{StaticResource DefaultFrame}" />
+            Margin="0">
+        <Grid x:Name="RootGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Frame x:Name="RootFrame"
+                   Style="{StaticResource DefaultFrame}" />
+        </Grid>
     </Border>
 
 </areawindow:YT_Window>

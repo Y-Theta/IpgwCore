@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace IpgwCore {
     /// <summary>
@@ -38,6 +39,10 @@ namespace IpgwCore {
 
         private void Current_SessionEnding(object sender, SessionEndingCancelEventArgs e) {
             IpgwCore.Properties.Settings.Default.Save();
+        }
+
+        public static void UIinvoke(Action act) {
+            Current.MainWindow.Dispatcher.Invoke(DispatcherPriority.Normal, act);
         }
 
         #endregion

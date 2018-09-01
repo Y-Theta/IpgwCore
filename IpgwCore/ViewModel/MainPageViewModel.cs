@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using IpgwCore.Model.BasicModel;
 using IpgwCore.MVVMBase;
 using IpgwCore.Services.MessageServices;
 using PMS = IpgwCore.Services.MessageServices.PopupMessageServices;
@@ -41,6 +42,13 @@ namespace IpgwCore.ViewModel {
         }
 
 
+        private double _fluxdata;
+        public double FluxData {
+            get => _fluxdata;
+            set => SetValue(out _fluxdata, value, FluxData);
+        }
+
+
         public CommandBase Operation { get; set; }
 
         public CommandBase Nvigate { get; set; }
@@ -61,6 +69,7 @@ namespace IpgwCore.ViewModel {
         #region Constructors
         public MainPageViewModel() {
             PMS.Instence.MessageHolder = this;
+            FluxData = 0.5;
             InitCommand();
         }
         #endregion

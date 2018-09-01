@@ -248,21 +248,30 @@ namespace IpgwCore.View {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return (int)((double)value * 100);
-            switch (parameter.ToString())
+            string[] str = parameter.ToString().Split('|');
+            switch (str[0])
             {
                 case "Path":
-                    return PercentToCircle(1 - GetFluxPercent((Flux)value));
+                    return PercentToCircle(1 - GetFluxPercent((Flux)value), Int32.Parse(str[1]), Int32.Parse(str[2]));
                 case "Per":
                     return (int)(100 - GetFluxPercent((Flux)value) * 100);
                 case "Used":
                     return GetUsed((Flux)value);
                 case "Bal":
                     return GetBalance((Flux)value);
+                case "Mon":
+                    return GetMon((Flux)value);
                 case "ConT":
                     return (bool)value ? "Online" : "Offline";
+                case "PathTest":
+                    return PercentToCircle((double)value, Int32.Parse(str[1]), Int32.Parse(str[2]));
                 default:
                     return (int)value;
             }
+        }
+
+        private string GetMon(Flux value) {
+            return String.Format("{0:###.##}  R", value.Balance);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
@@ -364,9 +373,9 @@ namespace IpgwCore.View {
         /// </summary>
         public static string FluxFormat(double value) {
             if (value > 1000)
-                return String.Format("{0:###.#} G", value / 1000.0);
+                return String.Format("{0:###.#}  G", value / 1000.0);
             else
-                return String.Format("{0:###.#} M", value);
+                return String.Format("{0:###.#}  M", value);
         }
 
         /// <summary>
@@ -374,18 +383,22 @@ namespace IpgwCore.View {
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static string PercentToCircle(double a) {
+        public static string PercentToCircle(double a, int cs, int r) {
+            string R = r.ToString();
+            int center = cs / 2;
+            string Center = center.ToString();
+            string Gap = ((int)((cs - 2 * r) / 2)).ToString();
             var A = a * Math.PI * 3.6 / 1.80;
-            var x = 30 * Math.Sin(A);
-            var y = 30 * Math.Cos(A);
-            x = 36 + x;
-            y = 36 - y;
+            var x = r * Math.Sin(A);
+            var y = r * Math.Cos(A);
+            x = center + x;
+            y = center - y;
             if (a <= 0.50)
-                return "M 36,6 A 30,30,0,0,1," + x.ToString() + "," + y.ToString();
-            else if (a == 1)
-                return "M 36,6 A 30,30,0,1,1,35.9,6";
+                return "M " + Center + "," + Gap + " A " + R + "," + R + ",0,0,1," + x.ToString() + "," + y.ToString();
+            else if (a >= 1)
+                return "M " + Center + "," + Gap + " A " + R + "," + R + ",0,0,1," + string.Format("{0:###.#}", center - 1) + "," + y.ToString();
             else
-                return "M 36,6 A 30,30,0,1,1," + x.ToString() + "," + y.ToString();
+                return "M " + Center + "," + Gap + " A " + R + "," + R + ",0,1,1," + x.ToString() + "," + y.ToString();
         }
     }
 
@@ -442,5 +455,25 @@ namespace IpgwCore.View {
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class StringConv : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
+            switch (parameter.ToString())
+            {
+                case "Visible":
+                    return value is null || value.ToString().Equals(String.Empty) ? Visibility.Visible : Visibility.Collapsed;
+                case "Collapsed":
+                    return value is null || value.ToString().Equals(String.Empty) ? Visibility.Collapsed : Visibility.Visible;
+                default: return value;
+            }
+        }
 
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
+        }
+    }
 }

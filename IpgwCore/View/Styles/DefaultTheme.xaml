@@ -11,9 +11,21 @@
     <SolidColorBrush x:Key="MainWindow_Bg"
                      Color="#080808" />
     <SolidColorBrush x:Key="MainWindow_Bc"
-                     Color="#808080" />
+                     Color="#000000" />
     <SolidColorBrush x:Key="MainWindow_Fg"
                      Color="#E0E0E0" />
+    <!--#endregion-->
+
+    <!--#region                                                MainPage-->
+
+    <SolidColorBrush x:Key="MainPage_Bg"
+                     Color="#080808" />
+    <SolidColorBrush x:Key="MainPage_Bg_L"
+                     Color="#323232" />
+    <SolidColorBrush x:Key="MainPage_Fg"
+                     Color="#A0A0A0" />
+    
+    
     <!--#endregion-->
 
     <!--#region                                                ContextMenu-->
@@ -21,7 +33,7 @@
     <SolidColorBrush x:Key="ContextMenu_Bg"
                      Color="#080808" />
     <SolidColorBrush x:Key="ContextMenu_Bc"
-                     Color="#404040" />
+                     Color="#B0B0B0" />
     <SolidColorBrush x:Key="ContextMenu_Fg"
                      Color="#A0A0A0" />
 
@@ -47,7 +59,10 @@
     <!--#endregion-->
 
     <!--#region                                                TitleBar  -->
-    
+
+    <SolidColorBrush x:Key="TitleBar_Bg"
+                     Color="#1E1E1E" />
+
     <!--Button-->
     <SolidColorBrush x:Key="DefaultButton_Icon_BG"
                      Color="#A0A0A0" />
@@ -61,13 +76,12 @@
                      Color="#606060" />
     <SolidColorBrush x:Key="DefaultButton_IconMask_BG_P"
                      Color="#404040" />
-    
+
     <!--Text-->
     <SolidColorBrush x:Key="DefaultMainLabel_Fg"
                      Color="#A0A0A0" />
 
     <!--#endregion-->
-
 
     <!--#region                                                ToolTips  -->
     
@@ -78,7 +92,6 @@
     <SolidColorBrush x:Key="DefaultToolTip_Bc"
                      Color="#323232" />
     <!--#endregion-->
-
 
     <!--#region                                                Dialogs  -->
     
@@ -153,11 +166,12 @@
     <!--#region                                                FluxPopup-->
 
     <SolidColorBrush x:Key="FluxPopup_Bg"
-                     Color="#080808" />
+                     Color="#F0000000" />
     <SolidColorBrush x:Key="FluxPopup_Fg"
                      Color="#A0A0A0" />
+    <Color x:Key="FluxPopup_Fg_C">#C0C0C0</Color>
     <SolidColorBrush x:Key="FluxPopup_Bc"
-                     Color="#323232" />
+                     Color="#000000" />
 
     <SolidColorBrush x:Key="FluxPopupButtonIcon_Bg"
                      Color="#A0A0A0" />
@@ -171,6 +185,16 @@
                      Color="Transparent" />
     <SolidColorBrush x:Key="FluxPopupButton_IconMask_BG_P"
                      Color="Transparent" />
+    <!--#endregion-->
+
+    <!--#region                                                MessagePopup-->
+    <SolidColorBrush x:Key="MessagePopup_Bg"
+                     Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MessagePopup_Fg"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="MessagePopup_Bc"
+                     Color="#1E1E1E" />
+
     <!--#endregion-->
 
 </ResourceDictionary>

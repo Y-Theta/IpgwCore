@@ -139,8 +139,6 @@ namespace IpgwCore.Controls.FlowControls {
             DependencyProperty.Register("AutoHide", typeof(bool),
                 typeof(YT_Popup), new PropertyMetadata(false));
 
-
-
         /// <summary>
         /// 依赖对象改变事件
         /// </summary>
@@ -207,7 +205,7 @@ namespace IpgwCore.Controls.FlowControls {
 
         private void OnPlacementTargetChanged(object sender, EventArgs e) {
             _locationSet = true;
-            if (Placement.Equals(PlacementMode.AbsolutePoint))
+            if (Placement.Equals(PlacementMode.AbsolutePoint) || PlacementTarget is null) 
             {
                 HorizontalOffset = 0;
                 VerticalOffset = 0;
@@ -216,8 +214,7 @@ namespace IpgwCore.Controls.FlowControls {
             }
             else
             {
-                HorizontalOffset = base.PlacementTarget.RenderSize.Width - AbsOffsetX;
-                VerticalOffset = base.PlacementTarget.RenderSize.Height - AbsOffsetY;
+                PlacementRectangle = new Rect(PlacementTarget.RenderSize.Width - AbsOffsetX, PlacementTarget.RenderSize.Height - AbsOffsetY, 0, 0);
                 if (PlacementTarget is Window)
                     ((Window)PlacementTarget).LocationChanged += YT_Popup_LocationChanged;
             }
@@ -231,7 +228,6 @@ namespace IpgwCore.Controls.FlowControls {
                 mi.Invoke(this, null);
             }
         }
-
 
         private CustomPopupPlacement[] Location(Size popupSize, Size targetSize, Point offset) {
             CustomPopupPlacement placement1 =

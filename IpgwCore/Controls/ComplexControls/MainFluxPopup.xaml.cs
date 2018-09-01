@@ -21,5 +21,27 @@ namespace IpgwCore.Controls.ComplexControls {
         public MainFluxPopup() {
             InitializeComponent();
         }
+
+        private void GraphPanel_MouseEnter(object sender, MouseEventArgs e) {
+            PercentNum.Foreground = Percent.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+            PercentEffect.Opacity = 1;
+            PercentNumEffect.Opacity = 1;
+        }
+
+        private void GraphPanel_MouseLeave(object sender, MouseEventArgs e) {
+            PercentNum.Foreground = Percent.Stroke = App.Current.Resources["FluxPopup_Fg"] as SolidColorBrush;
+            PercentEffect.Opacity = 0;
+            PercentNumEffect.Opacity = 0;
+        }
+
+        private void GraphPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            PercentNum.Foreground = Percent.Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255));
+            PercentEffect.BlurRadius = 0;
+        }
+
+        private void GraphPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            PercentNum.Foreground = Percent.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+            PercentEffect.BlurRadius = 20;
+        }
     }
 }

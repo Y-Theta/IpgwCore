@@ -366,11 +366,13 @@
                 Value="Center" />
     </Style>
 
-    <!--MessageContent-->
-    <Style x:Key="MessageContent"
+    <!--MessageBlock-->
+    <Style x:Key="MessageBlock"
            TargetType="TextBlock">
         <Setter Property="Foreground"
                 Value="{DynamicResource DefaultDialogs_Fg}" />
+        <Setter Property="TextWrapping"
+                Value="Wrap"/>
         <Setter Property="FontSize"
                 Value="12" />
         <Setter Property="TextAlignment"
@@ -423,7 +425,20 @@
         <Setter Property="FontFamily"
                 Value="{DynamicResource Questrial}" />
         <Setter Property="FontSize"
-                Value="13" />
+                Value="12" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="TextAlignment"
+                Value="Left" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+    </Style>
+    
+    <!--MenuLabel-->
+    <Style x:Key="MainPageLabel"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{DynamicResource MainPage_Fg}" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
         <Setter Property="TextAlignment"

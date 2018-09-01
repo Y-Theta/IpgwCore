@@ -36,6 +36,7 @@ namespace IpgwCore {
             Loaded += MainWindow_Loaded;
         }
 
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             _mpvm = DataContext as MainPageViewModel;
             _mpvm.CommandOperation += _mpvm_CommandOperation;
@@ -59,7 +60,7 @@ namespace IpgwCore {
             else
             {
                 if (Properties.Settings.Default.ExitArea)
-                    Hide();
+                    App.Current.MainWindow.Hide();
                 else
                 {
                     Properties.Settings.Default.Save();
@@ -76,7 +77,7 @@ namespace IpgwCore {
 
         private void Dialog_YesAction(object para = null) {
             if (Properties.Settings.Default.ExitArea)
-                Hide();
+                App.Current.MainWindow.Hide();
             else
             {
                 Properties.Settings.Default.Save();
@@ -87,12 +88,12 @@ namespace IpgwCore {
         protected override IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
             int a = wParam.ToInt32();
             int b = lParam.ToInt32();
-            switch (b)
+            switch (msg)
             {
-                case 1708:
+                case 8:
                     PopupMessageServices.Instence.MainWindowVisibility = Visibility.Hidden;
                     break;
-                case 6800:
+                case 7:
                     PopupMessageServices.Instence.MainWindowVisibility = Visibility.Visible;
                     break;
             }
@@ -108,6 +109,16 @@ namespace IpgwCore {
                     {
                         case "Exit":
                             App.Current.MainWindow.Close();
+                            break;
+                        case "Show":
+                            App.Current.MainWindow.Show();
+                            break;
+                        case "About":
+                            RootFrame.Navigate(new Uri(ConstTable.PagePath + "AboutPage.xaml", UriKind.Relative));
+                            break;
+                        case "COP":
+                            YT_ColorPicker cp = new YT_ColorPicker();
+                            cp.ShowDialog(this);
                             break;
                     }
                     break;

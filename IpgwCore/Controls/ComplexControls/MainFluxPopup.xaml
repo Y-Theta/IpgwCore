@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:IpgwCore.Controls"
              DataContext="{StaticResource FluxInfoVM}"
              mc:Ignorable="d">
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -20,22 +20,57 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid x:Name="GraphPanel"
-                  Margin="0,12,0,0">
+                  Width="72"
+                  Height="72"
+                  Margin="0,16,0,0"
+                  MouseEnter="GraphPanel_MouseEnter"
+                  MouseLeave="GraphPanel_MouseLeave"
+                  MouseLeftButtonDown="GraphPanel_MouseLeftButtonDown"
+                  MouseLeftButtonUp="GraphPanel_MouseLeftButtonUp">
                 <Canvas  Width="72"
                          Height="72"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Center">
-                    <Path Data="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Path}"
+                    <Path x:Name="Percent"
+                          Fill="{x:Null}"
+                          Data="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Path|72|30}"
                           Stroke="{DynamicResource FluxPopup_Fg}"
                           StrokeEndLineCap="Triangle"
-                          StrokeThickness="6" />
-                    <Path Data="M 36,6 A 30,30,0,1,1,35.9,6"
+                          StrokeThickness="6">
+                        <Path.Effect>
+                            <DropShadowEffect x:Name="PercentEffect"
+                                              Color="{DynamicResource FluxPopup_Fg_C}"
+                                              Opacity="0"
+                                              BlurRadius="20"
+                                              ShadowDepth="0" />
+                        </Path.Effect>
+                    </Path>
+                    <Path x:Name="PercentBg"
+                          Fill="{x:Null}"
+                          Data="M 36,6 A 30,30,0,1,1,35.9,6"
                           Stroke="{DynamicResource FluxPopup_Fg}"
                           Opacity="0.2"
                           StrokeThickness="6" />
                 </Canvas>
-                <TextBlock Text="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Per}"
-                           Style="{DynamicResource FluxPercent}" />
+                <TextBlock x:Name="PercentNum"
+                           Text="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Per}"
+                           Style="{DynamicResource FluxPercent}">
+                    <TextBlock.Effect>
+                        <DropShadowEffect x:Name="PercentNumEffect"
+                                          Color="{DynamicResource FluxPopup_Fg_C}"
+                                          Opacity="0"
+                                          BlurRadius="10"
+                                          ShadowDepth="0" />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.ToolTip>
+                    <ToolTip Style="{DynamicResource DefaultToolTip}">
+                        <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                            <TextBlock Text="单击查看详细流量信息"
+                                       Style="{DynamicResource DefaultToolTipText}" />
+                        </Grid>
+                    </ToolTip>
+                </Grid.ToolTip>
             </Grid>
             <Grid x:Name="ConnectID"
                   Grid.Row="1">
@@ -70,7 +105,7 @@
               Grid.Column="1"
               UseLayoutRounding="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="48" />
+                <RowDefinition Height="52" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -126,7 +161,7 @@
                 <TextBlock Width="84"
                            TextAlignment="Right"
                            FontWeight="Light"
-                           Text="{Binding FluxData.Balance}"
+                           Text="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Mon}"
                            Style="{StaticResource FluxLabel}" />
             </StackPanel>
         </Grid>

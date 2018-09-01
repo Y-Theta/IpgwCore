@@ -118,7 +118,7 @@ namespace IpgwCore.Controls.FlowControls {
                 new PropertyMetadata(0.0));
         #endregion
 
-        #region ContentText
+        #region ContentTextAlignment
         public TextAlignment ContentTextAlignment {
             get { return (TextAlignment)GetValue(ContentTextAlignmentProperty); }
             set { SetValue(ContentTextAlignmentProperty, value); }
@@ -126,6 +126,16 @@ namespace IpgwCore.Controls.FlowControls {
         public static readonly DependencyProperty ContentTextAlignmentProperty =
             DependencyProperty.Register("ContentTextAlignment", typeof(TextAlignment),
                 typeof(YT_MenuItem), new PropertyMetadata(TextAlignment.Left));
+        #endregion
+
+        #region ContentTextHAlignment
+        public HorizontalAlignment ContentTextHAlignment {
+            get { return (HorizontalAlignment)GetValue(ContentTextHAlignmentProperty); }
+            set { SetValue(ContentTextHAlignmentProperty, value); }
+        }
+        public static readonly DependencyProperty ContentTextHAlignmentProperty =
+            DependencyProperty.Register("ContentTextHAlignment", typeof(HorizontalAlignment), 
+                typeof(YT_MenuItem), new PropertyMetadata(HorizontalAlignment.Left));
         #endregion
 
         #region IconWidth
@@ -157,7 +167,6 @@ namespace IpgwCore.Controls.FlowControls {
             DependencyProperty.Register("IconAlignment", typeof(TextAlignment), 
                 typeof(YT_MenuItem), new PropertyMetadata(TextAlignment.Center));
         #endregion
-
 
 
         static YT_MenuItem() {

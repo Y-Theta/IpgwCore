@@ -24,6 +24,11 @@ namespace IpgwCore.View.Pages {
         public MainPage() {
             InitializeComponent();
             Loaded += MainPage_Loaded;
+            Unloaded += MainPage_Unloaded;
+        }
+
+        private void MainPage_Unloaded(object sender, RoutedEventArgs e) {
+            _mpvm.Mainpage = false;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e) {
@@ -33,7 +38,7 @@ namespace IpgwCore.View.Pages {
         }
 
         private void _mpvm_CommandOperation(object sender, MVVMBase.CommandArgs args) {
-            throw new NotImplementedException();
+            
         }
     }
 }

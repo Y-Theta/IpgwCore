@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IpgwCore.App" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAgAAAAAAAACgAAAAAAAAAAAAAQAAAAAAAAAAAIAwA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.ConstTable" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABAAAQA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.MainWindow" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACIAAAAAEQAAAAAAAAAAAAgAGAAAAABAQAAAAAA=</HashCode>
+      <FileName>View\Pages\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IpgwCore.Controls.AreaWindow.YT_AreaIcon" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAFAGIAAAIgBgACABAgAQBAgAAMEAACBCAAgAA=</HashCode>
+      <FileName>Controls\AreaWindow\YT_AreaIcon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.AreaWindow.YT_SizeBorder" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAEAAAAAAAAACAAAEABAAAACBAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\AreaWindow\YT_SizeBorder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.AreaWindow.YT_TitleBar" Collapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAARASAEAkEAAAACAAAAAAAAAAQAA=</HashCode>
+      <FileName>Controls\AreaWindow\YT_TitleBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.AreaWindow.YT_Window" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEABIAAgAAAAAgAACAAAAAAAAAAACBAAQAAAAAA=</HashCode>
+      <FileName>Controls\AreaWindow\YT_Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.ComplexControls.MainFluxPopup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\ComplexControls\MainFluxPopup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.Controls.Dialogs.YT_ColorPicker" Collapsed="true">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAEAAAAAAEAAAAAAAgAAAAA=</HashCode>
+      <FileName>Controls\Dialogs\YT_ColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.Dialogs.YT_DialogBase" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QWAAAAACQABAQoEIAQAAAAEGCAAGABASAAQAWEhIAAA=</HashCode>
+      <FileName>Controls\Dialogs\YT_DialogBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.Dialogs.YT_FormDialog" Collapsed="true">
+    <Position X="3" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Dialogs\YT_FormDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.Dialogs.YT_GeneralDialog" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAgAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Dialogs\YT_GeneralDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.Win32Funcs" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAACAAAAAAAABAAAAAAIAAAAQQAAA=</HashCode>
+      <FileName>Controls\DllFuncs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.YT_IconButton" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAQABCKAAAoxAkABACAIAgAQAAAUBATCAEYEA0IAA=</HashCode>
+      <FileName>Controls\OtherControls\YT_Buttons.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.YT_IconToggelButton" Collapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAQAACLgEAIZhkARCCAJAwQSIAEEBATCAEIAAUIAQ=</HashCode>
+      <FileName>Controls\OtherControls\YT_Buttons.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.YT_IconRadioButton" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAQAACLgEAIZhkARCCAJAwQSIAFEBATCAEIAAUIQQ=</HashCode>
+      <FileName>Controls\OtherControls\YT_Buttons.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.YT_TextBox" Collapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IADAAAAAAAAAAAgAAACAMQAEBAAAAAAgAAAAAIAAAAA=</HashCode>
+      <FileName>Controls\OtherControls\YT_TextBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.FlowControls.YT_ContextMenu" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\FlowControls\YT_ContextMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.FlowControls.YT_MenuItem" Collapsed="true">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAigABBAKAAAggAEAABCAYACgYAAEEAACCAAAEA0QAA=</HashCode>
+      <FileName>Controls\FlowControls\YT_ContextMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Controls.FlowControls.YT_Popup" Collapsed="true">
+    <Position X="18.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IoAAECkJAFAEWAYAATICiEgYAJBAEAAEAAA4AAEAQIA=</HashCode>
+      <FileName>Controls\FlowControls\YT_Popup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.Course" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgAEAQAAAAAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.CourseTime" Collapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAEkAAAAAAAAAAAgIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.CourseSet" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAABAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.Flux" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Flux.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.FluxTrendGroup" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAEAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Flux.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.InfoSet" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAQCAUAAAASAAAAAAAAEAQAAABMIAAAAAgA=</HashCode>
+      <FileName>Model\BasicModel\InfoSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Model.BasicModel.XmlPath" Collapsed="true">
+    <Position X="18.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\BasicModel\XmlPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.MVVMBase.CommandBase" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAgQAAEIAAAAAAAAAAAAQAAAIAAAAAAA=</HashCode>
+      <FileName>MVVMBase\CommandBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.MVVMBase.CommandArgs" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVMBase\EventArgsandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.MVVMBase.ViewModelBase" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAgAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>MVVMBase\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IpgwCore.Properties.Resources" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAABEAAAASAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Properties.Settings" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAgIAAAAAAAkAAAQIIgAAAAFAEAAAAAgAAAACAA=</HashCode>
+      <FileName>Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Services.FormatServices.Formater" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAAAAAQAAABgAICAEAABgQAAAAQAAIJAABAAA=</HashCode>
+      <FileName>Services\FormatServices\Formater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.Services.FormatServices.XmlDocService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAAEAAAAAQEAAAAAgAAEEEACAAQAAAAAIAAgIAgA=</HashCode>
+      <FileName>Services\FormatServices\XmlDocService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.Services.HttpServices.LoginServices" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAECACAAAAAUCACABBAJAgACAAAAACACBAMACgABAA=</HashCode>
+      <FileName>Services\HttpServices\LoginServices.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.Services.MessageServices.PopupMessageServices" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAUAIAAAAAEQAAIAAAAAAAAAASAAAAAAIAIAAIAAAA=</HashCode>
+      <FileName>Services\MessageServices\PopupMessageServices.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.ColorConv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAEAAgAABAAAAgAAAAAQAA=</HashCode>
+      <FileName>View\Converter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.ColorNumConv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAICAAAAEAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Converter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.FluxConv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAIAAAEAAgAiAAAIAAAAEAAAAAAA=</HashCode>
+      <FileName>View\Converter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.SliderConv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Converter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.OffsetConv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Converter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.BoolConv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Converter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.Pages.InfoPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Pages\InfoPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.Pages.MainPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAEAAAAAAAAAAAAAgAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Pages\MainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.View.Pages.SettingPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Pages\SettingPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IpgwCore.ViewModel.FluxInfoViewModel" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAASAAAAQAAgAAAAAAAAAAAAAEAAAAAgAI=</HashCode>
+      <FileName>ViewModel\FluxInfoViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IpgwCore.ViewModel.MainPageViewModel" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAgAAACAAAAYAAAAAAQAAARAAIEAEAAAAAAAA=</HashCode>
+      <FileName>ViewModel\MainPageViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IpgwCore.ViewModel.SettingPageViewModel" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ViewModel\SettingPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IpgwCore.Services.FormatServices.IXmlOperation" Collapsed="true">
+    <Position X="13" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEEEAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\FormatServices\IXmlOperation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IpgwCore.Services.HttpServices.ILogin" Collapsed="true">
+    <Position X="7.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAJAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\HttpServices\ILogin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IpgwCore.Services.MessageServices.IMessagePoster" Collapsed="true">
+    <Position X="9.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Services\MessageServices\IMessagePoster.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IpgwCore.Services.MessageServices.IMessageServices" Collapsed="true">
+    <Position X="11.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAIAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Services\MessageServices\IMessageServices.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="IpgwCore.Model.BasicModel.DAYS" Collapsed="true">
+    <Position X="7.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAQAAAQAAAAEAAAAAABCBAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Course.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IpgwCore.Model.BasicModel.TERM" Collapsed="true">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAACAAAAA=</HashCode>
+      <FileName>Model\BasicModel\Course.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="IpgwCore.MVVMBase.EnableAction" Collapsed="true">
+    <Position X="11.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVMBase\EventArgsandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="IpgwCore.MVVMBase.CommandAction" Collapsed="true">
+    <Position X="7.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVMBase\EventArgsandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="IpgwCore.MVVMBase.PropertyChangedCallBack" Collapsed="true">
+    <Position X="13" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>MVVMBase\EventArgsandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="IpgwCore.MVVMBase.CommandActionEventHandler" Collapsed="true">
+    <Position X="9.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVMBase\EventArgsandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

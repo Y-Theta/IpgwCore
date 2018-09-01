@@ -83,19 +83,21 @@ namespace IpgwCore.Services.HttpServices {
 
         #region Methods
 
-        private void RefrashinfSet(string name) {
+        private bool RefrashinfSet(string name) {
             if (InfSet != null && InfSet.name.Equals(name))
-                return;
+                return KeyValuePairsCheck();
             InfSet = XmlDocService.Instence.GetNode<InfoSet>(new XmlPath { Key = name });
+            return KeyValuePairsCheck();
         }
 
-        private void KeyValuePairsCheck() {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool KeyValuePairsCheck() {
             for (int i = 0; i < InfSet.KeyValuePairs.Count; i++)
                 if (InfSet.KeyValuePairs[i].Value == "")
-                {
-                    PopupMessageServices.Instence.ShowContent("请完善登录信息！");
-                    break;
-                }
+                    return false;
             if (InfSet.Cookies.Count != 0)
             {
                 foreach (KeyValuePair<string, string> kv in InfSet.Cookies)
@@ -108,8 +110,12 @@ namespace IpgwCore.Services.HttpServices {
                 }
                 InfSet.HasCookie = true;
             }
+            return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Stream GetStream(string uri) {
             Stream temp;
             try { temp = _httpClient.GetStreamAsync(uri).Result; }
@@ -120,11 +126,15 @@ namespace IpgwCore.Services.HttpServices {
             return temp;
         }
 
-        public string GetString(string uri,bool compress) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string GetString(string uri, bool compress) {
             if (compress)
                 return GetDatasetByString(GetStream(uri));
             else
-                try {
+                try
+                {
                     return _httpClient.GetStringAsync(uri).Result;
                 }
                 catch (AggregateException)
@@ -133,6 +143,9 @@ namespace IpgwCore.Services.HttpServices {
                 }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Post(string uri, List<KeyValuePair<string, string>> items) {
             try
             {
@@ -148,6 +161,9 @@ namespace IpgwCore.Services.HttpServices {
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Post(string uri, Dictionary<string, string> keyValuePairs) {
             List<KeyValuePair<string, string>> KVs = new List<KeyValuePair<string, string>>();
             foreach (var kvs in InfSet.KeyValuePairs)
@@ -156,7 +172,7 @@ namespace IpgwCore.Services.HttpServices {
                     continue;
                 KVs.Add(kvs);
             }
-            foreach(var kvs in keyValuePairs) 
+            foreach (var kvs in keyValuePairs)
                 KVs.Add(new KeyValuePair<string, string>(kvs.Key, kvs.Value));
             try
             {
@@ -187,84 +203,103 @@ namespace IpgwCore.Services.HttpServices {
         #endregion
 
         #region OuterMethod
-
+        /// <summary>
+        /// 检测网络连接
+        /// </summary>
         public async void IpgwConnectTest() {
-            Task tsk = new Task(() =>
+            if (RefrashinfSet(ConstTable.IPGW))
             {
-                string str = "";
-                Stream baidu = GetStream(@"https://www.baidu.com/");
-                if (baidu is null)
-                    App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
-                    {
-                        IpgwConnected = false;
-                    }));
-                else
+                Task tsk = new Task(() =>
                 {
-                    GZipStream gzip = new GZipStream(baidu, CompressionMode.Decompress);
-                    using (StreamReader reader = new StreamReader(gzip, Encoding.GetEncoding("utf-8")))
-                    {
-                        str = reader.ReadToEnd();
-                    }
-                    if (str.Contains("百度搜索"))
-                        App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
-                        {
-                            IpgwConnected = true;
-                        }));
-                    else
+                    string rest = "";
+                    rest = GetString(InfSet.Uris[1], InfSet.Compressed);
+                    if (rest.Equals("not_online"))
                         App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
                         {
                             IpgwConnected = false;
                         }));
-                }
-            });
-            tsk.Start();
-            await tsk;
+                    else
+                        App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+                        {
+                            IpgwConnected = true;
+                            foreach (var kv in InfSet.KeyValuePairs)
+                            {
+                                if (kv.Key.Equals("username"))
+                                    Properties.Settings.Default.UserID = kv.Value;
+                            }
+                        }));
+                });
+                tsk.Start();
+                await tsk;
+            }
         }
 
+        /// <summary>
+        /// 登录IPGW网关
+        /// </summary>
         public bool LoginIpgw() {
-            RefrashinfSet(ConstTable.IPGW);
-            Post(InfSet.Uris[0], InfSet.KeyValuePairs);
-            String rest = GetString(InfSet.Uris[1], InfSet.Compressed);
-            if (rest.Equals("not_online"))
+            if (RefrashinfSet(ConstTable.IPGW))
             {
-                IpgwConnected = false;
-                PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接后重新连接!");
-            }
-            else
-            {
-                IpgwConnected = true;
-                foreach (var kv in InfSet.KeyValuePairs) {
-                    if (kv.Key.Equals("username"))
-                        Properties.Settings.Default.UserID = kv.Value;
-                }
-                PopupMessageServices.Instence.ShowContent("网络已连接.");
-            }
-            return IpgwConnected;
-        }
-
-        public bool LogoutIpgw() {
-            RefrashinfSet(ConstTable.IPGW);
-            Post(InfSet.Uris[0], new Dictionary<string, string>() {
-                {"action","logout" },
-            });
-            PopupMessageServices.Instence.ShowContent("网络已断开.");
-            return IpgwConnected;
-        }
-
-        public string GetFluxInfo() {
-            RefrashinfSet(ConstTable.IPGW);
-            if (IpgwConnected)
-                return GetString(InfSet.Uris[1], InfSet.Compressed);
-            else
-            {
-                RefrashinfSet(ConstTable.IPGW);
                 Post(InfSet.Uris[0], InfSet.KeyValuePairs);
-                return GetString(InfSet.Uris[1], InfSet.Compressed);
+                String rest = GetString(InfSet.Uris[1], InfSet.Compressed);
+                if (rest.Equals("not_online"))
+                    PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接后重新连接!");
+                else
+                {
+                    IpgwConnected = true;
+                    foreach (var kv in InfSet.KeyValuePairs)
+                    {
+                        if (kv.Key.Equals("username"))
+                            Properties.Settings.Default.UserID = kv.Value;
+                    }
+                    PopupMessageServices.Instence.ShowContent("网络已连接.");
+                    return IpgwConnected;
+                }
             }
+            else
+                PopupMessageServices.Instence.ShowContent("请完善登录信息!");
+            IpgwConnected = false;
+            return IpgwConnected;
+        }
+
+        /// <summary>
+        /// 断开IPGW网关
+        /// </summary>
+        public bool LogoutIpgw() {
+            if (RefrashinfSet(ConstTable.IPGW))
+            {
+                Post(InfSet.Uris[0], new Dictionary<string, string>() {
+                {"action","logout" }, });
+                IpgwConnected = false;
+                PopupMessageServices.Instence.ShowContent("网络已断开.");
+            }
+            else
+                PopupMessageServices.Instence.ShowContent("请完善登录信息！");
+            return IpgwConnected;
+        }
+
+        /// <summary>
+        /// 获取流量信息
+        /// </summary>
+        public string GetFluxInfo() {
+            if (RefrashinfSet(ConstTable.IPGW))
+            {
+                if (IpgwConnected)
+                    return GetString(InfSet.Uris[1], InfSet.Compressed);
+                else
+                {
+                    Post(InfSet.Uris[0], InfSet.KeyValuePairs);
+                    return GetString(InfSet.Uris[1], InfSet.Compressed);
+                }
+            }
+            else
+                PopupMessageServices.Instence.ShowContent("请完善登录信息！");
+            return null;
         }
         #endregion
 
         #region Constructors
+
         public LoginServices() {
             _clientHandler = new HttpClientHandler { UseCookies = true };
             _httpClient = new HttpClient(_clientHandler);
