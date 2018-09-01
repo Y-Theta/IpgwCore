@@ -69,7 +69,6 @@ namespace IpgwCore.Services.FormatServices {
         /// <summary>
         /// 获取流量数据
         /// </summary>
-        /// <returns></returns>
         private Flux GetIpgwInfo() {
             if (_ipgwInfo != null)
                 return _ipgwInfo;
@@ -124,6 +123,12 @@ namespace IpgwCore.Services.FormatServices {
             return a / 1000000.0;
         }
 
+        public void UpdateFlux() {
+            if (RefreshInfo() is null)
+                IpgwInfo = GetIpgwInfo();
+            else
+                IpgwInfo = RefreshInfo();
+        }
         #endregion
 
         private CourseSet GetCourseSet() {

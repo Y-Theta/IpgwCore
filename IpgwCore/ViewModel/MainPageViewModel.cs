@@ -14,9 +14,21 @@ namespace IpgwCore.ViewModel {
         public object _message { get => Msg; set => Msg = value.ToString(); }
 
         private string _msg;
+        /// <summary>
+        /// 消息
+        /// </summary>
         public string Msg {
             get => _msg;
             set => SetValue(out _msg, value, Msg);
+        }
+
+        private string _exittip;
+        /// <summary>
+        /// 退出提示
+        /// </summary>
+        public string ExitTip {
+            get => _exittip;
+            set => SetValue(out _exittip, value, ExitTip);
         }
 
         public CommandBase CancelCommand { get; set; }

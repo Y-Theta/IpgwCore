@@ -3,6 +3,8 @@
                     xmlns:flowcontrol="clr-namespace:IpgwCore.Controls.FlowControls"
                     xmlns:controls="clr-namespace:IpgwCore.Controls"
                     xmlns:complex="clr-namespace:IpgwCore.Controls.ComplexControls"
+                    xmlns:dialog="clr-namespace:IpgwCore.Controls.Dialogs"
+                    xmlns:settings ="clr-namespace:IpgwCore.Properties"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
     <!--#region                                                -->
@@ -173,7 +175,7 @@
     <!--#region                                                DialogContent-->
 
     <!--FluxInfoPopup-->
-    <sys:Double x:Key="FluxPopupWidth">300</sys:Double>
+    <sys:Double x:Key="FluxPopupWidth">320</sys:Double>
     <sys:Double x:Key="FluxPopupHeight">120</sys:Double>
     <Style x:Key="FluxInfoPopup"
            TargetType="flowcontrol:YT_Popup">
@@ -181,6 +183,8 @@
                 Value="AbsolutePoint" />
         <Setter Property="AllowsTransparency"
                 Value="True" />
+        <Setter Property="PopupAnimation"
+                Value="Fade" />
         <Setter Property="Background"
                 Value="{DynamicResource FluxPopup_Bg}" />
         <Setter Property="Foreground"
@@ -206,7 +210,7 @@
                         </Grid.ColumnDefinitions>
                         <complex:MainFluxPopup x:Name="Info" />
                         <Grid x:Name="ControlArea"
-                              Margin="0,4,4,4"
+                              Margin="0,4,8,4"
                               DataContext="{DynamicResource FluxInfoVM}"
                               Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -258,6 +262,8 @@
                 Value="AbsolutePoint" />
         <Setter Property="AllowsTransparency"
                 Value="True" />
+        <Setter Property="PopupAnimation"
+                Value="Fade" />
         <Setter Property="Background"
                 Value="{DynamicResource FluxPopup_Bg}" />
         <Setter Property="Foreground"
@@ -300,5 +306,110 @@
         </Setter>
     </Style>
 
+
+    <!--ExitDialog-->
+    <Style x:Key="ExitDialog"
+           TargetType="dialog:YT_FormDialog">
+        <Setter Property="AllowsTransparency"
+                Value="True" />
+        <Setter Property="Background"
+                Value="{DynamicResource FluxPopup_Bg}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource FluxPopup_Fg}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource FluxPopup_Bc}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dialog:YT_FormDialog">
+                    <Border x:Name="Rootborder"
+                            Background="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            Width="300"
+                            Height="120">
+                        <Grid x:Name="Rootgrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="28" />
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="TitleArea">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <controls:YT_IconButton Grid.Column="1"
+                                                        Content="&#xE711;"
+                                                        ToolTipVisiblity="Visible"
+                                                        ForeToolTip="取消"
+                                                        Margin="0,4,4,0"
+                                                        IconMaskR="Transparent"
+                                                        IconMaskP="Transparent"
+                                                        Style="{StaticResource CloseButton}"
+                                                        Command="{Binding CancelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dialog:YT_FormDialog}}" />
+                            </Grid>
+                            <Grid x:Name="ContentArea"
+                                  VerticalAlignment="Stretch"
+                                  Margin="24,8,0,0"
+                                  Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Style="{StaticResource MainLabel}"
+                                           FontSize="12"
+                                           DataContext="{DynamicResource MainPageVM}"
+                                           Text="{Binding ExitTip}" />
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="1"
+                                            Margin="0,5,0,0">
+                                    <controls:YT_IconToggelButton IsChecked="{Binding ExitArea,Source={x:Static settings:Settings.Default},Mode=TwoWay}"
+                                                                  Style="{StaticResource CheckToggleButton}" />
+                                    <TextBlock Margin="8,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="10"
+                                               Text="托盘运行"
+                                               Foreground="{DynamicResource WindowTitleBarForeground}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="2"
+                                            Margin="0,5,0,0">
+                                    <controls:YT_IconToggelButton IsChecked="{Binding ExitAsk,Source={x:Static settings:Settings.Default},Mode=TwoWay}"
+                                                                  Style="{StaticResource CheckToggleButton}" />
+                                    <TextBlock Margin="8,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="10"
+                                               Text="下次不再提示"
+                                               Foreground="{DynamicResource WindowTitleBarForeground}" />
+                                </StackPanel>
+                            </Grid>
+                            <Grid x:Name="FootArea"
+                                  VerticalAlignment="Top"
+                                  Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <controls:YT_IconButton Grid.Column="1"
+                                                        ContentText="是"
+                                                        Margin="0,0,24,0"
+                                                        Command="{Binding YesCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dialog:YT_FormDialog}}"
+                                                        Style="{StaticResource ExitConfirm}" />
+                                <controls:YT_IconButton Grid.Column="2"
+                                                        ContentText="否"
+                                                        Margin="0,0,12,0"
+                                                        Command="{Binding NoCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dialog:YT_FormDialog}}"
+                                                        Style="{StaticResource ExitConfirm}" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!--#endregion-->
 </ResourceDictionary>

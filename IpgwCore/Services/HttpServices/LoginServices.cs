@@ -84,6 +84,8 @@ namespace IpgwCore.Services.HttpServices {
         #region Methods
 
         private void RefrashinfSet(string name) {
+            if (InfSet != null && InfSet.name.Equals(name))
+                return;
             InfSet = XmlDocService.Instence.GetNode<InfoSet>(new XmlPath { Key = name });
         }
 
@@ -113,20 +115,20 @@ namespace IpgwCore.Services.HttpServices {
             try { temp = _httpClient.GetStreamAsync(uri).Result; }
             catch (AggregateException)
             {
-                PopupMessageServices.Instence.ShowContent("请检查网络连接！");
                 return null;
             }
             return temp;
         }
 
-        public string GetString(string uri) {
-            if (InfSet.Compressed)
+        public string GetString(string uri,bool compress) {
+            if (compress)
                 return GetDatasetByString(GetStream(uri));
             else
-                try { return _httpClient.GetStringAsync(uri).Result; }
+                try {
+                    return _httpClient.GetStringAsync(uri).Result;
+                }
                 catch (AggregateException)
                 {
-                    PopupMessageServices.Instence.ShowContent("请检查网络连接！");
                     return null;
                 }
         }
@@ -138,34 +140,34 @@ namespace IpgwCore.Services.HttpServices {
                     _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(items)).Result;
                 else
                     _response = _httpClient.PostAsync(uri, new FormUrlEncodedContent(items)).Result;
-                if (InfSet.name.Equals(ConstTable.IPGW))
-                    IpgwConnected = true;
                 return true;
             }
             catch (AggregateException)
             {
-                PopupMessageServices.Instence.ShowContent("请检查网络连接！");
                 return false;
             }
         }
 
         public bool Post(string uri, Dictionary<string, string> keyValuePairs) {
-            for (int kvp = 0; kvp < InfSet.KeyValuePairs.Count; kvp++)
-                if (keyValuePairs.ContainsKey(InfSet.KeyValuePairs[kvp].Key))
-                    InfSet.KeyValuePairs[kvp] = new KeyValuePair<string, string>(InfSet.KeyValuePairs[kvp].Key, keyValuePairs[InfSet.KeyValuePairs[kvp].Key]);
+            List<KeyValuePair<string, string>> KVs = new List<KeyValuePair<string, string>>();
+            foreach (var kvs in InfSet.KeyValuePairs)
+            {
+                if (keyValuePairs.ContainsKey(kvs.Key))
+                    continue;
+                KVs.Add(kvs);
+            }
+            foreach(var kvs in keyValuePairs) 
+                KVs.Add(new KeyValuePair<string, string>(kvs.Key, kvs.Value));
             try
             {
                 if (InfSet.NeedLogin)
-                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result;
+                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(KVs)).Result;
                 else
-                    _response = _httpClient.PostAsync(uri + _id, new FormUrlEncodedContent(InfSet.KeyValuePairs)).Result;
-                if (InfSet.name.Equals(ConstTable.IPGW))
-                    IpgwConnected = false;
+                    _response = _httpClient.PostAsync(uri, new FormUrlEncodedContent(KVs)).Result;
                 return true;
             }
             catch (AggregateException)
             {
-                PopupMessageServices.Instence.ShowContent("请检查网络连接！");
                 return false;
             }
         }
@@ -186,28 +188,76 @@ namespace IpgwCore.Services.HttpServices {
 
         #region OuterMethod
 
+        public async void IpgwConnectTest() {
+            Task tsk = new Task(() =>
+            {
+                string str = "";
+                Stream baidu = GetStream(@"https://www.baidu.com/");
+                if (baidu is null)
+                    App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+                    {
+                        IpgwConnected = false;
+                    }));
+                else
+                {
+                    GZipStream gzip = new GZipStream(baidu, CompressionMode.Decompress);
+                    using (StreamReader reader = new StreamReader(gzip, Encoding.GetEncoding("utf-8")))
+                    {
+                        str = reader.ReadToEnd();
+                    }
+                    if (str.Contains("百度搜索"))
+                        App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+                        {
+                            IpgwConnected = true;
+                        }));
+                    else
+                        App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+                        {
+                            IpgwConnected = false;
+                        }));
+                }
+            });
+            tsk.Start();
+            await tsk;
+        }
+
         public bool LoginIpgw() {
             RefrashinfSet(ConstTable.IPGW);
-            return Post(InfSet.Uris[0], InfSet.KeyValuePairs); ;
+            Post(InfSet.Uris[0], InfSet.KeyValuePairs);
+            String rest = GetString(InfSet.Uris[1], InfSet.Compressed);
+            if (rest.Equals("not_online"))
+            {
+                IpgwConnected = false;
+                PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接后重新连接!");
+            }
+            else
+            {
+                IpgwConnected = true;
+                PopupMessageServices.Instence.ShowContent("网络已连接.");
+            }
+            return IpgwConnected;
         }
 
         public bool LogoutIpgw() {
             RefrashinfSet(ConstTable.IPGW);
-            return Post(InfSet.Uris[0], new Dictionary<string, string>() {
-                {"action","logout" }
+            Post(InfSet.Uris[0], new Dictionary<string, string>() {
+                {"action","logout" },
             });
+            PopupMessageServices.Instence.ShowContent("网络已断开.");
+            return IpgwConnected;
         }
 
         public string GetFluxInfo() {
+            RefrashinfSet(ConstTable.IPGW);
             if (IpgwConnected)
-                return GetString(InfSet.Uris[1]);
+                return GetString(InfSet.Uris[1], InfSet.Compressed);
             else
             {
                 RefrashinfSet(ConstTable.IPGW);
-                return GetString(InfSet.Uris[1]);
+                Post(InfSet.Uris[0], InfSet.KeyValuePairs);
+                return GetString(InfSet.Uris[1], InfSet.Compressed);
             }
         }
-
         #endregion
 
         #region Constructors
@@ -215,11 +265,11 @@ namespace IpgwCore.Services.HttpServices {
             _clientHandler = new HttpClientHandler { UseCookies = true };
             _httpClient = new HttpClient(_clientHandler);
             _httpClient.MaxResponseContentBufferSize = 25600;
+            _httpClient.Timeout = TimeSpan.FromSeconds(3);
             _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
             _httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
             _httpClient.DefaultRequestHeaders.Add("Accept-Language", "zh-CN,zh;q=0.8");
             _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
-            _httpClient.Timeout = TimeSpan.FromDays(1);
         }
         #endregion
 

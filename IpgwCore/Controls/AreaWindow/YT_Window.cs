@@ -17,7 +17,8 @@ namespace IpgwCore.Controls.AreaWindow {
             set { SetValue(ExtendToTitleBarProperty, value); }
         }
         public static readonly DependencyProperty ExtendToTitleBarProperty =
-            DependencyProperty.Register("ExtendToTitleBar", typeof(bool), typeof(YT_Window), new PropertyMetadata(false));
+            DependencyProperty.Register("ExtendToTitleBar", typeof(bool),
+                typeof(YT_Window), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
         #endregion
 
         #region TitleBar
@@ -26,8 +27,8 @@ namespace IpgwCore.Controls.AreaWindow {
             set { SetValue(TitleAreaProperty, value); }
         }
         public static readonly DependencyProperty TitleAreaProperty =
-            DependencyProperty.Register("TitleArea", typeof(object), typeof(YT_Window),
-                new PropertyMetadata(null));
+            DependencyProperty.Register("TitleArea", typeof(object),
+                typeof(YT_Window), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
         #endregion
 
         #region AreaIcon
@@ -36,7 +37,8 @@ namespace IpgwCore.Controls.AreaWindow {
             set { SetValue(AreaIconProperty, value); }
         }
         public static readonly DependencyProperty AreaIconProperty =
-            DependencyProperty.Register("AreaIcon", typeof(YT_AreaIcon), typeof(YT_Window), new PropertyMetadata(null));
+            DependencyProperty.Register("AreaIcon", typeof(YT_AreaIcon), 
+                typeof(YT_Window), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
         #endregion
 
         #region override
@@ -50,7 +52,6 @@ namespace IpgwCore.Controls.AreaWindow {
         }
 
         protected virtual IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
-
             return IntPtr.Zero;
         }
         #endregion

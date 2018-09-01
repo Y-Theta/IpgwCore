@@ -21,7 +21,7 @@ namespace IpgwCore.Services.HttpServices {
         /// <summary>
         /// 获得字符型返回数据
         /// </summary>
-        String GetString(string uri);
+        String GetString(string uri,bool compress);
 
         /// <summary>
         /// 获得流型返回数据

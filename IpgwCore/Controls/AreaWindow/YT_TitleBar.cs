@@ -63,14 +63,9 @@ namespace IpgwCore.Controls.AreaWindow {
 
         #region Method
         private void InitCommands (){
-            CloseCommand = new CommandBase(obj => {
-
-                // TODO:
-                App.Current.MainWindow.Close();
-                
-            });
-            MinCommand = new CommandBase(obj => { });
-            MaxCommand = new CommandBase(obj => { });
+            CloseCommand = new CommandBase();
+            MinCommand = new CommandBase();
+            MaxCommand = new CommandBase();
         }
         #endregion
 

@@ -524,7 +524,6 @@
                 Value="{DynamicResource DefaultButton_IconMask_BG_P}" />
     </Style>
 
-
     <!--FluxPopupButton-->
     <Style x:Key="FluxPopupButton"
            TargetType="control:YT_IconButton">
@@ -553,6 +552,33 @@
         <Setter Property="IconMaskP"
                 Value="{DynamicResource FluxPopupButton_IconMask_BG_P}" />
     </Style>
+    
+    <!--CheckToggleButton-->
+    <Style x:Key="CheckToggleButton"
+           TargetType="control:YT_IconToggelButton">
+        <Setter Property="IconN"
+                Value="{DynamicResource CheckToggleButton_Icon_N}" />
+        <Setter Property="IconR"
+                Value="{DynamicResource CheckToggleButton_Icon_R}" />
+        <Setter Property="IconP"
+                Value="{DynamicResource CheckToggleButton_Icon_P}" />
+        <Setter Property="IconS"
+                Value="{DynamicResource CheckToggleButton_Icon_S}" />
+        <Setter Property="IconMaskN"
+                Value="{DynamicResource CheckToggleButton_Mask_N}" />
+        <Setter Property="IconMaskR"
+                Value="{DynamicResource CheckToggleButton_Mask_R}" />
+        <Setter Property="IconMaskP"
+                Value="{DynamicResource CheckToggleButton_Mask_P}" />
+        <Setter Property="IconMaskS"
+                Value="{DynamicResource CheckToggleButton_Mask_S}" />
+        <Setter Property="ForeIcon"
+                Value="&#xF16B;" />
+        <Setter Property="BackIcon"
+                Value="&#xF16C;" />
+        <Setter Property="FontSize"
+                Value="12" />
+    </Style> 
 
     <!--TextButton-->
     <Style x:Key="TextButton"
@@ -577,6 +603,35 @@
                 Value="{DynamicResource TextButton_IconMask_BG_R}" />
         <Setter Property="IconMaskP"
                 Value="{DynamicResource TextButton_IconMask_BG_P}" />
+    </Style>
+
+    <!--TextButton-->
+    <Style x:Key="ExitConfirm"
+           TargetType="control:YT_IconButton">
+        <Setter Property="IconVisiblity"
+                Value="Collapsed" />
+        <Setter Property="ContentTextVisiblity"
+                Value="Visible" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Height"
+                Value="24" />
+        <Setter Property="Width"
+                Value="32" />
+        <Setter Property="IconN"
+                Value="{DynamicResource TextButton_Icon_BG}" />
+        <Setter Property="IconR"
+                Value="{DynamicResource TextButton_Icon_BG_R}" />
+        <Setter Property="IconP"
+                Value="{DynamicResource TextButton_Icon_BG_P}" />
+        <Setter Property="IconMaskN"
+                Value="Transparent" />
+        <Setter Property="IconMaskR"
+                Value="Transparent" />
+        <Setter Property="IconMaskP"
+                Value="Transparent" />
     </Style>
 
     <!--#endregion-->

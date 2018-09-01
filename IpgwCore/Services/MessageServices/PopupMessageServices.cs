@@ -59,14 +59,7 @@ namespace IpgwCore.Services.MessageServices {
             if (PopupInstence.IsOpen)
                 PopupInstence.IsOpen = false;
             PopupInstence.Style = obj;
-            if (MainWindowVisibility.Equals(Visibility.Hidden))
-                PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.AbsolutePoint;
-            else
-            {
-                PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.RelativePoint;
-                PopupInstence.PlacementTarget = App.Current.MainWindow;
-            }
-            PopupInstence.IsOpen = true;
+            ShowPopup();
             return true;
         }
 
@@ -83,15 +76,22 @@ namespace IpgwCore.Services.MessageServices {
                 PopupInstence.IsOpen = false;
             PopupInstence.TextContent = s;
             PopupInstence.Style = App.Current.Resources["MessageContent"] as Style;
+            ShowPopup();
+            return true;
+        }
+
+        private void ShowPopup() {
             if (MainWindowVisibility.Equals(Visibility.Hidden))
+            {
                 PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.AbsolutePoint;
+                PopupInstence.PlacementTarget = null;
+            }
             else
             {
                 PopupInstence.Placement = System.Windows.Controls.Primitives.PlacementMode.RelativePoint;
                 PopupInstence.PlacementTarget = App.Current.MainWindow;
             }
             PopupInstence.IsOpen = true;
-            return true;
         }
 
         #endregion

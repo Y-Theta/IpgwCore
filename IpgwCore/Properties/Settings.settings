@@ -8,9 +8,6 @@
     <Setting Name="MainOpacity" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="AreaIconColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">160, 8, 8, 8</Value>
-    </Setting>
     <Setting Name="C1P" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">15</Value>
     </Setting>
@@ -24,10 +21,22 @@
       <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="Package" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="UserID" Type="System.String" Scope="User">
       <Value Profile="(Default)">未设置</Value>
+    </Setting>
+    <Setting Name="ExitArea" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ExitAsk" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AreaFontSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">11.8</Value>
+    </Setting>
+    <Setting Name="AreaFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
     </Setting>
   </Settings>
 </SettingsFile>

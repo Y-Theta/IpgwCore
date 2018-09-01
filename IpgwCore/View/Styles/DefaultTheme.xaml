@@ -11,6 +11,8 @@
 
     <SolidColorBrush x:Key="MainWindow_Bg"
                      Color="#080808" />
+    <SolidColorBrush x:Key="MainWindow_Bc"
+                     Color="#404040" />
     <SolidColorBrush x:Key="MainWindow_Fg"
                      Color="#E0E0E0" />
     <!--#endregion-->
@@ -68,6 +70,24 @@
                      Color="#E0E0E0" />
     <SolidColorBrush x:Key="DefaultDialogs_Bc"
                      Color="#323232" />
+    
+    <!--CheckButtonColor-->
+    <SolidColorBrush x:Key="CheckToggleButton_Icon_N"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="CheckToggleButton_Icon_R"
+                     Color="#F0F0F0" />
+    <SolidColorBrush x:Key="CheckToggleButton_Icon_P"
+                     Color="#808080" />
+    <SolidColorBrush x:Key="CheckToggleButton_Icon_S"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="CheckToggleButton_Mask_N"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="CheckToggleButton_Mask_R"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="CheckToggleButton_Mask_P"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="CheckToggleButton_Mask_S"
+                     Color="Transparent" />
     <!--#endregion-->
 
     <!--#region                                                ColorPicker  -->

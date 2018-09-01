@@ -47,18 +47,6 @@ namespace IpgwCore.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("160, 8, 8, 8")]
-        public global::System.Drawing.Color AreaIconColor {
-            get {
-                return ((global::System.Drawing.Color)(this["AreaIconColor"]));
-            }
-            set {
-                this["AreaIconColor"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
@@ -97,7 +85,7 @@ namespace IpgwCore.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int Package {
             get {
                 return ((int)(this["Package"]));
@@ -116,6 +104,54 @@ namespace IpgwCore.Properties {
             }
             set {
                 this["UserID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExitArea {
+            get {
+                return ((bool)(this["ExitArea"]));
+            }
+            set {
+                this["ExitArea"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExitAsk {
+            get {
+                return ((bool)(this["ExitAsk"]));
+            }
+            set {
+                this["ExitAsk"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("11.8")]
+        public float AreaFontSize {
+            get {
+                return ((float)(this["AreaFontSize"]));
+            }
+            set {
+                this["AreaFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color AreaFontColor {
+            get {
+                return ((global::System.Drawing.Color)(this["AreaFontColor"]));
+            }
+            set {
+                this["AreaFontColor"] = value;
             }
         }
     }

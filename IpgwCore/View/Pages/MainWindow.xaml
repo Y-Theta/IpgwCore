@@ -7,14 +7,29 @@
                       xmlns:local="clr-namespace:IpgwCore"
                       xmlns:areawindow="clr-namespace:IpgwCore.Controls.AreaWindow"
                       xmlns:controls="clr-namespace:IpgwCore.Controls"
+                      xmlns:flowcontrol="clr-namespace:IpgwCore.Controls.FlowControls"
                       ExtendToTitleBar="True"
                       DataContext="{StaticResource MainPageVM}"
-                      Opacity="{Binding MainOpacity, Source={x:Static settings:Settings.Default}}"
+                      Opacity="{Binding MainOpacity, Source={x:Static settings:Settings.Default},Mode=OneWay}"
                       Width="320"
                       Height="420"
                       mc:Ignorable="d">
     <areawindow:YT_Window.AreaIcon>
-        <areawindow:YT_AreaIcon />
+        <areawindow:YT_AreaIcon AreaVisibility="True">
+            <areawindow:YT_AreaIcon.CheckPop>
+                <flowcontrol:YT_Popup x:Name="CheckPop"
+                                      Style="{StaticResource FluxInfoPopup}">
+                    <flowcontrol:YT_Popup.Resources>
+                        <Storyboard x:Key="FadeIn">
+                            
+                        </Storyboard>
+                    </flowcontrol:YT_Popup.Resources>
+                </flowcontrol:YT_Popup>
+            </areawindow:YT_AreaIcon.CheckPop>
+            <areawindow:YT_AreaIcon.DContextmenu>
+                <flowcontrol:YT_ContextMenu />
+            </areawindow:YT_AreaIcon.DContextmenu>
+        </areawindow:YT_AreaIcon>
     </areawindow:YT_Window.AreaIcon>
     <areawindow:YT_Window.TitleArea>
         <Grid Height="24"
@@ -36,37 +51,31 @@
         </Grid>
     </areawindow:YT_Window.TitleArea>
     <Border Background="{DynamicResource MainWindow_Bg}"
-            BorderBrush="#c0c0c0"
-            BorderThickness="0.5">
+            BorderBrush="{DynamicResource MainWindow_Bc}"
+            Margin="-1"
+            BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="24" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
+                <RowDefinition Height="48" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBox  x:Name="Tes"
-                      Text="{Binding Msg,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      Grid.Row="1" />
-            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=HEX}"
-                     Grid.Row="2" />
-            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=A}"
-                     Grid.Row="3" />
-            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=R}"
-                     Grid.Row="4" />
-            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=G}"
-                     Grid.Row="5" />
-            <TextBox Text="{Binding Msg,Converter={StaticResource ColorNumConv},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ConverterParameter=B}"
-                     Grid.Row="6" />
             <controls:YT_IconButton Command="{Binding CancelCommand}"
                                     ForeToolTip="关闭"
                                     ToolTipVisiblity="Visible"
                                     Style="{StaticResource CloseButton}"
-                                    Grid.Row="7" />
+                                    Grid.Row="1" />
+            <Slider x:Name="FontS"
+                    Grid.Row="2"
+                    Style="{StaticResource ColorPickerSlider}"
+                    TickFrequency="0.2"
+                    Maximum="20"
+                    Minimum="10"
+                    Value="{Binding AreaFontSize, Source={x:Static settings:Settings.Default},Mode=TwoWay,Converter={StaticResource SliderConv},ConverterParameter=1}" />
+            <TextBlock Grid.Row="3"
+                       Style="{StaticResource ColorSliderLabel}"
+                       Text="{Binding Value, ElementName=FontS}" />
         </Grid>
     </Border>
 

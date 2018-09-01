@@ -430,7 +430,7 @@ namespace IpgwCore.Controls {
         }
         public static readonly DependencyProperty ToolTipVisiblityProperty =
             DependencyProperty.Register("ToolTipVisiblity", typeof(Visibility), typeof(YT_IconToggelButton),
-                new PropertyMetadata(Visibility.Visible));
+                new PropertyMetadata(Visibility.Collapsed));
         #endregion
 
         #region IconRotate

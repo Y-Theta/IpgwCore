@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using IpgwCore.Services.MessageServices;
 using IpgwCore.Services.HttpServices;
+using IpgwCore.Controls.Dialogs;
+using System.Windows;
 
 namespace IpgwCore.ViewModel {
     internal class FluxInfoViewModel :ViewModelBase{
@@ -59,7 +61,7 @@ namespace IpgwCore.ViewModel {
                         LoginServices.Instence.LoginIpgw();
                         break;
                     case "Refresh":
-
+                        Formater.Instence.UpdateFlux();
                         break;
                     case "Disconnect":
                         LoginServices.Instence.LogoutIpgw();

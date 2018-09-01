@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using IpgwCore.MVVMBase;
+using IpgwCore.Services.HttpServices;
 
 namespace IpgwCore.Controls.FlowControls {
     public class YT_Popup : Popup {
@@ -18,6 +19,8 @@ namespace IpgwCore.Controls.FlowControls {
         #region Properties
 
         private bool _locationSet { get; set; }
+
+        private bool _fisrtrun { get; set; }
 
         private Timer _autohide;
 
@@ -176,7 +179,7 @@ namespace IpgwCore.Controls.FlowControls {
             if (!_locationSet)
                 OnPlacementTargetChanged(null, null);
             if (AutoHide)
-                _autohide.Enabled = true;
+                _autohide.Enabled = true;            
             base.IsOpen = true;
         }
 
@@ -244,6 +247,7 @@ namespace IpgwCore.Controls.FlowControls {
             PlacementTargetChanged += OnPlacementTargetChanged;
             CustomPopupPlacementCallback = new CustomPopupPlacementCallback(Location);
             _locationSet = false;
+            _fisrtrun = true;
 
             _autohide = new Timer { Interval = 4500 };
             _autohide.Elapsed += _autohide_Elapsed;

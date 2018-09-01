@@ -52,6 +52,15 @@ namespace IpgwCore.Controls.Dialogs {
         public static readonly DependencyProperty CancelButtonVisibilityProperty =
             DependencyProperty.Register("CancelButtonVisibility", typeof(Visibility),
                 typeof(YT_DialogBase), new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.Inherits));
+
+        public bool CanDrag {
+            get { return (bool)GetValue(CanDragProperty); }
+            set { SetValue(CanDragProperty, value); }
+        }
+        public static readonly DependencyProperty CanDragProperty =
+            DependencyProperty.Register("CanDrag", typeof(bool),
+                typeof(YT_DialogBase), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
+
         #endregion
 
         #region ButtonCommands
@@ -80,17 +89,22 @@ namespace IpgwCore.Controls.Dialogs {
                 typeof(YT_DialogBase), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
 
-        private CommandAction yesAction;
+        private event CommandAction _yesAction;
         public event CommandAction YesAction {
-            add { yesAction = value; }
-            remove { yesAction -= value; }
+            add { _yesAction = value; }
+            remove { _yesAction -= value; }
         }
 
-        private CommandAction noAction;
+        private event CommandAction _noAction;
         public event CommandAction NoAction {
-            add { noAction = value; }
-            remove { noAction -= value; }
+            add { _noAction = value; }
+            remove { _noAction -= value; }
+        }
 
+        private event CommandAction _cancelAction;
+        public event CommandAction CancelAction {
+            add { _cancelAction = value; }
+            remove { _cancelAction -= value; }
         }
         #endregion
 
@@ -100,7 +114,8 @@ namespace IpgwCore.Controls.Dialogs {
 
         #region PrivateMethod
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) {
-            this.DragMove();
+            if (CanDrag)
+                this.DragMove();
             base.OnMouseLeftButtonDown(e);
         }
 
@@ -115,17 +130,19 @@ namespace IpgwCore.Controls.Dialogs {
 
         protected virtual void NoCommand_Commandaction(object para) {
             DialogResult = false;
-            noAction?.Invoke(para);
+            _noAction?.Invoke(para);
             Close();
         }
 
         protected virtual void YesCommand_Commandaction(object para) {
             DialogResult = true;
-            yesAction?.Invoke(para);
+            _yesAction?.Invoke(para);
             Close();
         }
 
         protected virtual void CancelCommand_Commandaction(object para) {
+            DialogResult = false;
+            _cancelAction?.Invoke(para);
             Close();
         }
         #endregion

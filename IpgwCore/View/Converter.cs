@@ -286,18 +286,18 @@ namespace IpgwCore.View {
             throw new NotImplementedException();
         }
 
-        private static string GetBalance(Flux flux) {
+        public static string GetBalance(Flux flux) {
             return FluxFormat(GetFluxData(flux,false));
         }
 
-        private static string GetUsed(Flux flux) {
+        public static string GetUsed(Flux flux) {
             return FluxFormat(GetFluxData(flux,true));
         }
 
         /// <summary>
         /// 根据套餐获得已用流量百分比
         /// </summary>
-        public double GetFluxPercent(Flux IpgwInfo) {
+        public static double GetFluxPercent(Flux IpgwInfo) {
             try
             {
                 if (Properties.Settings.Default.Package == 1)
@@ -379,7 +379,7 @@ namespace IpgwCore.View {
         /// <summary>
         /// 将流量表示为 M G 的形式
         /// </summary>
-        private static string FluxFormat(double value) {
+        public static string FluxFormat(double value) {
             if (value > 1000)
                 return String.Format("{0:###.#} G", value / 1000.0);
             else
@@ -391,7 +391,7 @@ namespace IpgwCore.View {
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        private static string PercentToCircle(double a) {
+        public static string PercentToCircle(double a) {
             var A = a * Math.PI * 3.6 / 1.80;
             var x = 30 * Math.Sin(A);
             var y = 30 * Math.Cos(A);
@@ -411,7 +411,12 @@ namespace IpgwCore.View {
     /// </summary>
     internal class SliderConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            return (double)value * Double.Parse(parameter.ToString());
+            if (value is Double)
+                return (double)value * Double.Parse(parameter.ToString());
+            else if (value is float)
+                return (double)(float)value * Double.Parse(parameter.ToString());
+            else
+                return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
