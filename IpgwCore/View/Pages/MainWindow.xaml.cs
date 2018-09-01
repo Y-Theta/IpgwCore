@@ -41,6 +41,7 @@ namespace IpgwCore {
             _mpvm.CommandOperation += _mpvm_CommandOperation;
             _titlebar = (YT_TitleBar)GetTemplateChild("TitleBar");
             _titlebar.CloseCommand.Execution += CloseCommand_Execution;
+            RootFrame.Navigate(new Uri(ConstTable.PagePath + "MainPage.xaml", UriKind.Relative));
         }
 
         private void CloseCommand_Execution(object para = null) {
@@ -95,12 +96,6 @@ namespace IpgwCore {
                     PopupMessageServices.Instence.MainWindowVisibility = Visibility.Visible;
                     break;
             }
-            //switch (a)
-            //{
-            //    case Win32Funcs.W_HIDE:
-            //        PopupMessageServices.Instence.MainWindowVisibility = App.Current.MainWindow.Visibility;
-            //        break;
-            //}
             return base.WndProc(hwnd, msg, wParam, lParam, ref handled);
         }
 
@@ -108,7 +103,16 @@ namespace IpgwCore {
 
             switch (args.Command)
             {
-                case "CancelCommand":
+                case "Operation":
+                    switch (args.Parameter.ToString())
+                    {
+                        case "Exit":
+                            App.Current.MainWindow.Close();
+                            break;
+                    }
+                    break;
+                case "Nvigate":
+                    RootFrame.Navigate(new Uri(ConstTable.PagePath + args.Parameter.ToString(), UriKind.Relative));
                     break;
             }
         }

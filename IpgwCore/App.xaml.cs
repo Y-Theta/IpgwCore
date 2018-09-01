@@ -52,5 +52,6 @@ namespace IpgwCore {
     public class ConstTable {
         public const string IPGW = "NEUIpgw";
         public const string ZJW = "NEUZhjw";
+        public const string PagePath = @"View\Pages\";
     }
 }

@@ -124,8 +124,15 @@ namespace IpgwCore.Controls.AreaWindow {
             switch (e.Button)
             {
                 case System.Windows.Forms.MouseButtons.Right:
+                    if (DContextmenu is null)
+                        return;
+                    if (DContextmenu.IsOpen)
+                        return;
+                    DContextmenu.IsOpen = true;
                     break;
                 case System.Windows.Forms.MouseButtons.Left:
+                    if (CheckPop is null)
+                        return;
                     if (CheckPop.IsOpen)
                         return;
                     LoginServices.Instence.IpgwConnectTest();

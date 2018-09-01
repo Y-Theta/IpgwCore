@@ -636,7 +636,27 @@
 
     <!--#endregion-->
 
+    <!--#region                                                Frame-->
+    
+    <Style x:Key="DefaultFrame"
+           TargetType="{x:Type Frame}">
+        <Setter Property="Margin"
+                Value="0,24,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Frame}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="PART_FrameCP" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+    <!--#endregion-->
 
 
 </ResourceDictionary>

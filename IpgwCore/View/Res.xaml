@@ -13,5 +13,6 @@
     <view:OffsetConv x:Key="OffsetConv" />
     <view:FluxConv x:Key="FluxConv" />
     <view:SliderConv x:Key="SliderConv" />
+    <view:BoolConv x:Key="BoolConv" />
 
 </ResourceDictionary>

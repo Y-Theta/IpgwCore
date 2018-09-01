@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:settings="clr-namespace:IpgwCore.Properties"
-                    xmlns:view="clr-namespace:IpgwCore.View"
-                    xmlns:local="clr-namespace:IpgwCore.View.Styles">
+                    xmlns:view="clr-namespace:IpgwCore.View">
     <!--#region                                                -->
     <!--#endregion-->
 
@@ -12,9 +11,28 @@
     <SolidColorBrush x:Key="MainWindow_Bg"
                      Color="#080808" />
     <SolidColorBrush x:Key="MainWindow_Bc"
-                     Color="#404040" />
+                     Color="#808080" />
     <SolidColorBrush x:Key="MainWindow_Fg"
                      Color="#E0E0E0" />
+    <!--#endregion-->
+
+    <!--#region                                                ContextMenu-->
+
+    <SolidColorBrush x:Key="ContextMenu_Bg"
+                     Color="#080808" />
+    <SolidColorBrush x:Key="ContextMenu_Bc"
+                     Color="#404040" />
+    <SolidColorBrush x:Key="ContextMenu_Fg"
+                     Color="#A0A0A0" />
+
+    <SolidColorBrush x:Key="ContextMenuItem_Bg"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="ContextMenuItem_Bg_R"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="ContextMenuItem_Fg"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="ContextMenuItem_Fg_R"
+                     Color="#080808" />
     <!--#endregion-->
 
     <!--#region                                                ScrollView-->

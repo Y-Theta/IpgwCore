@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IpgwCore.Services.HttpServices;
+using IpgwCore.Services.MessageServices;
 using IpgwCore.MVVMBase;
 
 namespace IpgwCore.Services.FormatServices {
@@ -88,8 +89,7 @@ namespace IpgwCore.Services.FormatServices {
             return GetIpgwDataInf(LoginServices.Instence.GetFluxInfo());
         }
 
-        private Flux GetIpgwDataInf(string data)  //Ipgw网关信息格式化获取
-{
+        private Flux GetIpgwDataInf(string data) {
             Flux info = new Flux();
             try
             {
@@ -100,12 +100,10 @@ namespace IpgwCore.Services.FormatServices {
             }
             catch (IndexOutOfRangeException)
             {
-                // MessageService.Instence.ShowError(null, "用户名或密码错误");
                 return null;
             }
             catch (NullReferenceException)
             {
-                //  MessageService.Instence.ShowError(null, "网络未连接");
                 return null;
             }
 
@@ -125,7 +123,10 @@ namespace IpgwCore.Services.FormatServices {
 
         public void UpdateFlux() {
             if (RefreshInfo() is null)
+            {
+                PopupMessageServices.Instence.ShowContent("请先连接网关再进行刷新!");
                 IpgwInfo = GetIpgwInfo();
+            }
             else
                 IpgwInfo = RefreshInfo();
         }

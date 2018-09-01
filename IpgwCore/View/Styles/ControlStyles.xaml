@@ -4,7 +4,7 @@
                     xmlns:controls="clr-namespace:IpgwCore.Controls"
                     xmlns:complex="clr-namespace:IpgwCore.Controls.ComplexControls"
                     xmlns:dialog="clr-namespace:IpgwCore.Controls.Dialogs"
-                    xmlns:settings ="clr-namespace:IpgwCore.Properties"
+                    xmlns:settings="clr-namespace:IpgwCore.Properties"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:IpgwCore.View.Styles">
     <!--#region                                                -->
@@ -411,5 +411,151 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--#endregion-->
+
+    <!--#region                                                ContextMenu-->
+
+    <!--AreaContextMenuSeperator-->
+    <Style x:Key="AreaContextMenuSeperator"
+           TargetType="{x:Type Separator}">
+        <Setter Property="Margin"
+                Value="2,1,2,1" />
+        <Setter Property="Focusable"
+                Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Height="1"
+                            SnapsToDevicePixels="true" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--FirstLevelMenuItem-->
+    <Style x:Key="FirstLevelMenuItem"
+           TargetType="flowcontrol:YT_MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="flowcontrol:YT_MenuItem">
+                    <Grid x:Name="RootGrid"
+                          Height="{TemplateBinding Height}"
+                          Background="{TemplateBinding Background}"
+                          MinWidth="{TemplateBinding MinWidth}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle x:Name="Mask"
+                                   Margin="2"
+                                   Grid.ColumnSpan="2"
+                                   Fill="{TemplateBinding IconMaskN}" />
+                        <TextBlock x:Name="Icon"
+                                   Width="{TemplateBinding IconWidth}"
+                                   FontFamily="{DynamicResource Segoe}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{TemplateBinding HeadIcon}"
+                                   Foreground="{TemplateBinding IconN}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   FontWeight="{TemplateBinding FontWeight}" />
+                        <TextBlock x:Name="Content"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{TemplateBinding ContentText}"
+                                   Foreground="{TemplateBinding IconN}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   FontWeight="{TemplateBinding FontWeight}" />
+                        <Popup x:Name="SubMenu"
+                               Placement="Right"
+                               IsOpen="{TemplateBinding IsSubmenuOpen}"
+                               AllowsTransparency="True"
+                               Focusable="True">
+                            <Border x:Name="SubmenuBorder"
+                                    SnapsToDevicePixels="True"
+                                    Background="{DynamicResource BackgroundBrush}">
+                                <StackPanel IsItemsHost="True"
+                                            KeyboardNavigation.DirectionalNavigation="Cycle" />
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter TargetName="Mask"
+                                    Property="Fill"
+                                    Value="{Binding IconMaskR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Icon"
+                                    Property="Foreground"
+                                    Value="{Binding IconR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Content"
+                                    Property="Foreground"
+                                    Value="{Binding TextR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter Property="IsSubmenuOpen"
+                                    Value="True" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--AreaContextMenu-->
+    <Style x:Key="AreaContextMenu"
+           TargetType="flowcontrol:YT_ContextMenu">
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource ContextMenu_Bc}" />
+        <Setter Property="DataContext"
+                Value="{DynamicResource MainPageVM}" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="Padding"
+                Value="-1,4,0,4" />
+        <Setter Property="Margin"
+                Value="-1,0,0,0" />
+        <Setter Property="Width"
+                Value="128" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="flowcontrol:YT_ContextMenu">
+                    <Border x:Name="RootBorder"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Width="{TemplateBinding Width}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Margin="{TemplateBinding Padding}">
+                        <Border.Resources>
+                            <Style x:Key="SubMenuItem"
+                                   TargetType="flowcontrol:YT_MenuItem">
+                                <Setter Property="IconWidth"
+                                        Value="32" />
+                                <Setter Property="MinWidth"
+                                        Value="120" />
+                                <Setter Property="Height"
+                                        Value="32" />
+                                <Setter Property="IconAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </Border.Resources>
+                        <StackPanel Background="{TemplateBinding Background}">
+                            <Separator Style="{StaticResource AreaContextMenuSeperator }" />
+                            <flowcontrol:YT_MenuItem x:Name="M4"
+                                                     HeadIcon="&#xEA39;"
+                                                     ContentText="退出程序"
+                                                     CommandParameter="Exit"
+                                                     Style="{StaticResource SubMenuItem}"
+                                                     Command="{Binding Operation}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--#endregion-->
 </ResourceDictionary>

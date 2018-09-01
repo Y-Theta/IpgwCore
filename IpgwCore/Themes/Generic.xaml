@@ -3,6 +3,7 @@
                     xmlns:controls="clr-namespace:IpgwCore.Controls"
                     xmlns:dialogs="clr-namespace:IpgwCore.Controls.Dialogs"
                     xmlns:areawindow="clr-namespace:IpgwCore.Controls.AreaWindow"
+                    xmlns:flowcontrols="clr-namespace:IpgwCore.Controls.FlowControls"
                     xmlns:local="clr-namespace:IpgwCore">
 
     <!--WindowBase-->
@@ -827,6 +828,110 @@
                                         Value="{Binding DisIconBack, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <!--ContextMenu-->
+
+    <!--DContextMenu-->
+    <Style TargetType="{x:Type flowcontrols:YT_ContextMenu}">
+        <Setter Property="Background"
+                Value="{DynamicResource ContextMenu_Bg}" />
+        <Setter Property="Padding"
+                Value="-1" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type flowcontrols:YT_ContextMenu}">
+                    <Border x:Name="RootBorder"
+                            BorderThickness="2"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Margin="{TemplateBinding Padding}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ItemsPresenter x:Name="ItemsPresenter"
+                                            KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--DMenuItem-->
+    <Style TargetType="{x:Type flowcontrols:YT_MenuItem}">
+        <Setter Property="FontWeight"
+                Value="Light" />
+        <Setter Property="Background"
+                Value="{DynamicResource ContextMenu_Bg}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource ContextMenu_Fg}" />
+        <Setter Property="IconN"
+                Value="{DynamicResource ContextMenuItem_Fg}" />
+        <Setter Property="IconR"
+                Value="{DynamicResource ContextMenuItem_Fg_R}" />
+        <Setter Property="IconMaskN"
+                Value="{DynamicResource ContextMenuItem_Bg}" />
+        <Setter Property="IconMaskR"
+                Value="{DynamicResource ContextMenuItem_Bg_R}" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="FontSize"
+                Value="13" />
+        <Setter Property="IconSize"
+                Value="12" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type flowcontrols:YT_MenuItem}">
+                    <Grid x:Name="RootGrid"
+                          Height="{TemplateBinding Height}"
+                          Background="{TemplateBinding Background}"
+                          MinWidth="{TemplateBinding MinWidth}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle x:Name="Mask"
+                                   Margin="2"
+                                   Grid.ColumnSpan="2"
+                                   Fill="{TemplateBinding IconMaskN}" />
+                        <TextBlock x:Name="Icon"
+                                   Width="{TemplateBinding IconWidth}"
+                                   FontFamily="{DynamicResource Segoe}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="{TemplateBinding IconAlignment}"
+                                   Text="{TemplateBinding HeadIcon}"
+                                   Foreground="{TemplateBinding IconN}"
+                                   FontSize="{TemplateBinding IconSize}"
+                                   FontWeight="{TemplateBinding FontWeight}"/>
+                        <TextBlock x:Name="Content"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="{TemplateBinding ContentTextAlignment}"
+                                   Text="{TemplateBinding ContentText}"
+                                   Foreground="{TemplateBinding IconN}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   FontWeight="{TemplateBinding FontWeight}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter TargetName="Mask"
+                                    Property="Fill"
+                                    Value="{Binding IconMaskR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Icon"
+                                    Property="Foreground"
+                                    Value="{Binding IconR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Content"
+                                    Property="Foreground"
+                                    Value="{Binding IconR, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

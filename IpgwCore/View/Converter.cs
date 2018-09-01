@@ -242,19 +242,6 @@ namespace IpgwCore.View {
     }
 
     /// <summary>
-    /// 对控件的位置进行修正
-    /// </summary>
-    internal class OffsetConv : IValueConverter {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            return System.Convert.ToDouble(value) + System.Convert.ToDouble(parameter);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
     /// 流量信息转换器
     /// </summary>
     internal class FluxConv : IValueConverter {
@@ -273,10 +260,6 @@ namespace IpgwCore.View {
                     return GetBalance((Flux)value);
                 case "ConT":
                     return (bool)value ? "Online" : "Offline";
-                case "ConV":
-                    return (bool)value ? Visibility.Visible : Visibility.Collapsed;
-                case "ConNV":
-                    return (bool)value ? Visibility.Collapsed : Visibility.Visible;
                 default:
                     return (int)value;
             }
@@ -421,6 +404,41 @@ namespace IpgwCore.View {
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             return (double)value / Double.Parse(parameter.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 对控件的位置进行修正
+    /// </summary>
+    internal class OffsetConv : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            return System.Convert.ToDouble(value) + System.Convert.ToDouble(parameter);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 对Bool值进行转换，将true转换为para后的参数
+    /// </summary>
+    internal class BoolConv : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
+            switch(parameter.ToString())
+            {
+                case "Visible":
+                    return (bool)value ? Visibility.Visible : Visibility.Collapsed;
+                case "Collapsed":
+                    return (bool)value ? Visibility.Collapsed : Visibility.Visible;
+                default:return value;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
         }
     }
 

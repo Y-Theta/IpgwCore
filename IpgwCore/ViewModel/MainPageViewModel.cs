@@ -31,7 +31,20 @@ namespace IpgwCore.ViewModel {
             set => SetValue(out _exittip, value, ExitTip);
         }
 
-        public CommandBase CancelCommand { get; set; }
+        private bool _mainpage;
+        /// <summary>
+        /// 是否在主页
+        /// </summary>
+        public bool Mainpage {
+            get => _mainpage;
+            set => SetValue(out _mainpage, value, Mainpage);
+        }
+
+
+        public CommandBase Operation { get; set; }
+
+        public CommandBase Nvigate { get; set; }
+
 
         public event CommandActionEventHandler CommandOperation;
 
@@ -39,7 +52,8 @@ namespace IpgwCore.ViewModel {
 
         #region Methods
         private void InitCommand() {
-            CancelCommand = new CommandBase(obj => CommandOperation?.Invoke(this, new CommandArgs(obj, "CancelCommand")));
+            Operation = new CommandBase(obj => CommandOperation?.Invoke(this, new CommandArgs(obj, "Operation")));
+            Nvigate = new CommandBase(obj => CommandOperation?.Invoke(this, new CommandArgs(obj, "Nvigate")));
         }
 
         #endregion

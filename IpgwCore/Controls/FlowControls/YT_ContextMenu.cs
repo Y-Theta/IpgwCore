@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,24 +54,24 @@ namespace IpgwCore.Controls.FlowControls {
             set { SetValue(IconMaskNProperty, value); }
         }
         public static readonly DependencyProperty IconMaskNProperty =
-            DependencyProperty.Register("IconMaskN", typeof(Brush), typeof(YT_MenuItem),
-                new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
+            DependencyProperty.Register("IconMaskN", typeof(Brush), 
+                typeof(YT_MenuItem),new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
         public Brush IconMaskR {
             get { return (Brush)GetValue(IconMaskRProperty); }
             set { SetValue(IconMaskRProperty, value); }
         }
         public static readonly DependencyProperty IconMaskRProperty =
-            DependencyProperty.Register("IconMaskR", typeof(Brush), typeof(YT_MenuItem),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(80, 0, 0, 0))));
+            DependencyProperty.Register("IconMaskR", typeof(Brush), 
+                typeof(YT_MenuItem), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(80, 0, 0, 0))));
 
         public Brush IconMaskP {
             get { return (Brush)GetValue(IconMaskPProperty); }
             set { SetValue(IconMaskPProperty, value); }
         }
         public static readonly DependencyProperty IconMaskPProperty =
-            DependencyProperty.Register("IconMaskP", typeof(Brush), typeof(YT_MenuItem),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(160, 0, 0, 0))));
+            DependencyProperty.Register("IconMaskP", typeof(Brush),
+                typeof(YT_MenuItem),new PropertyMetadata(new SolidColorBrush(Color.FromArgb(160, 0, 0, 0))));
 
         public Brush IconN {
             get { return (Brush)GetValue(IconNProperty); }
@@ -116,6 +117,48 @@ namespace IpgwCore.Controls.FlowControls {
             DependencyProperty.Register("ContentTextFontSize", typeof(double), typeof(YT_MenuItem),
                 new PropertyMetadata(0.0));
         #endregion
+
+        #region ContentText
+        public TextAlignment ContentTextAlignment {
+            get { return (TextAlignment)GetValue(ContentTextAlignmentProperty); }
+            set { SetValue(ContentTextAlignmentProperty, value); }
+        }
+        public static readonly DependencyProperty ContentTextAlignmentProperty =
+            DependencyProperty.Register("ContentTextAlignment", typeof(TextAlignment),
+                typeof(YT_MenuItem), new PropertyMetadata(TextAlignment.Left));
+        #endregion
+
+        #region IconWidth
+        public double IconWidth {
+            get { return (double)GetValue(IconWidthProperty); }
+            set { SetValue(IconWidthProperty, value); }
+        }
+        public static readonly DependencyProperty IconWidthProperty =
+            DependencyProperty.Register("IconWidth", typeof(double), 
+                typeof(YT_MenuItem), new PropertyMetadata(0.0));
+        #endregion
+
+        #region IconSize
+        public double IconSize {
+            get { return (double)GetValue(IconSizeProperty); }
+            set { SetValue(IconSizeProperty, value); }
+        }
+        public static readonly DependencyProperty IconSizeProperty =
+            DependencyProperty.Register("IconSize", typeof(double),
+                typeof(YT_MenuItem), new PropertyMetadata(0.0));
+        #endregion
+
+        #region IconAlignment
+        public TextAlignment IconAlignment {
+            get { return (TextAlignment)GetValue(IconAlignmentProperty); }
+            set { SetValue(IconAlignmentProperty, value); }
+        }
+        public static readonly DependencyProperty IconAlignmentProperty =
+            DependencyProperty.Register("IconAlignment", typeof(TextAlignment), 
+                typeof(YT_MenuItem), new PropertyMetadata(TextAlignment.Center));
+        #endregion
+
+
 
         static YT_MenuItem() {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(YT_MenuItem), new FrameworkPropertyMetadata(typeof(YT_MenuItem)));

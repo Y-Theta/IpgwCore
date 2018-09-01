@@ -18,16 +18,11 @@
         <areawindow:YT_AreaIcon AreaVisibility="True">
             <areawindow:YT_AreaIcon.CheckPop>
                 <flowcontrol:YT_Popup x:Name="CheckPop"
-                                      Style="{StaticResource FluxInfoPopup}">
-                    <flowcontrol:YT_Popup.Resources>
-                        <Storyboard x:Key="FadeIn">
-                            
-                        </Storyboard>
-                    </flowcontrol:YT_Popup.Resources>
-                </flowcontrol:YT_Popup>
+                                      Style="{StaticResource FluxInfoPopup}" />
             </areawindow:YT_AreaIcon.CheckPop>
             <areawindow:YT_AreaIcon.DContextmenu>
-                <flowcontrol:YT_ContextMenu />
+                <flowcontrol:YT_ContextMenu x:Name="DContextmenu"
+                                            Style="{StaticResource AreaContextMenu}"/>
             </areawindow:YT_AreaIcon.DContextmenu>
         </areawindow:YT_AreaIcon>
     </areawindow:YT_Window.AreaIcon>
@@ -38,45 +33,36 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource MainLabel}"
                        Text="{Binding Msg,Converter={StaticResource ColorNumConv}}"
                        Margin="8,0,0,0" />
+            <controls:YT_IconButton x:Name="Back"
+                                    Grid.Column="2"
+                                    Content="&#xE80F;"
+                                    ForeToolTip="返回主页"
+                                    ToolTipVisiblity="Visible"
+                                    CommandParameter="MainPage.xaml"
+                                    Width="32"
+                                    Command="{Binding Nvigate}"
+                                    Visibility="{Binding Mainpage,Converter={StaticResource BoolConv},ConverterParameter=Collapsed}"
+                                    Style="{StaticResource CloseButton}" />
             <controls:YT_IconButton x:Name="Close"
+                                    Width="32"
                                     Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type areawindow:YT_TitleBar}}}"
                                     ForeToolTip="关闭"
                                     ToolTipVisiblity="Visible"
                                     Style="{StaticResource CloseButton}"
-                                    Grid.Column="2" />
+                                    Grid.Column="3" />
         </Grid>
     </areawindow:YT_Window.TitleArea>
     <Border Background="{DynamicResource MainWindow_Bg}"
             BorderBrush="{DynamicResource MainWindow_Bc}"
             Margin="-1"
             BorderThickness="1">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <controls:YT_IconButton Command="{Binding CancelCommand}"
-                                    ForeToolTip="关闭"
-                                    ToolTipVisiblity="Visible"
-                                    Style="{StaticResource CloseButton}"
-                                    Grid.Row="1" />
-            <Slider x:Name="FontS"
-                    Grid.Row="2"
-                    Style="{StaticResource ColorPickerSlider}"
-                    TickFrequency="0.2"
-                    Maximum="20"
-                    Minimum="10"
-                    Value="{Binding AreaFontSize, Source={x:Static settings:Settings.Default},Mode=TwoWay,Converter={StaticResource SliderConv},ConverterParameter=1}" />
-            <TextBlock Grid.Row="3"
-                       Style="{StaticResource ColorSliderLabel}"
-                       Text="{Binding Value, ElementName=FontS}" />
-        </Grid>
+        <Frame x:Name="RootFrame"
+               Style="{StaticResource DefaultFrame}" />
     </Border>
 
 </areawindow:YT_Window>

@@ -233,6 +233,10 @@ namespace IpgwCore.Services.HttpServices {
             else
             {
                 IpgwConnected = true;
+                foreach (var kv in InfSet.KeyValuePairs) {
+                    if (kv.Key.Equals("username"))
+                        Properties.Settings.Default.UserID = kv.Value;
+                }
                 PopupMessageServices.Instence.ShowContent("网络已连接.");
             }
             return IpgwConnected;

@@ -49,14 +49,14 @@
                     <Ellipse Stroke="{DynamicResource FluxPopup_Fg}"
                              HorizontalAlignment="Right"
                              StrokeThickness="1"
-                             Visibility="{Binding Connected,Converter={StaticResource FluxConv},ConverterParameter=ConNV}"
+                             Visibility="{Binding Connected,Converter={StaticResource BoolConv},ConverterParameter=Collapsed}"
                              Width="8"
                              Height="8" />
                     <Ellipse Stroke="{DynamicResource FluxPopup_Fg}"
                              HorizontalAlignment="Right"
                              StrokeThickness="1"
                              Fill="{DynamicResource FluxPopup_Fg}"
-                             Visibility="{Binding Connected,Converter={StaticResource FluxConv},ConverterParameter=ConV}"
+                             Visibility="{Binding Connected,Converter={StaticResource BoolConv},ConverterParameter=Visible}"
                              Width="8"
                              Height="8" />
                 </Grid>

@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="/View/Styles/ControlStyles.xaml" />
                 <ResourceDictionary Source="/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            
             <viewmodel:MainPageViewModel x:Key="MainPageVM" />
             <viewmodel:SettingPageViewModel x:Key="SettingPageVM" />
             <viewmodel:FluxInfoViewModel x:Key="FluxInfoVM" />
