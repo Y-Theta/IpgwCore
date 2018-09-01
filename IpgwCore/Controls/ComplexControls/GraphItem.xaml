@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="IpgwCore.Controls.ComplexControls.GraphItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IpgwCore.Controls.ComplexControls"
+             xmlns:settings="clr-namespace:IpgwCore.Properties"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d">
+    <StackPanel Margin="{Binding Padding, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem}}"
+                Grid.Row="2"
+                Orientation="Horizontal">
+        <Grid Width="12">
+            <Rectangle Visibility="{Binding IconType, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem},Converter={StaticResource BoolConv},ConverterParameter=Visible}"
+                       Fill="{Binding IconBrush, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem}}"
+                       Height="12"
+                       RenderTransformOrigin=".5 .5">
+                <Rectangle.RenderTransform>
+                    <ScaleTransform x:Name="Info2Scale"
+                                    ScaleX="1"
+                                    ScaleY="1" />
+                </Rectangle.RenderTransform>
+                <Rectangle.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard FillBehavior="HoldEnd">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info2Scale"
+                                                                   Storyboard.TargetProperty="ScaleX">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1.3" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info2Scale"
+                                                                   Storyboard.TargetProperty="ScaleY">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1.3" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard FillBehavior="HoldEnd">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info2Scale"
+                                                                   Storyboard.TargetProperty="ScaleX">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info2Scale"
+                                                                   Storyboard.TargetProperty="ScaleY">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Rectangle.Triggers>
+            </Rectangle>
+            <TextBlock Visibility="{Binding IconType, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem},Converter={StaticResource BoolConv},ConverterParameter=Collapsed}"
+                       Style="{StaticResource FluxLabel}"
+                       FontFamily="{Binding IconFontFamily, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem}}"
+                       Height="12"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="{Binding IconFontSize, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem},FallbackValue=12.0}"
+                       Text="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem}}"
+                       RenderTransformOrigin=".5 .5">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform x:Name="Info3Scale"
+                                    ScaleX="1"
+                                    ScaleY="1" />
+                </TextBlock.RenderTransform>
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard FillBehavior="HoldEnd">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info3Scale"
+                                                                   Storyboard.TargetProperty="ScaleX">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1.3" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info3Scale"
+                                                                   Storyboard.TargetProperty="ScaleY">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1.3" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard FillBehavior="HoldEnd">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info3Scale"
+                                                                   Storyboard.TargetProperty="ScaleX">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Info3Scale"
+                                                                   Storyboard.TargetProperty="ScaleY">
+                                        <SplineDoubleKeyFrame KeyTime="0:0:0.25"
+                                                              KeySpline="0.5,0 1,0.6"
+                                                              Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+            <Grid.ToolTip>
+                <ToolTip Style="{DynamicResource DefaultToolTip}">
+                    <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                        <TextBlock x:Name="IconToolTip" 
+                                   Style="{DynamicResource DefaultToolTipText}" />
+                    </Grid>
+                </ToolTip>
+            </Grid.ToolTip>
+        </Grid>
+        <TextBlock Width="{Binding InfoWidth, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem}}"
+                   TextAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   FontWeight="Light"
+                   Text="{Binding InfoText, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:GraphItem}}"
+                   Style="{StaticResource FluxLabel}" />
+    </StackPanel>
+</UserControl>

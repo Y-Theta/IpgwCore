@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using IpgwCore.Services.HttpServices;
 using IpgwCore.Services.MessageServices;
 using IpgwCore.MVVMBase;
+using IpgwCore.View;
 
 namespace IpgwCore.Services.FormatServices {
     /// <summary>
@@ -97,6 +98,7 @@ namespace IpgwCore.Services.FormatServices {
                 info.FluxData = FluxFormater(t[0]);
                 info.Balance = Convert.ToDouble(t[2]);
                 info.InfoTime = DateTime.Now;
+                Properties.Settings.Default.OnlineTime = FluxConv.GetTime(Double.Parse(t[1]));
             }
             catch (IndexOutOfRangeException)
             {
@@ -106,7 +108,6 @@ namespace IpgwCore.Services.FormatServices {
             {
                 return null;
             }
-
             XmlDocService.Instence.SetNode(info, null);
             return info;
         }

@@ -95,6 +95,9 @@
     <Compile Include="Controls\AreaWindow\YT_SizeBorder.cs" />
     <Compile Include="Controls\AreaWindow\YT_TitleBar.cs" />
     <Compile Include="Controls\AreaWindow\YT_Window.cs" />
+    <Compile Include="Controls\ComplexControls\GraphItem.xaml.cs">
+      <DependentUpon>GraphItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ComplexControls\MainFluxPopup.xaml.cs">
       <DependentUpon>MainFluxPopup.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
     <Compile Include="View\Pages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ComplexControls\GraphItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ComplexControls\MainFluxPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

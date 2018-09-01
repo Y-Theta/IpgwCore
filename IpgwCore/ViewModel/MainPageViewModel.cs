@@ -42,10 +42,13 @@ namespace IpgwCore.ViewModel {
         }
 
 
-        private double _fluxdata;
-        public double FluxData {
-            get => _fluxdata;
-            set => SetValue(out _fluxdata, value, FluxData);
+        private string _onlinetime;
+        /// <summary>
+        /// 在线时长
+        /// </summary>
+        public string OnlineTime {
+            get => _onlinetime;
+            set => SetValue(out _onlinetime, value, OnlineTime);
         }
 
 
@@ -64,12 +67,22 @@ namespace IpgwCore.ViewModel {
             Nvigate = new CommandBase(obj => CommandOperation?.Invoke(this, new CommandArgs(obj, "Nvigate")));
         }
 
+        private void InitRes() {
+            OnlineTime = Properties.Settings.Default.OnlineTime;
+            PMS.Instence.MessageHolder = this;
+            Properties.Settings.Default.SettingChanging += Default_SettingChanging; 
+        }
+
+
+        private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e) {
+            if (e.SettingName.Equals("OnlineTime"))
+                OnlineTime = (string)e.NewValue;
+        }
         #endregion
 
         #region Constructors
         public MainPageViewModel() {
-            PMS.Instence.MessageHolder = this;
-            FluxData = 0.5;
+            InitRes();
             InitCommand();
         }
         #endregion

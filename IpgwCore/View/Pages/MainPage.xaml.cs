@@ -35,6 +35,7 @@ namespace IpgwCore.View.Pages {
             _mpvm = (MainPageViewModel)DataContext;
             _mpvm.CommandOperation += _mpvm_CommandOperation;
             _mpvm.Mainpage = true;
+            _mpvm.Msg = "流量详情";
         }
 
         private void _mpvm_CommandOperation(object sender, MVVMBase.CommandArgs args) {

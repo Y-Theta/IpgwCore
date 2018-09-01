@@ -24,8 +24,50 @@
                      Color="#323232" />
     <SolidColorBrush x:Key="MainPage_Fg"
                      Color="#A0A0A0" />
-    
-    
+    <SolidColorBrush x:Key="MainPage_Fg_L"
+                     Color="#808080" />
+
+    <DrawingBrush x:Key="DashLineBrush" 
+                  Viewport="0,0,0.035,0.035"
+                  Stretch="Uniform"
+                  TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <LineGeometry StartPoint="0,0"
+                                      EndPoint="20,20" />
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+                <GeometryDrawing.Pen>
+                    <Pen Thickness="1"
+                         Brush="#E0E0E0" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="DashLineBrushR"
+                  Viewport="0,0,0.40,0.40"
+                  Stretch="Uniform"
+                  TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <LineGeometry StartPoint="0,0"
+                                      EndPoint="10,10" />
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+                <GeometryDrawing.Pen>
+                    <Pen Thickness="1"
+                         Brush="#E0E0E0" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+
     <!--#endregion-->
 
     <!--#region                                                ContextMenu-->
@@ -49,12 +91,12 @@
 
     <!--#region                                                ScrollView-->
     
-    <SolidColorBrush x:Key="ScrollViewThumb__Bg_N"
-                     Color="#1e1e1e" />
-    <SolidColorBrush x:Key="ScrollViewThumb__Bg_R"
-                     Color="#E0E0E0" />
-    <SolidColorBrush x:Key="ScrollViewThumb__Bg_P"
-                     Color="#808080" />
+    <SolidColorBrush x:Key="ScrollViewThumb_Bg_N"
+                     Color="#1E1E1E" />
+    <SolidColorBrush x:Key="ScrollViewThumb_Bg_R"
+                     Color="#606060" />
+    <SolidColorBrush x:Key="ScrollViewThumb_Bg_P"
+                     Color="#202020" />
     
     <!--#endregion-->
 

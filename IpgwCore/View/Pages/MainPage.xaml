@@ -3,8 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:settings="clr-namespace:IpgwCore.Properties"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:controls="clr-namespace:IpgwCore.Controls"
       xmlns:local="clr-namespace:IpgwCore.View.Pages"
+      xmlns:complexcontrols="clr-namespace:IpgwCore.Controls.ComplexControls"
       DataContext="{StaticResource MainPageVM}"
       mc:Ignorable="d">
     <Grid x:Name="Rootgrid"
@@ -12,25 +15,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid x:Name="TitleArea"
-              Background="{DynamicResource MainPage_Bg_L}"
-              Margin="0,4,0,0"
-              Height="36" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource MainPageLabel}"
-                       Foreground="#808080"
-                       Margin="8,2,0,2"
-                       FontSize="24"
-                       FontWeight="Light"
-                       Text="流量概况" />
-        </Grid>
         <Grid x:Name="GeneralArea"
               Margin="0,8,0,0"
               Background="{DynamicResource MainPage_Bg_L}"
@@ -41,68 +27,145 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid x:Name="Maingraph" 
-                  Width="200">
+                  Width="180">
                 <Canvas  Width="160"
                          Height="160"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Center">
-                    <Path x:Name="Percent"
-                          Fill="{x:Null}"
-                          Data="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=PathTest|160|72}"
-                          StrokeEndLineCap="Triangle"
-                          StrokeThickness="12"
-                          Stroke="{DynamicResource FluxPopup_Fg}" />
                     <Path x:Name="PercentBg"
                           Fill="{x:Null}"
                           Data="M 80,8 A 72,72,0,1,1,79.9,8"
-                          Opacity="0.8"
-                          StrokeThickness="12">
-                        <Path.Stroke>
-                            <DrawingBrush Viewport="0,0,0.05,0.05"
-                                          Stretch="Uniform"
-                                          TileMode="Tile">
-                                <DrawingBrush.Drawing>
-                                    <GeometryDrawing>
-                                        <GeometryDrawing.Geometry>
-                                            <GeometryGroup>
-                                                <LineGeometry StartPoint="0,0"
-                                                              EndPoint="20,20" />
-                                            </GeometryGroup>
-                                        </GeometryDrawing.Geometry>
-                                        <GeometryDrawing.Pen>
-                                            <Pen Thickness="1"
-                                                 Brush="{DynamicResource FluxPopup_Fg}" />
-                                        </GeometryDrawing.Pen>
-                                    </GeometryDrawing>
-                                </DrawingBrush.Drawing>
-                            </DrawingBrush>
-                        </Path.Stroke>
-                    </Path>
+                          StrokeThickness="12"
+                          Stroke="{DynamicResource DashLineBrush}" />
+                    <Path x:Name="Percent"
+                          Fill="{x:Null}"
+                          Data="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Path|160|72}"
+                          DataContext="{StaticResource FluxInfoVM}"
+                          StrokeThickness="12"
+                          Stroke="{DynamicResource FluxPopup_Fg}" />
                 </Canvas>
-                
+                <TextBlock x:Name="PercentNum"
+                           FontSize="32"
+                           FontWeight="Thin"
+                           DataContext="{StaticResource FluxInfoVM}"
+                           Text="{Binding FluxData,Converter={StaticResource FluxConv},ConverterParameter=Per}"
+                           Style="{DynamicResource FluxPercent}" />
             </Grid>
             <Grid x:Name="GriphAddition"
+                  Margin="8,0,0,0"
                   Grid.Column="1">
+                <Grid.Resources>
+                    <sys:Double x:Key="GriphItemExpWidth">84</sys:Double>
+                </Grid.Resources>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
+                <complexcontrols:GraphItem Grid.Row="1"
+                                           IconType="True"
+                                           ToolTipText="已用流量"
+                                           Icon="&#xED5A;"
+                                           HorizontalAlignment="Left"
+                                           IconFontFamily="{DynamicResource Segoe}"
+                                           DataContext="{DynamicResource FluxInfoVM}"
+                                           InfoWidth="{StaticResource GriphItemExpWidth}"
+                                           IconBrush="{DynamicResource DashLineBrushR}"
+                                           InfoText="{Binding FluxData, Converter={StaticResource FluxConv},ConverterParameter=Used}" />
+                <complexcontrols:GraphItem Grid.Row="2"
+                                           Padding="0,8,0,0"
+                                           IconType="True"
+                                           ToolTipText="剩余流量"
+                                           Icon="&#xED5A;"
+                                           HorizontalAlignment="Left"
+                                           IconFontFamily="{DynamicResource Segoe}"
+                                           DataContext="{DynamicResource FluxInfoVM}"
+                                           InfoWidth="{StaticResource GriphItemExpWidth}"
+                                           IconBrush="{DynamicResource FluxPopup_Fg}"
+                                           InfoText="{Binding FluxData, Converter={StaticResource FluxConv},ConverterParameter=Bal}" />
+                <complexcontrols:GraphItem Grid.Row="3"
+                                           Padding="0,8,0,0"
+                                           IconType="False"
+                                           ToolTipText="账户余额"
+                                           Icon="¥"
+                                           IconFontSize="12"
+                                           HorizontalAlignment="Left"
+                                           IconFontFamily="{DynamicResource Questrial}"
+                                           DataContext="{DynamicResource FluxInfoVM}"
+                                           InfoWidth="{StaticResource GriphItemExpWidth}"
+                                           IconBrush="{DynamicResource FluxPopup_Fg}"
+                                           InfoText="{Binding FluxData, Converter={StaticResource FluxConv},ConverterParameter=Mon}" />
+                <complexcontrols:GraphItem Grid.Row="4"
+                                           Padding="0,8,0,0"
+                                           IconType="False"
+                                           ToolTipText="在线时间"
+                                           HorizontalAlignment="Left"
+                                           Icon="&#xED5A;"
+                                           IconFontSize="12"
+                                           InfoWidth="{StaticResource GriphItemExpWidth}"
+                                           IconBrush="{DynamicResource FluxPopup_Fg}"
+                                           IconFontFamily="{DynamicResource Segoe}"
+                                           InfoText="{Binding OnlineTime}" />
             </Grid>
         </Grid>
         <Grid x:Name="ControlArea"
-              Background="{DynamicResource MainPage_Bg_L}"
-              Margin="0,8,0,0"
-              Height="36"
+              Margin="0,0,0,4"
               Grid.Row="2">
-            <Slider Style="{StaticResource ColorPickerSlider}"
-                    Margin="4,0,4,0"
-                    VerticalAlignment="Center"
-                    Maximum="100"
-                    Minimum="0"
-                    Value="{Binding FluxData,Converter={StaticResource SliderConv},Mode=TwoWay,ConverterParameter=100}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Background="{DynamicResource MainPage_Bg_L}"
+                  Margin="0,8,0,0"
+                  Grid.Row="0">
+                <controls:YT_Hitholder Background="Transparent"
+                                       PointBrush="#20000000"
+                                       PressBrush="#40000000"
+                                       Command="{Binding Nvigate}"
+                                       CommandPara="InfoPage.xaml">
+                    <TextBlock Style="{StaticResource MainPageLabel}"
+                               Margin="8,0,0,0"
+                               Foreground="#808080"
+                               FontSize="16"
+                               FontWeight="Light"
+                               Text="登录信息设置" />
+                </controls:YT_Hitholder>
+            </Grid>
+            <Grid Background="{DynamicResource MainPage_Bg_L}"
+                  Margin="0,8,0,0"
+                  Grid.Row="1">
+                <controls:YT_Hitholder Background="Transparent"
+                                       PointBrush="#20000000"
+                                       PressBrush="#40000000"
+                                       Command="{Binding Nvigate}"
+                                       CommandPara="SettingPage.xaml">
+                    <TextBlock Style="{StaticResource MainPageLabel}"
+                               Margin="8,0,0,0"
+                               Foreground="#808080"
+                               FontSize="16"
+                               FontWeight="Light"
+                               Text="软件相关功能设置" />
+                </controls:YT_Hitholder>
+            </Grid>
+            <Grid Background="{DynamicResource MainPage_Bg_L}"
+                  Margin="0,8,0,0"
+                  Grid.Row="2">
+                <controls:YT_Hitholder Background="Transparent"
+                                       PointBrush="#20000000"
+                                       PressBrush="#40000000"
+                                       Command="{Binding Nvigate}"
+                                       CommandPara="AboutPage.xaml">
+                    <TextBlock Style="{StaticResource MainPageLabel}"
+                               Margin="8,0,0,0"
+                               Foreground="#808080"
+                               FontSize="16"
+                               FontWeight="Light"
+                               Text="关于软件" />
+                </controls:YT_Hitholder>
+            </Grid>
         </Grid>
-        
     </Grid>
 </Page>

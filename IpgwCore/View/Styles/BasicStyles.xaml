@@ -19,13 +19,13 @@
                     <Rectangle x:Name="THB"
                                Height="{TemplateBinding Height}"
                                Width="{TemplateBinding Width}"
-                               Fill="{StaticResource ScrollViewThumb__Bg_N}" />
+                               Fill="{StaticResource ScrollViewThumb_Bg_N}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDragging"
                                  Value="true">
                             <Setter TargetName="THB"
                                     Property="Fill"
-                                    Value="{StaticResource ScrollViewThumb__Bg_P}" />
+                                    Value="{StaticResource ScrollViewThumb_Bg_P}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -39,7 +39,7 @@
                                     Value="Hand" />
                             <Setter TargetName="THB"
                                     Property="Fill"
-                                    Value="{StaticResource ScrollViewThumb__Bg_R}" />
+                                    Value="{StaticResource ScrollViewThumb_Bg_R}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -355,15 +355,17 @@
     <Style x:Key="MainLabel"
            TargetType="TextBlock">
         <Setter Property="Foreground"
-                Value="{DynamicResource DefaultMainLabel_Fg}" />
-        <Setter Property="FontSize"
-                Value="12" />
+                Value="{DynamicResource MainPage_FgL}" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
         <Setter Property="TextAlignment"
                 Value="Left" />
         <Setter Property="HorizontalAlignment"
                 Value="Left" />
-        <Setter Property="VerticalAlignment"
-                Value="Center" />
+        <Setter Property="FontSize"
+                Value="24" />
+        <Setter Property="FontWeight"
+                Value="Light" />
     </Style>
 
     <!--MessageBlock-->
@@ -652,11 +654,13 @@
     <!--#endregion-->
 
     <!--#region                                                Frame-->
-    
+
     <Style x:Key="DefaultFrame"
            TargetType="{x:Type Frame}">
         <Setter Property="Margin"
-                Value="0,24,0,0" />
+                Value="0" />
+        <Setter Property="Padding"
+                Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Frame}">

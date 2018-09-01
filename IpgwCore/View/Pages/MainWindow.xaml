@@ -27,29 +27,37 @@
         </areawindow:YT_AreaIcon>
     </areawindow:YT_Window.AreaIcon>
     <areawindow:YT_Window.TitleArea>
-        <Grid Height="24"
-              Background="Transparent">
+        <Grid Height="36"
+              Background="{DynamicResource MainPage_Bg_L}"
+              Margin="4,4,4,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource MainLabel}"
-                       Text="{Binding Msg,Converter={StaticResource ColorNumConv}}"
-                       Margin="8,0,0,0" />
+            <TextBlock Style="{StaticResource MainPageLabel}"
+                       Foreground="#808080"
+                       Margin="8,2,0,2"
+                       FontSize="22"
+                       FontWeight="Light"
+                       Text="{Binding Msg}" />
             <controls:YT_IconButton x:Name="Back"
                                     Grid.Column="2"
                                     Content="&#xE80F;"
                                     ForeToolTip="返回主页"
                                     ToolTipVisiblity="Visible"
                                     CommandParameter="MainPage.xaml"
-                                    Width="32"
+                                    Height="28"
+                                    Width="28"
+                                    Margin="0,0,16,0"
                                     Command="{Binding Nvigate}"
                                     Visibility="{Binding Mainpage,Converter={StaticResource BoolConv},ConverterParameter=Collapsed}"
                                     Style="{StaticResource CloseButton}" />
             <controls:YT_IconButton x:Name="Close"
-                                    Width="32"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="0,0,4,0"
                                     Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type areawindow:YT_TitleBar}}}"
                                     ForeToolTip="关闭"
                                     ToolTipVisiblity="Visible"
@@ -58,13 +66,15 @@
         </Grid>
     </areawindow:YT_Window.TitleArea>
     <Border Background="{DynamicResource MainWindow_Bg}"
-            Margin="0">
+            Padding="0,4,0,0">
         <Grid x:Name="RootGrid">
             <Grid.RowDefinitions>
+                <RowDefinition Height="36" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Frame x:Name="RootFrame"
+                   Grid.Row="1"
                    Style="{StaticResource DefaultFrame}" />
         </Grid>
     </Border>

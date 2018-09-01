@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IpgwCore.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace IpgwCore.View.Pages {
     public partial class SettingPage : Page {
         public SettingPage() {
             InitializeComponent();
+            Loaded += SettingPage_Loaded;
+        }
+
+        private void SettingPage_Loaded(object sender, RoutedEventArgs e) {
+            (App.Current.Resources["MainPageVM"] as MainPageViewModel).Msg = "软件设置";
         }
     }
 }

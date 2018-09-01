@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IpgwCore.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace IpgwCore.View.Pages
         public AboutPage()
         {
             InitializeComponent();
+            Loaded += AboutPage_Loaded;
+        }
+
+        private void AboutPage_Loaded(object sender, RoutedEventArgs e) {
+            (App.Current.Resources["MainPageVM"] as MainPageViewModel).Msg = "关于软件";
         }
     }
 }

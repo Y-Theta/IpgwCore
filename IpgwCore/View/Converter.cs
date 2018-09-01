@@ -270,20 +270,47 @@ namespace IpgwCore.View {
             }
         }
 
-        private string GetMon(Flux value) {
-            return String.Format("{0:###.##}  R", value.Balance);
-        }
-
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             throw new NotImplementedException();
         }
 
+
+        public static string GetMon(Flux value) {
+            return String.Format("{0:###.##}  R", value.Balance);
+        }
+
         public static string GetBalance(Flux flux) {
-            return FluxFormat(GetFluxData(flux,false));
+            return FluxFormat(GetFluxData(flux, false));
         }
 
         public static string GetUsed(Flux flux) {
-            return FluxFormat(GetFluxData(flux,true));
+            return FluxFormat(GetFluxData(flux, true));
+        }
+
+        /// <summary>
+        /// 获取在线时间
+        /// </summary>
+        public static string GetTime(double sec) {
+            var h = Math.Round(sec / 3600);
+            var m = Math.Round((sec % 3600) / 60);
+            var s = sec % 3600 % 60;
+            var output = "";
+            if (h < 10)
+                output += "0" + h + " : ";
+            else
+                output += h + " : ";
+
+            if (m < 10)
+                output += "0" + m + " : ";
+            else
+                output += m + " : ";
+
+            if (s < 10)
+                output += "0" + s + "";
+            else
+                output += s + "";
+
+            return output;
         }
 
         /// <summary>
@@ -408,9 +435,9 @@ namespace IpgwCore.View {
     internal class SliderConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value is Double)
-                return (double)value * Double.Parse(parameter.ToString());
+                return Math.Round((double)value * Double.Parse(parameter.ToString()), 0);
             else if (value is float)
-                return (double)(float)value * Double.Parse(parameter.ToString());
+                return Math.Round((double)(float)value * Double.Parse(parameter.ToString()), 0) ;
             else
                 return value;
         }

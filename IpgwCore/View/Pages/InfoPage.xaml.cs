@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IpgwCore.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,12 @@ namespace IpgwCore.View.Pages {
     public partial class InfoPage : Page {
         public InfoPage() {
             InitializeComponent();
+            Loaded += InfoPage_Loaded;
+        }
+
+        private void InfoPage_Loaded(object sender, RoutedEventArgs e) {
+            (App.Current.Resources["MainPageVM"] as MainPageViewModel).Msg = "用户信息";
+
         }
     }
 }
