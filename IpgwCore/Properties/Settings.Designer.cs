@@ -226,5 +226,17 @@ namespace IpgwCore.Properties {
                 this["IPGWS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SelfRunning {
+            get {
+                return ((bool)(this["SelfRunning"]));
+            }
+            set {
+                this["SelfRunning"] = value;
+            }
+        }
     }
 }

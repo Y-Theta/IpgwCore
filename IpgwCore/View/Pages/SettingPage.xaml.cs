@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IpgwCore.Services.SystemServices;
 
 namespace IpgwCore.View.Pages {
     /// <summary>
@@ -49,10 +50,22 @@ namespace IpgwCore.View.Pages {
             _spvm.CommandOperation += _spvm_CommandOperation;
         }
 
+        private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e) {
+            switch (e.SettingName)
+            {
+                case "SelfRunning":
+                    SystemServices.Instence.SetSelfRunning((bool)e.NewValue);
+                    break;
+            }
+        }
+
         public SettingPage() {
             InitializeComponent();
+            Properties.Settings.Default.SettingChanging += Default_SettingChanging;
             Loaded += SettingPage_Loaded;
             Unloaded += SettingPage_Unloaded;
         }
+
+ 
     }
 }
