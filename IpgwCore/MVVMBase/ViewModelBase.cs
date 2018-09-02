@@ -27,7 +27,7 @@ namespace IpgwCore.MVVMBase {
         /// <param name="callBack">回调若属性的更改需要得到控制</param>
         public void SetValue<T>(out T nProperty, T value, T oProperty, PropertyChangedCallBack callBack = null) {
             bool accept = true;
-            accept = callBack is null ? true : callBack.Invoke(value, oProperty);
+            accept = callBack is null ? true : callBack.Invoke(oProperty, value);
             if (accept)
                 nProperty = value;
             else

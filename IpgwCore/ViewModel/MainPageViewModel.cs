@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using IpgwCore.Model.BasicModel;
 using IpgwCore.MVVMBase;
+using IpgwCore.Services.FormatServices;
+using IpgwCore.Services.HttpServices;
 using IpgwCore.Services.MessageServices;
+using IpgwCore.View;
 using PMS = IpgwCore.Services.MessageServices.PopupMessageServices;
 
 namespace IpgwCore.ViewModel {

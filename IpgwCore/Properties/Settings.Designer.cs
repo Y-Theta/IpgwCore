@@ -166,5 +166,65 @@ namespace IpgwCore.Properties {
                 this["OnlineTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IPGWBF {
+            get {
+                return ((bool)(this["IPGWBF"]));
+            }
+            set {
+                this["IPGWBF"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainPageMoreInfo {
+            get {
+                return ((bool)(this["MainPageMoreInfo"]));
+            }
+            set {
+                this["MainPageMoreInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IPGWA {
+            get {
+                return ((string)(this["IPGWA"]));
+            }
+            set {
+                this["IPGWA"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IPGWP {
+            get {
+                return ((string)(this["IPGWP"]));
+            }
+            set {
+                this["IPGWP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IPGWS {
+            get {
+                return ((bool)(this["IPGWS"]));
+            }
+            set {
+                this["IPGWS"] = value;
+            }
+        }
     }
 }

@@ -11,8 +11,8 @@
                       ExtendToTitleBar="True"
                       DataContext="{StaticResource MainPageVM}"
                       Opacity="{Binding MainOpacity, Source={x:Static settings:Settings.Default},Mode=OneWay}"
-                      Width="320"
-                      Height="400"
+                      SizeToContent="Height"
+                      Width="360"
                       mc:Ignorable="d">
     <areawindow:YT_Window.AreaIcon>
         <areawindow:YT_AreaIcon AreaVisibility="True">
@@ -29,7 +29,7 @@
     <areawindow:YT_Window.TitleArea>
         <Grid Height="36"
               Background="{DynamicResource MainPage_Bg_L}"
-              Margin="4,4,4,0">
+              Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
@@ -65,8 +65,8 @@
                                     Grid.Column="3" />
         </Grid>
     </areawindow:YT_Window.TitleArea>
-    <Border Background="{DynamicResource MainWindow_Bg}"
-            Padding="0,4,0,0">
+    <Border Background="#00080808"
+            Padding="0,0,0,0">
         <Grid x:Name="RootGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="36" />

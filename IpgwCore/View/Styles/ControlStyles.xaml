@@ -360,6 +360,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Style="{StaticResource MainLabel}"
                                            FontSize="12"
+                                           Margin="0,0,0,4"
                                            DataContext="{DynamicResource MainPageVM}"
                                            Text="{Binding ExitTip}" />
                                 <StackPanel Orientation="Horizontal"
@@ -548,7 +549,7 @@
                             <flowcontrol:YT_MenuItem x:Name="M3"
                                                      HeadIcon="&#xEC26;"
                                                      ContentText="关于"
-                                                     CommandParameter="About"
+                                                     CommandParameter="COP"
                                                      Style="{StaticResource SubMenuItem}"
                                                      Command="{Binding Operation}" />
                             <Separator Style="{StaticResource AreaContextMenuSeperator }" />

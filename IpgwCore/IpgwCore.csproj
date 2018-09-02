@@ -108,6 +108,7 @@
     <Compile Include="Controls\DllFuncs.cs" />
     <Compile Include="Controls\FlowControls\YT_ContextMenu.cs" />
     <Compile Include="Controls\FlowControls\YT_Popup.cs" />
+    <Compile Include="Controls\OtherControls\YT_GridFolder.cs" />
     <Compile Include="Controls\OtherControls\YT_Hitholder.cs" />
     <Compile Include="Controls\OtherControls\YT_TextBox.cs" />
     <Compile Include="Model\BasicModel\Course.cs" />

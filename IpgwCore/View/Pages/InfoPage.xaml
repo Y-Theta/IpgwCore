@@ -1,14 +1,139 @@
 ﻿<Page x:Class="IpgwCore.View.Pages.InfoPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:control="clr-namespace:IpgwCore.Controls"
       xmlns:local="clr-namespace:IpgwCore.View.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="InfoPage">
-
-    <Grid>
-        
+      DataContext="{DynamicResource SettingPageVM}"
+      mc:Ignorable="d">
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="IPGW"
+              Background="{DynamicResource MainPage_Bg_L}"
+              Margin="0,8,0,0"
+              Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <control:YT_Hitholder Command="{Binding ElementName=IPGWT}"
+                                  ToolTipText="折叠当前内容"
+                                  Background="{DynamicResource YT_Hitholder_Bg}"
+                                  PointBrush="{DynamicResource YT_Hitholder_Bg_R}"
+                                  PressBrush="{DynamicResource YT_Hitholder_Bg_P}">
+                <control:YT_GridFolder x:Name="IPGWT"
+                                       Margin="4,0,0,0"
+                                       Foreground="{DynamicResource MainPage_Fg_L}"
+                                       TitleSize="14"
+                                       IconSize="14"
+                                       Style="{StaticResource InfoPageGridFolder}"
+                                       AttachedGrid="{Binding ElementName=IPGW}"
+                                       CommandPara="1"
+                                       Title="IPGW信息设置"
+                                       AimGridType="Auto"
+                                       IconWidth="32"
+                                       IconF="&#xE971;"
+                                       IconB="&#xE972;" />
+            </control:YT_Hitholder>
+            <Grid x:Name="IPGWFormArea"
+                  Margin="12,4,12,0"
+                  HorizontalAlignment="Stretch"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"
+                      MinHeight="36">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               FontSize="16"
+                               Width="72"
+                               Text="■  账号" />
+                    <TextBox x:Name="IPGWA" 
+                             Grid.Column="1"
+                             FontSize="14"
+                             Style="{StaticResource AccountTextBox}" />
+                </Grid>
+                <Grid Grid.Row="1"
+                      MinHeight="36">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               FontSize="16"
+                               Width="72"
+                               Text="■  密码" />
+                    <PasswordBox x:Name="IPGWP" 
+                                 Grid.Column="1"
+                                 FontSize="14"
+                                 Style="{StaticResource AccountPasswordBox}" />
+                </Grid>
+                <Grid Grid.Row="2"
+                      MinHeight="36">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               FontSize="12"
+                               Width="72"
+                               Text="套餐选择" />
+                    <StackPanel Orientation="Horizontal"
+                                Visibility="{Binding Visibility, ElementName=Pack1}"
+                                Grid.Column="2">
+                        <control:YT_IconRadioButton  x:Name="Pack1"
+                                                     Margin="0,0,4,0"
+                                                     DataContext="{DynamicResource FluxInfoVM}"
+                                                     Style="{StaticResource PackageSelectRadio}"
+                                                     IsChecked="{Binding PackageN,Converter={StaticResource PackageConv},ConverterParameter=B0,Mode=TwoWay}" />
+                        <TextBlock Style="{StaticResource MainLabel}"
+                                   Foreground="{DynamicResource MainPage_Fg_L}"
+                                   FontSize="12"
+                                   Width="48"
+                                   Text="{Binding Converter={StaticResource PackageConv},ConverterParameter=P0}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Visibility="{Binding Visibility, ElementName=Pack2}"
+                                Margin="16,0,0,0"
+                                Grid.Column="3">
+                        <control:YT_IconRadioButton  x:Name="Pack2"
+                                                     Margin="0,0,4,0"
+                                                     DataContext="{DynamicResource FluxInfoVM}"
+                                                     Style="{StaticResource PackageSelectRadio}"
+                                                     IsChecked="{Binding PackageN,Converter={StaticResource PackageConv},ConverterParameter=B1,Mode=TwoWay}" />
+                        <TextBlock Style="{StaticResource MainLabel}"
+                                   Foreground="{DynamicResource MainPage_Fg_L}"
+                                   FontSize="12"
+                                   Width="48"
+                                   Text="{Binding Converter={StaticResource PackageConv},ConverterParameter=P1}" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3"
+                      Margin="-12,0,-12,0">
+                    <control:YT_IconButton Style="{StaticResource TextButton}"
+                                           Command="{Binding Operation}"
+                                           CommandParameter="IPGWSubmit"
+                                           ToolTipVisiblity="Collapsed"
+                                           Height="24"
+                                           ContentText="{Binding IsEnabled, ElementName=IPGWP,Converter={StaticResource BoolConv},ConverterParameter=String|保存设置|修改设置}" />
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

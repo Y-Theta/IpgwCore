@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Drawing;
 using ColorD = System.Drawing.Color;
 using Color = System.Windows.Media.Color;
+using SettingS = IpgwCore.Properties.Settings;
 using IpgwCore.ViewModel;
 using IpgwCore.Services.FormatServices;
 using System.Windows;
@@ -252,15 +253,19 @@ namespace IpgwCore.View {
             switch (str[0])
             {
                 case "Path":
-                    return PercentToCircle(1 - GetFluxPercent((Flux)value), Int32.Parse(str[1]), Int32.Parse(str[2]));
+                    return PercentToCircle(GetFluxPercent((Flux)value)/100, Int32.Parse(str[1]), Int32.Parse(str[2]));
                 case "Per":
-                    return (int)(100 - GetFluxPercent((Flux)value) * 100);
+                    return GetFluxPercent((Flux)value);
                 case "Used":
                     return GetUsed((Flux)value);
                 case "Bal":
                     return GetBalance((Flux)value);
                 case "Mon":
                     return GetMon((Flux)value);
+                case "AllMon":
+                    return GetAllMoney((Flux)value);
+                case "Span":
+                    return GetLastUpdate((Flux)value);
                 case "ConT":
                     return (bool)value ? "Online" : "Offline";
                 case "PathTest":
@@ -288,65 +293,60 @@ namespace IpgwCore.View {
         }
 
         /// <summary>
+        /// 获取距离上次更新时间
+        /// </summary>
+        public static string GetLastUpdate(Flux flux) {
+            DateTime time = DateTime.Now;
+            TimeSpan span = time.Subtract(flux.InfoTime);
+            if (span.TotalHours < 0.15)
+                return "刚刚更新";
+            else if (span.TotalHours < 0.5)
+                return "半小时内";
+            else if (span.TotalHours < 1)
+                return "一小时内";
+            return String.Format("{0:###.#}  H", span.TotalHours);
+        }
+
+        /// <summary>
+        /// 获取本月累计充值的网费
+        /// </summary>
+        public static string GetAllMoney(Flux flux) {
+            double use = GetFluxData(flux, true);
+            double balance = flux.Balance;
+            double all;
+            if (SettingS.Default.Package == 0)
+            {
+                if (use > SettingS.Default.C1F * 1024)
+                    all = (use - 1000 * SettingS.Default.C1F) / 1000 + balance;
+                else
+                    all = balance;
+            }
+            else
+            {
+                if (use > SettingS.Default.C2F * 1024)
+                    all = (use - 1000 * SettingS.Default.C2F) / 1000 + balance;
+                else
+                    all = balance;
+            }
+            return String.Format("{0:###.##}  R", all);
+        }
+
+        /// <summary>
         /// 获取在线时间
         /// </summary>
         public static string GetTime(double sec) {
-            var h = Math.Round(sec / 3600);
-            var m = Math.Round((sec % 3600) / 60);
-            var s = sec % 3600 % 60;
-            var output = "";
-            if (h < 10)
-                output += "0" + h + " : ";
-            else
-                output += h + " : ";
-
-            if (m < 10)
-                output += "0" + m + " : ";
-            else
-                output += m + " : ";
-
-            if (s < 10)
-                output += "0" + s + "";
-            else
-                output += s + "";
-
-            return output;
+            return String.Format("{0:###}  H", sec / 3600);
         }
 
         /// <summary>
         /// 根据套餐获得已用流量百分比
         /// </summary>
         public static double GetFluxPercent(Flux IpgwInfo) {
-            try
-            {
-                if (Properties.Settings.Default.Package == 1)
-                {
-                    double all = IpgwInfo.Balance - 20;
-                    if (IpgwInfo.FluxData > 60 * 1024)
-                        return IpgwInfo.FluxData / (IpgwInfo.FluxData + all * 1000);
-                    else
-                    {
-                        all = all * 1000 + 60000;
-                        return IpgwInfo.FluxData / all;
-                    }
-                }
-                else
-                {
-                    double all = IpgwInfo.Balance - 15;
-                    if (IpgwInfo.FluxData > 27 * 1024)
-                        return IpgwInfo.FluxData / (IpgwInfo.FluxData + all * 1000);
-                    else
-                    {
-                        all = all * 1000 + 27000;
-                        return IpgwInfo.FluxData / all;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                //TODO:
-                return 0;
-            }
+            double used = GetFluxData(IpgwInfo, true);
+            double balance = GetFluxData(IpgwInfo, false);
+            double per = balance * 100 / (used + balance);
+            double _out = Math.Round(per, 0, MidpointRounding.AwayFromZero);
+            return _out;
         }
 
         /// <summary>
@@ -360,29 +360,29 @@ namespace IpgwCore.View {
                     return IpgwInfo.FluxData;
                 else
                 {
-                    if (Properties.Settings.Default.Package == 1)
+                    if (SettingS.Default.Package == 0)
                     {
-                        double all = IpgwInfo.Balance - 20;
-                        if (IpgwInfo.FluxData > 60 * 1024)
+                        double all = IpgwInfo.Balance - SettingS.Default.C1P;
+                        if (IpgwInfo.FluxData > SettingS.Default.C1F * 1024)
                         {
                             return all * 1000;
                         }
                         else
                         {
-                            all = all * 1000 + 60000;
+                            all = all * 1000 + 1000 * SettingS.Default.C1F;
                             return all - IpgwInfo.FluxData;
                         }
                     }
                     else
                     {
-                        double all = IpgwInfo.Balance - 15;
-                        if (IpgwInfo.FluxData > 27 * 1024)
+                        double all = IpgwInfo.Balance - SettingS.Default.C2P;
+                        if (IpgwInfo.FluxData > SettingS.Default.C2F * 1024)
                         {
                             return all * 1000;
                         }
                         else
                         {
-                            all = all * 1000 + 27000;
+                            all = all * 1000 + 1000 * SettingS.Default.C2F;
                             return all - IpgwInfo.FluxData;
                         }
                     }
@@ -408,7 +408,9 @@ namespace IpgwCore.View {
         /// <summary>
         /// 将百分比转换为圆形路径
         /// </summary>
-        /// <param name="a"></param>
+        /// <param name="a">百分比 小数表示</param>
+        /// <param name="cs">区域大小</param>
+        /// <param name="r">半径</param>
         /// <returns></returns>
         public static string PercentToCircle(double a, int cs, int r) {
             string R = r.ToString();
@@ -434,10 +436,12 @@ namespace IpgwCore.View {
     /// </summary>
     internal class SliderConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
             if (value is Double)
                 return Math.Round((double)value * Double.Parse(parameter.ToString()), 0);
             else if (value is float)
-                return Math.Round((double)(float)value * Double.Parse(parameter.ToString()), 0) ;
+                return Math.Round((double)(float)value * Double.Parse(parameter.ToString()), 0);
             else
                 return value;
         }
@@ -467,21 +471,34 @@ namespace IpgwCore.View {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return value;
-            switch(parameter.ToString())
+            string[] str = parameter.ToString().Split('|');
+            switch (str[0])
             {
                 case "Visible":
                     return (bool)value ? Visibility.Visible : Visibility.Collapsed;
                 case "Collapsed":
                     return (bool)value ? Visibility.Collapsed : Visibility.Visible;
-                default:return value;
+                case "String":
+                    return (bool)value ? str[1] : str[2];
+                default: return value;
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
+            if (parameter is null)
+                return value;
+            string[] str = parameter.ToString().Split('|');
+            switch (parameter.ToString())
+            {
+                case "Visible":
+                    return ((Visibility)value).Equals(Visibility.Visible) ? true : false;
+                case "Collapsed":
+                    return ((Visibility)value).Equals(Visibility.Visible) ? false : false;
+                default: return value;
+            }
         }
     }
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -501,6 +518,45 @@ namespace IpgwCore.View {
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class PackageConv : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
+            switch (parameter.ToString()) {
+                case "V0":
+                    return (int)value == 0 ? Visibility.Visible : Visibility.Collapsed;
+                case "V1":
+                    return (int)value == 1 ? Visibility.Visible : Visibility.Collapsed;
+                case "B0":
+                    return (int)value == 0 ? true : false;
+                case "B1":
+                    return (int)value == 1 ? true : false;
+                case "P0":
+                    return String.Format("{0:##}元{1:##}G", SettingS.Default.C1P, SettingS.Default.C1F);
+                case "P1":
+                    return String.Format("{0:##}元{1:##}G", SettingS.Default.C2P, SettingS.Default.C2F);
+                default: return value;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
+            switch (parameter.ToString())
+            {
+                case "B0":
+                    return (bool)value ? 0 : 1;
+                case "B1":
+                    return (bool)value ? 1 : 0;
+
+                default: return value;
+            }
         }
     }
 }

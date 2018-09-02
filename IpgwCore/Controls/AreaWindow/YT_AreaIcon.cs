@@ -93,8 +93,9 @@ namespace IpgwCore.Controls.AreaWindow {
             {
                 Visible = true,
                 ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(),
-                Icon = Drawicon(((int)(100 - FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo) * 100)).ToString())
+                Icon = Drawicon(FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString())
             };
+            string str = FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString();
             _flowicon.MouseClick += _flowicon_MouseClick;
             _flowicon.MouseMove += _flowicon_MouseMove;
             _flowicon.MouseDoubleClick += _flowicon_MouseDoubleClick;
@@ -191,16 +192,16 @@ namespace IpgwCore.Controls.AreaWindow {
             {
                 case "AreaFontSize":
                     _areafont = new Font(_pfc.Families[0], _areafontsize);
-                    _flowicon.Icon = Drawicon(((int)(100 - FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo) * 100)).ToString());
+                    _flowicon.Icon = Drawicon(FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString());
                     break;
                 case "AreaFontColor":
-                    _flowicon.Icon = Drawicon(((int)(100 - FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo) * 100)).ToString());
+                    _flowicon.Icon = Drawicon(FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString());
                     break;
             }
         }
 
         private bool Instence_IpgwInfoChanged(object op, object np) {
-            _flowicon.Icon = Drawicon(((int)(100 - FluxConv.GetFluxPercent((Flux)np) * 100)).ToString());
+            _flowicon.Icon = Drawicon(FluxConv.GetFluxPercent((Flux)np).ToString());
             return true;
         }
 

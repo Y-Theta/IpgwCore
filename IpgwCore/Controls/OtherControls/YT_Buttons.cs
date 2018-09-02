@@ -671,8 +671,8 @@ namespace IpgwCore.Controls {
             set { SetValue(ToolTipVisiblityProperty, value); }
         }
         public static readonly DependencyProperty ToolTipVisiblityProperty =
-            DependencyProperty.Register("ToolTipVisiblity", typeof(Visibility), typeof(YT_IconRadioButton),
-                new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("ToolTipVisiblity", typeof(Visibility), 
+                typeof(YT_IconRadioButton),new PropertyMetadata(Visibility.Collapsed));
         #endregion
 
         #region RoatAngel

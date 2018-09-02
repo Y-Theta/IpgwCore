@@ -482,6 +482,125 @@
                 Value="14" />
     </Style>
 
+
+    <!--AccountTextBox-->
+    <Style x:Key="AccountTextBox"
+           TargetType="TextBox">
+        <Setter Property="TextWrapping"
+                Value="Wrap" />
+        <Setter Property="Height"
+                Value="20" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MainPage_Fg_L}" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Margin"
+                Value="10,0,0,0" />
+        <Setter Property="CaretBrush"
+                Value="{DynamicResource MainPage_Fg_L}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border x:Name="border"
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="{TemplateBinding Background}"
+                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                          Focusable="False"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          Margin="0,3,0,0" />
+                            <Rectangle x:Name="EnableId"
+                                       Grid.Row="1"
+                                       Fill="{DynamicResource MainPage_Fg_L}"
+                                       Height="1"
+                                       SnapsToDevicePixels="True"
+                                       HorizontalAlignment="Stretch" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="EnableId"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--AccountPasswordBox-->
+    <Style x:Key="AccountPasswordBox"
+           TargetType="{x:Type PasswordBox}">
+        <Setter Property="Height"
+                Value="20" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MainPage_Fg_L}" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="CaretBrush"
+                Value="{DynamicResource MainPage_Fg_L}" />
+        <Setter Property="Margin"
+                Value="10,0,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="border"
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          Margin="0,2,0,0" />
+                            <Rectangle x:Name="EnableID"
+                                       Grid.Row="1"
+                                       Fill="{DynamicResource MainPage_Fg_L}"
+                                       Height="1"
+                                       SnapsToDevicePixels="True"
+                                       HorizontalAlignment="Stretch" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="EnableID"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--#endregion-->
 
     <!--#region                                                ToolTip-->
@@ -595,7 +714,33 @@
                 Value="&#xF16C;" />
         <Setter Property="FontSize"
                 Value="12" />
-    </Style> 
+    </Style>
+    
+    <!---->
+    <Style x:Key="PackageSelectRadio" TargetType="control:YT_IconRadioButton">
+        <Setter Property="IconN"
+                Value="{DynamicResource CheckToggleButton_Icon_N}" />
+        <Setter Property="IconR"
+                Value="{DynamicResource CheckToggleButton_Icon_R}" />
+        <Setter Property="IconP"
+                Value="{DynamicResource CheckToggleButton_Icon_P}" />
+        <Setter Property="IconS"
+                Value="{DynamicResource CheckToggleButton_Icon_S}" />
+        <Setter Property="IconMaskN"
+                Value="{DynamicResource CheckToggleButton_Mask_N}" />
+        <Setter Property="IconMaskR"
+                Value="{DynamicResource CheckToggleButton_Mask_R}" />
+        <Setter Property="IconMaskP"
+                Value="{DynamicResource CheckToggleButton_Mask_P}" />
+        <Setter Property="IconMaskS"
+                Value="{DynamicResource CheckToggleButton_Mask_S}" />
+        <Setter Property="ForeIcon"
+                Value="&#xF16B;" />
+        <Setter Property="BackIcon"
+                Value="&#xF16C;" />
+        <Setter Property="FontSize"
+                Value="12" />
+    </Style>
 
     <!--TextButton-->
     <Style x:Key="TextButton"
@@ -676,6 +821,111 @@
     </Style>
 
     <!--#endregion-->
+
+
+    <!--#region                                                YT_GridFolder-->
+
+    <Style x:Key="InfoPageGridFolder"
+           TargetType="control:YT_GridFolder">
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="control:YT_GridFolder">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            SnapsToDevicePixels="True"
+                            Margin="{TemplateBinding Margin}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{TemplateBinding Title}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding TitleSize}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center" 
+                                       FontWeight="{TemplateBinding FontWeight}"/>
+                            <TextBlock x:Name="Icon" 
+                                       Grid.Column="1" 
+                                       Text="{TemplateBinding IconF}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding IconSize}"
+                                       Width="{TemplateBinding IconWidth}"
+                                       FontFamily="{DynamicResource Segoe}"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontWeight="{TemplateBinding FontWeight}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ContentVis"
+                                 Value="Collapsed">
+                            <Setter TargetName="Icon"
+                                    Property="Text"
+                                    Value="{Binding IconB, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="MainPageGridFolder"
+           TargetType="control:YT_GridFolder">
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="control:YT_GridFolder">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            SnapsToDevicePixels="True"
+                            Margin="{TemplateBinding Margin}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <control:YT_Hitholder  Background="{DynamicResource YT_Hitholder_Bg}"
+                                                   PointBrush="{DynamicResource YT_Hitholder_Bg_R}"
+                                                   PressBrush="{DynamicResource YT_Hitholder_Bg_P}"
+                                                   Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <TextBlock x:Name="Icon" 
+                                           Text="{TemplateBinding IconF}"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontFamily="{DynamicResource Segoe}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Center" />
+
+                            </control:YT_Hitholder>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ContentVis"
+                                 Value="Collapsed">
+                            <Setter TargetName="Icon"
+                                    Property="Text"
+                                    Value="{Binding IconB, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
 
 
 </ResourceDictionary>

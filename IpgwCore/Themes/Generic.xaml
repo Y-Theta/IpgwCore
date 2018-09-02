@@ -215,7 +215,7 @@
                 <ControlTemplate TargetType="dialogs:YT_ColorPicker">
                     <Border Width="300"
                             Height="160"
-                            Background="{DynamicResource MainWindow_Bg}"
+                            Background="#F0080808"
                             BorderBrush="{DynamicResource DefaultDialogs_Bc}"
                             BorderThickness="1">
                         <Grid x:Name="RootGrid">
@@ -278,7 +278,16 @@
                                                 Margin="4,0,0,0"
                                                 VerticalAlignment="Top"
                                                 Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=R}"
-                                                Style="{StaticResource ColorPickerSlider}" />
+                                                Style="{StaticResource ColorPickerSlider}">
+                                            <Slider.ToolTip>
+                                                <ToolTip Style="{DynamicResource DefaultToolTip}">
+                                                    <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                                                        <TextBlock Text="设置红色分量"
+                                                                   Style="{DynamicResource DefaultToolTipText}" />
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Slider.ToolTip>
+                                        </Slider>
                                     </Grid>
                                     <Grid x:Name="G"
                                           Grid.Row="1"
@@ -294,7 +303,16 @@
                                                 Margin="4,0,0,0"
                                                 VerticalAlignment="Center"
                                                 Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=G}"
-                                                Style="{StaticResource ColorPickerSlider}" />
+                                                Style="{StaticResource ColorPickerSlider}">
+                                            <Slider.ToolTip>
+                                                <ToolTip Style="{DynamicResource DefaultToolTip}">
+                                                    <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                                                        <TextBlock Text="设置绿色分量"
+                                                                   Style="{DynamicResource DefaultToolTipText}" />
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Slider.ToolTip>
+                                        </Slider>
                                     </Grid>
                                     <Grid x:Name="B"
                                           Grid.Row="2"
@@ -310,7 +328,16 @@
                                                 VerticalAlignment="Bottom"
                                                 Margin="4,0,0,0"
                                                 Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=B}"
-                                                Style="{StaticResource ColorPickerSlider}" />
+                                                Style="{StaticResource ColorPickerSlider}">
+                                            <Slider.ToolTip>
+                                                <ToolTip Style="{DynamicResource DefaultToolTip}">
+                                                    <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                                                        <TextBlock Text="设置蓝色分量"
+                                                                   Style="{DynamicResource DefaultToolTipText}" />
+                                                    </Grid>
+                                                </ToolTip>
+                                            </Slider.ToolTip>
+                                        </Slider>
                                     </Grid>
                                 </Grid>
                                 <Grid x:Name="A"
@@ -329,7 +356,16 @@
                                             VerticalAlignment="Center"
                                             Margin="4,0,0,0"
                                             Value="{Binding Argb, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay,Converter={StaticResource ColorNumConv},ConverterParameter=A}"
-                                            Style="{StaticResource ColorPickerSlider}" />
+                                            Style="{StaticResource ColorPickerSlider}">
+                                        <Slider.ToolTip>
+                                            <ToolTip Style="{DynamicResource DefaultToolTip}">
+                                                <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                                                    <TextBlock Text="设置透明度"
+                                                               Style="{DynamicResource DefaultToolTipText}" />
+                                                </Grid>
+                                            </ToolTip>
+                                        </Slider.ToolTip>
+                                    </Slider>
                                 </Grid>
                                 <Grid x:Name="EditBlocks"
                                       Grid.Row="2"
@@ -962,6 +998,37 @@
                         </Rectangle>
                         <ContentPresenter Content="{TemplateBinding Content}" />
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--GridLineFolder-->
+    
+    <Style TargetType="{x:Type controls:YT_GridFolder}">
+        <Setter Property="Background"
+                Value="{DynamicResource GridLineFloderBackground}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource GridLineFloderButtonColor}" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:YT_GridFolder}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            SnapsToDevicePixels="True"
+                            Margin="{TemplateBinding Margin}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

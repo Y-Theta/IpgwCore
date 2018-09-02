@@ -114,6 +114,7 @@ namespace IpgwCore {
                             App.Current.MainWindow.Show();
                             break;
                         case "About":
+                            App.Current.MainWindow.Show();
                             RootFrame.Navigate(new Uri(ConstTable.PagePath + "AboutPage.xaml", UriKind.Relative));
                             break;
                         case "COP":

@@ -15,5 +15,6 @@
     <view:SliderConv x:Key="SliderConv" />
     <view:BoolConv x:Key="BoolConv" />
     <view:StringConv x:Key="StringConv" />
+    <view:PackageConv x:Key="PackageConv" />
 
 </ResourceDictionary>

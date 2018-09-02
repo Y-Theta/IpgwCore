@@ -243,7 +243,17 @@ namespace IpgwCore.Services.HttpServices {
                 Post(InfSet.Uris[0], InfSet.KeyValuePairs);
                 String rest = GetString(InfSet.Uris[1], InfSet.Compressed);
                 if (rest.Equals("not_online"))
-                    PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接后重新连接!");
+                {
+                    IpgwConnected = false;
+                    String ori = _response.Content.ReadAsStringAsync().Result;
+                    if (ori.Contains("用户不存在"))
+                        PopupMessageServices.Instence.ShowContent("请输入正确的用户名");
+                    else if(ori.Contains("密码错误"))
+                        PopupMessageServices.Instence.ShowContent("密码错误");
+                    else
+                        PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接并重新登录");
+                    return IpgwConnected;
+                }
                 else
                 {
                     IpgwConnected = true;

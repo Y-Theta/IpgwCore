@@ -21,13 +21,20 @@
     <SolidColorBrush x:Key="MainPage_Bg"
                      Color="#080808" />
     <SolidColorBrush x:Key="MainPage_Bg_L"
-                     Color="#323232" />
+                     Color="#080808" />
     <SolidColorBrush x:Key="MainPage_Fg"
-                     Color="#A0A0A0" />
+                     Color="#808080" />
     <SolidColorBrush x:Key="MainPage_Fg_L"
                      Color="#808080" />
 
-    <DrawingBrush x:Key="DashLineBrush" 
+    <SolidColorBrush x:Key="YT_Hitholder_Bg"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="YT_Hitholder_Bg_R"
+                     Color="#20ffffff" />
+    <SolidColorBrush x:Key="YT_Hitholder_Bg_P"
+                     Color="#40ffffff" />
+
+    <DrawingBrush x:Key="DashLineBrush"
                   Viewport="0,0,0.035,0.035"
                   Stretch="Uniform"
                   TileMode="Tile">
@@ -66,6 +73,23 @@
             </GeometryDrawing>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+
+
+    <!--#endregion-->
+
+    <!--#region                                                InfoPage-->
+    <SolidColorBrush x:Key="AccountPage_Icon_BG"
+                     Color="#A0A0A0" />
+    <SolidColorBrush x:Key="AccountPage_Icon_BG_R"
+                     Color="#E0E0E0" />
+    <SolidColorBrush x:Key="AccountPage_Icon_BG_P"
+                     Color="#E0E0E0" />
+    <SolidColorBrush x:Key="AccountPage_IconMask_BG_N"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="AccountPage_IconMask_BG_R"
+                     Color="#606060" />
+    <SolidColorBrush x:Key="AccountPage_IconMask_BG_P"
+                     Color="#404040" />
 
 
     <!--#endregion-->

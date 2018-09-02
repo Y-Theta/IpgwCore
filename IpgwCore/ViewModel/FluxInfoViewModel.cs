@@ -28,6 +28,12 @@ namespace IpgwCore.ViewModel {
             set => SetValue(out _fluxdata, value, FluxData);
         }
 
+        private int _package;
+        public int PackageN {
+            get => _package;
+            set => SetValue(out _package, value, PackageN, PackageChanged);
+        }
+
 
         public CommandBase Operation { get; set; }
 
@@ -37,9 +43,15 @@ namespace IpgwCore.ViewModel {
 
         private void InitRes() {
             Connected = LoginServices.Instence.IpgwConnected;
+            _package = Properties.Settings.Default.Package;
             FluxData = Formater.Instence.IpgwInfo;
             LoginServices.Instence.IpgwConnectedChanged += Instence_IpgwConnectedChanged;
             Formater.Instence.IpgwInfoChanged += Instence_IpgwInfoChanged;
+        }
+
+        private bool PackageChanged(object op, object np) {
+            Properties.Settings.Default.Package = (int)np;
+            return true;
         }
 
         private bool Instence_IpgwInfoChanged(object op, object np) {
