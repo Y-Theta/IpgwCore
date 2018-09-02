@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IpgwCore.Services.SystemServices;
+using IpgwCore.Services.FormatServices;
+using IpgwCore.Services.MessageServices;
 
 namespace IpgwCore.View.Pages {
     /// <summary>
@@ -22,6 +24,7 @@ namespace IpgwCore.View.Pages {
     /// </summary>
     public partial class SettingPage : Page {
         SettingPageViewModel _spvm;
+        YT_FormDialog _resd;
 
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) {
@@ -30,11 +33,22 @@ namespace IpgwCore.View.Pages {
         }
 
         private void _spvm_CommandOperation(object sender, MVVMBase.CommandArgs args) {
-            switch (args.Parameter) {
+            switch (args.Parameter)
+            {
                 case "Color":
                     YT_ColorPicker cp = new YT_ColorPicker();
                     cp.ShowDialog(App.Current.MainWindow, Properties.Settings.Default.AreaFontColor);
                     Properties.Settings.Default.AreaFontColor = ColorNumConv.ToColorD(cp.Argb);
+                    break;
+                case "Free":
+                    XmlDocService.Instence.ResetAll();
+                    _spvm.UpdateCache();
+                    PopupMessageServices.Instence.ShowContent("已清空全部缓存");
+                    break;
+                case "Reset":
+                    _resd.Question = "确认清除所有数据?\n(包括自定义设置)";
+                    _resd.YesAction += _resd_YesAction;
+                    _resd.ShowDialog(App.Current.MainWindow);
                     break;
             }
         }
@@ -59,13 +73,22 @@ namespace IpgwCore.View.Pages {
             }
         }
 
+        private void _resd_YesAction(object para = null) {
+            XmlDocService.Instence.ResetAll();
+            Properties.Settings.Default.Reset();
+            Properties.Settings.Default.Save();
+            _spvm.UpdateCache();
+            PopupMessageServices.Instence.ShowContent("已恢复至出场设置");
+        }
+
         public SettingPage() {
             InitializeComponent();
+            _resd = new YT_FormDialog { Style = App.Current.Resources["QuestionDialog"] as Style };
             Properties.Settings.Default.SettingChanging += Default_SettingChanging;
             Loaded += SettingPage_Loaded;
             Unloaded += SettingPage_Unloaded;
         }
 
- 
+
     }
 }

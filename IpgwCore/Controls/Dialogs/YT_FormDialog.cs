@@ -12,7 +12,13 @@ namespace IpgwCore.Controls.Dialogs {
     public sealed class YT_FormDialog :YT_DialogBase {
 
         #region Properties
-
+        public string Question {
+            get { return (string)GetValue(QuestionProperty); }
+            set { SetValue(QuestionProperty, value); }
+        }
+        public static readonly DependencyProperty QuestionProperty =
+            DependencyProperty.Register("Question", typeof(string),
+                typeof(YT_FormDialog), new PropertyMetadata(""));
         #endregion
 
         #region Actions

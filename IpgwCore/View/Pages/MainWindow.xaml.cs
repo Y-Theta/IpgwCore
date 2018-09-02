@@ -16,6 +16,7 @@ using IpgwCore.MVVMBase;
 using IpgwCore.ViewModel;
 using IpgwCore.Controls.AreaWindow;
 using IpgwCore.Services.MessageServices;
+using IpgwCore.Services.SystemServices;
 using IpgwCore.Services.HttpServices;
 using IpgwCore.Controls.Dialogs;
 using IpgwCore.View;

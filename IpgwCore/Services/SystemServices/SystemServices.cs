@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IpgwCore.Services.MessageServices;
+using System.IO;
 
 namespace IpgwCore.Services.SystemServices {
    internal class SystemServices {
@@ -107,6 +108,13 @@ namespace IpgwCore.Services.SystemServices {
                 SelfRunning(isStart, "IpgwCore", Process.GetCurrentProcess().MainModule.FileName + " -s");
                 PopupMessageServices.Instence.ShowContent("已取消开机自启动");
             }
+        }
+
+        public string GetCache() {
+            FileInfo fi = new FileInfo(App.RootPath + App.FluxLog);
+            if ((fi.Length - 194) / 1024 < 1)
+                return "0 KB";
+            return string.Format("{0:##.##} KB", (fi.Length - 194) / 1024);
         }
 
         #endregion

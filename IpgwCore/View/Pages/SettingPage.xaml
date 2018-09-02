@@ -45,10 +45,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1"
+                <Grid Grid.Row="0"
                       MinHeight="36">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="240" />
@@ -86,7 +84,7 @@
                                         Style="{StaticResource SettingValue}" />
                 </Grid>
                 <Grid Height="36"
-                      Grid.Row="2">
+                      Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="240" />
                         <ColumnDefinition Width="auto" />
@@ -155,7 +153,7 @@
                                        IconF="&#xE971;"
                                        IconB="&#xE972;" />
             </control:YT_Hitholder>
-            <Grid x:Name="SelfRunning"
+            <Grid x:Name="SystemSettingItem"
                   Margin="12,0,12,0"
                   Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -163,8 +161,9 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1"
+                <Grid Grid.Row="0"
                       MinHeight="36">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="240" />
@@ -201,7 +200,7 @@
                                                  Grid.Column="2" />
                 </Grid>
                 <Grid Height="36"
-                      Grid.Row="2">
+                      Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="240" />
                         <ColumnDefinition Width="auto" />
@@ -229,12 +228,88 @@
                                Width="48"
                                HorizontalAlignment="Left"
                                FontSize="12"
-                               Text="{Binding IsChecked, ElementName=SelfRunningID,Converter={StaticResource BoolConv},ConverterParameter=String|直接退出|后台运行}" />
+                               Text="{Binding IsChecked, ElementName=ExitModeID,Converter={StaticResource BoolConv},ConverterParameter=String|后台运行|直接退出}" />
                     <control:YT_IconToggelButton x:Name="ExitModeID"
                                                  IsChecked="{Binding ExitArea, Source={x:Static settings:Settings.Default},Mode=TwoWay}"
                                                  Style="{StaticResource CheckToggleButton}"
                                                  Grid.Column="2" />
                     
+                </Grid>
+                <Grid Height="36"
+                      Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="4"
+                               Margin="-12,6,0,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Left"
+                               Fill="#a0ffffff" />
+                    <Rectangle Width="4"
+                               Grid.ColumnSpan="3"
+                               Margin="0,6,-12,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Right"
+                               Fill="#a0ffffff" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="清空缓存" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               Grid.Column="1"
+                               Width="48"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="{Binding Cache}" />
+                    <control:YT_IconButton x:Name="ClearData"
+                                           Grid.Column="2"
+                                           Content="&#xE835;"
+                                           ForeToolTip="清除"
+                                           CommandParameter="Free"
+                                           Command="{Binding Operation}"
+                                           Style="{StaticResource FluxPopupButton}" />
+                </Grid>
+                <Grid Height="36"
+                      Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="4"
+                               Margin="-12,6,0,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Left"
+                               Fill="#a0ffffff" />
+                    <Rectangle Width="4"
+                               Grid.ColumnSpan="3"
+                               Margin="0,6,-12,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Right"
+                               Fill="#a0ffffff" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="清除所有设置" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               Grid.Column="1"
+                               Width="48"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="" />
+                    <control:YT_IconButton x:Name="Reset"
+                                           Grid.Column="2"
+                                           Content="&#xEBC4;"
+                                           ForeToolTip="重置"
+                                           CommandParameter="Reset"
+                                           Command="{Binding Operation}"
+                                           Style="{StaticResource FluxPopupButton}" />
                 </Grid>
             </Grid>
         </Grid>
