@@ -17,7 +17,7 @@
               Margin="0,8,0,0"
               Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="32" />
+                <RowDefinition Height="24" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <control:YT_Hitholder Command="{Binding ElementName=IPGWT}"
@@ -35,7 +35,7 @@
                                        CommandPara="1"
                                        Title="IPGW信息设置"
                                        AimGridType="Auto"
-                                       IconWidth="32"
+                                       IconWidth="24"
                                        IconF="&#xE971;"
                                        IconB="&#xE972;" />
             </control:YT_Hitholder>

@@ -830,7 +830,7 @@
                                  Value="false">
                             <Setter TargetName="ContentIcon"
                                     Property="Text"
-                                    Value="{Binding DisIcon, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    Value="{x:Null}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -861,7 +861,7 @@
                             <MultiTrigger.Setters>
                                 <Setter TargetName="ContentIcon"
                                         Property="Text"
-                                        Value="{Binding DisIconBack, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                        Value="{x:Null}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

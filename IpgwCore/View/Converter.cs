@@ -75,6 +75,13 @@ namespace IpgwCore.View {
             return Color.FromArgb((Byte)a, (Byte)r, (Byte)g, (Byte)b);
         }
 
+        public static ColorD ToColorD(int cp) {
+            int a = cp >> 24, r = (cp >> 16) & 0xff, g = (cp >> 8) & 0xff, b = cp & 0xff;
+            if (a < 0)
+                a = a + 256;
+            return ColorD.FromArgb((Byte)a, (Byte)r, (Byte)g, (Byte)b);
+        }
+
         public static SolidColorBrush ToSolidColorBrush(int cp) {
             int a = cp >> 24, r = (cp >> 16) & 0xff, g = (cp >> 8) & 0xff, b = cp & 0xff;
             if (a < 0)
@@ -488,7 +495,7 @@ namespace IpgwCore.View {
             if (parameter is null)
                 return value;
             string[] str = parameter.ToString().Split('|');
-            switch (parameter.ToString())
+            switch (str[0])
             {
                 case "Visible":
                     return ((Visibility)value).Equals(Visibility.Visible) ? true : false;
@@ -517,7 +524,39 @@ namespace IpgwCore.View {
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
+                return value;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class DoubleConv : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
+            string[] str = parameter.ToString().Split('|');
+            switch (str[0]) {
+                case "String":
+                    return String.Format("{0:##.##}", System.Convert.ToDouble(value));
+                default:return value;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter is null)
+                return value;
+            string[] str = parameter.ToString().Split('|');
+            switch (str[0])
+            {
+                case "String":
+                    try
+                    {
+                        return Double.Parse(value.ToString(), NumberStyles.Float);
+                    }
+                    catch (Exception) { return 11.8; }
+                default: return value;
+            }
         }
     }
 

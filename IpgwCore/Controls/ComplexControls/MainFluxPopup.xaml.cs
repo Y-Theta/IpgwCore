@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IpgwCore.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,8 @@ namespace IpgwCore.Controls.ComplexControls {
         private void GraphPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
             PercentNum.Foreground = Percent.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
             PercentEffect.BlurRadius = 20;
+            App.Current.MainWindow.Show();
+            (App.Current.Resources["MainPageVM"] as MainPageViewModel).Nvigate.Execute("MainPage.xaml");
         }
     }
 }

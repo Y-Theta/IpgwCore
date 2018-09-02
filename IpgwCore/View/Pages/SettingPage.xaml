@@ -3,10 +3,138 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:settings="clr-namespace:IpgwCore.Properties"
       xmlns:local="clr-namespace:IpgwCore.View.Pages"
-      mc:Ignorable="d"
-      Title="SettingPage">
-    <Border >
-
-    </Border>
+      xmlns:control="clr-namespace:IpgwCore.Controls"
+      DataContext="{StaticResource SettingPageVM}"
+      mc:Ignorable="d">
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="AreaIcon"
+              Background="{DynamicResource MainPage_Bg_L}"
+              Margin="0,4,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <control:YT_Hitholder Command="{Binding ElementName=IPGWT}"
+                                  ToolTipText="折叠当前内容"
+                                  Background="{DynamicResource YT_Hitholder_Bg}"
+                                  PointBrush="{DynamicResource YT_Hitholder_Bg_R}"
+                                  PressBrush="{DynamicResource YT_Hitholder_Bg_P}">
+                <control:YT_GridFolder x:Name="IPGWT"
+                                       Margin="4,0,0,0"
+                                       Foreground="{DynamicResource MainPage_Fg_L}"
+                                       TitleSize="14"
+                                       IconSize="14"
+                                       Style="{StaticResource InfoPageGridFolder}"
+                                       AttachedGrid="{Binding ElementName=AreaIcon}"
+                                       CommandPara="1"
+                                       Title="任务栏图标设置"
+                                       AimGridType="Auto"
+                                       IconWidth="24"
+                                       IconF="&#xE971;"
+                                       IconB="&#xE972;" />
+            </control:YT_Hitholder>
+            <Grid x:Name="AreaIconSettings"
+                  Margin="12,0,12,0"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1"
+                      MinHeight="36">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="4"
+                               Grid.ColumnSpan="3"
+                               Margin="-12,6,0,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Left"
+                               Fill="#a0ffffff" />
+                    <Rectangle Width="4"
+                               Grid.ColumnSpan="3"
+                               Margin="0,6,-12,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Right"
+                               Fill="#a0ffffff" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="字体大小设置" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               Grid.Column="1"
+                               Margin="0,0,8,0"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="当前值" />
+                    <control:YT_TextBox x:Name="AreaIconFontSize" 
+                                        Grid.Column="2"
+                                        Margin="0,0,0,0"
+                                        Text="{Binding AreaFontSize, Source={x:Static settings:Settings.Default},Converter={StaticResource DoubleConv},ConverterParameter=String,Mode=TwoWay}"
+                                        Style="{StaticResource SettingValue}" />
+                </Grid>
+                <Grid Height="36"
+                      Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="4"
+                               Margin="-12,6,0,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Left"
+                               Fill="#a0ffffff" />
+                    <Rectangle Width="4"
+                               Grid.ColumnSpan="3"
+                               Margin="0,6,-12,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Right"
+                               Fill="#a0ffffff" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="字体颜色设置" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               Grid.Column="1"
+                               Margin="0,0,8,0"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="当前值" />
+                    <control:YT_Hitholder x:Name="AreaIconFontColor"
+                                          Background="{Binding AreaFontColor, Source={x:Static settings:Settings.Default},Converter={StaticResource ColorConv}}"
+                                          PointBrush="{Binding AreaFontColor, Source={x:Static settings:Settings.Default},Converter={StaticResource ColorConv}}"
+                                          PressBrush="{Binding AreaFontColor, Source={x:Static settings:Settings.Default},Converter={StaticResource ColorConv}}"
+                                          Command="{Binding Operation}"
+                                          CommandPara="Color"
+                                          Grid.Column="2"
+                                          Width="16"
+                                          Height="16">
+                        <control:YT_Hitholder.ToolTip>
+                            <ToolTip Style="{DynamicResource DefaultToolTip}">
+                                <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                                    <TextBlock Text="单击设置当前颜色"
+                                               Style="{DynamicResource DefaultToolTipText}" />
+                                </Grid>
+                            </ToolTip>
+                        </control:YT_Hitholder.ToolTip>
+                    </control:YT_Hitholder>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
 </Page>

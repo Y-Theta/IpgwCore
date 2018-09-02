@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace IpgwCore.Controls {
@@ -12,6 +13,8 @@ namespace IpgwCore.Controls {
         #region Properties
         private Brush _ft;
         private Brush _bt;
+        private bool _enterlost;
+        private bool _notin;
         /// <summary>
         /// 焦点前景色
         /// </summary>
@@ -44,7 +47,7 @@ namespace IpgwCore.Controls {
             set { SetValue(ContentPaddingProperty, value); }
         }
         public static readonly DependencyProperty ContentPaddingProperty =
-            DependencyProperty.Register("ContentPadding", typeof(Thickness), 
+            DependencyProperty.Register("ContentPadding", typeof(Thickness),
                 typeof(YT_TextBox), new PropertyMetadata(new Thickness(0)));
 
         /// <summary>
@@ -57,9 +60,44 @@ namespace IpgwCore.Controls {
         public static readonly DependencyProperty ContentMarginProperty =
             DependencyProperty.Register("ContentMargin", typeof(Thickness),
                 typeof(YT_TextBox), new PropertyMetadata(new Thickness(0)));
+
+        /// <summary>
+        /// 是否在回车时提交内容
+        /// </summary>
+        public bool EnterSubmit {
+            get { return (bool)GetValue(EnterSubmitProperty); }
+            set { SetValue(EnterSubmitProperty, value); }
+        }
+        public static readonly DependencyProperty EnterSubmitProperty =
+            DependencyProperty.Register("EnterSubmit", typeof(bool),
+                typeof(YT_TextBox), new PropertyMetadata(true));
+
         #endregion
 
         #region Methods
+        public virtual void GiveupFocus() {
+            _enterlost = true;
+            Focusable = false;
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e) {
+            base.OnPreviewKeyDown(e);
+            if (EnterSubmit)
+                if (e.Key.Equals(Key.Enter))
+                    GiveupFocus();
+        }
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) {
+            base.OnMouseLeftButtonDown(e);
+            if (EnterSubmit)
+                if (_enterlost)
+                {
+                    e.Handled = true;
+                    _enterlost = false;
+                    Focusable = true;
+                    Focus();
+                }
+        }
 
         protected override void OnGotFocus(RoutedEventArgs e) {
             _bt = Background;
@@ -67,7 +105,6 @@ namespace IpgwCore.Controls {
             _ft = Foreground;
             Foreground = ForegroundF;
             base.OnGotFocus(e);
-            
         }
 
         protected override void OnLostFocus(RoutedEventArgs e) {

@@ -21,7 +21,7 @@
     <SolidColorBrush x:Key="MainPage_Bg"
                      Color="#080808" />
     <SolidColorBrush x:Key="MainPage_Bg_L"
-                     Color="#080808" />
+                     Color="#E0080808" />
     <SolidColorBrush x:Key="MainPage_Fg"
                      Color="#808080" />
     <SolidColorBrush x:Key="MainPage_Fg_L"
@@ -90,6 +90,20 @@
                      Color="#606060" />
     <SolidColorBrush x:Key="AccountPage_IconMask_BG_P"
                      Color="#404040" />
+
+
+    <!--#endregion-->
+
+    <!--#region                                                SettingPage-->
+    <SolidColorBrush x:Key="SettingValue_Bg"
+                     Color="Transparent" />
+    <SolidColorBrush x:Key="SettingValue_Bg_F"
+                     Color="#40FFFFFF" />
+    <SolidColorBrush x:Key="SettingValue_Fg"
+                     Color="#808080" />
+    <SolidColorBrush x:Key="SettingValue_Fg_F"
+                     Color="#FFFFFF" />
+
 
 
     <!--#endregion-->

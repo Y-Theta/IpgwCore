@@ -34,10 +34,7 @@ namespace IpgwCore.Controls.AreaWindow {
             set => Properties.Settings.Default.AreaFontSize = value;
         }
 
-        private Color _areafontcolor {
-            get => Properties.Settings.Default.AreaFontColor;
-            set => Properties.Settings.Default.AreaFontColor = value;
-        }
+        private Color _areafontcolor;
 
         #region AttachedWindow
         public object AttachedWindow {
@@ -195,6 +192,7 @@ namespace IpgwCore.Controls.AreaWindow {
                     _flowicon.Icon = Drawicon(FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString());
                     break;
                 case "AreaFontColor":
+                    _areafontcolor = (Color)e.NewValue;
                     _flowicon.Icon = Drawicon(FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString());
                     break;
             }
@@ -208,6 +206,7 @@ namespace IpgwCore.Controls.AreaWindow {
         #endregion
 
         public YT_AreaIcon() {
+            _areafontcolor = Properties.Settings.Default.AreaFontColor;
             InitHock();
             InitNotifyIcon();
         }

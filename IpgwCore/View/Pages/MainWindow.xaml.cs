@@ -117,10 +117,6 @@ namespace IpgwCore {
                             App.Current.MainWindow.Show();
                             RootFrame.Navigate(new Uri(ConstTable.PagePath + "AboutPage.xaml", UriKind.Relative));
                             break;
-                        case "COP":
-                            YT_ColorPicker cp = new YT_ColorPicker();
-                            cp.ShowDialog(this);
-                            break;
                     }
                     break;
                 case "Nvigate":

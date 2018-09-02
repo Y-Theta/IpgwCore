@@ -29,9 +29,9 @@ namespace IpgwCore.Controls.Dialogs {
 
         #region Methods
 
-        public void ShowDialog(Window Holder, ColorD color,ref Color selected) {
-            base.ShowDialog(Holder);
+        public void ShowDialog(Window Holder, ColorD color) {
             Argb = color.ToArgb();
+            base.ShowDialog(Holder);
         }
 
         protected override void OnClosing(CancelEventArgs e) {

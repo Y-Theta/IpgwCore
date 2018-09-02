@@ -549,7 +549,7 @@
                             <flowcontrol:YT_MenuItem x:Name="M3"
                                                      HeadIcon="&#xEC26;"
                                                      ContentText="关于"
-                                                     CommandParameter="COP"
+                                                     CommandParameter="About"
                                                      Style="{StaticResource SubMenuItem}"
                                                      Command="{Binding Operation}" />
                             <Separator Style="{StaticResource AreaContextMenuSeperator }" />

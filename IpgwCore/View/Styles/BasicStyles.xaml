@@ -483,6 +483,35 @@
     </Style>
 
 
+    <!--SettingValue-->
+    <Style x:Key="SettingValue"
+           TargetType="{x:Type control:YT_TextBox}">
+        <Setter Property="Background"
+                Value="{DynamicResource SettingValue_Bg}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource SettingValue_Fg}" />
+        <Setter Property="BackgroundF"
+                Value="{DynamicResource SettingValue_Bg_F}" />
+        <Setter Property="ForegroundF"
+                Value="{DynamicResource SettingValue_Fg_F}" />
+        <Setter Property="ContentMargin"
+                Value="3,1,-6,-6" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="0,4,0,0" />
+        <Setter Property="CaretBrush"
+                Value="{DynamicResource SettingValue_Fg_F}" />
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="TextAlignment"
+                Value="Right" />
+        <Setter Property="Width"
+                Value="36" />
+        <Setter Property="Height"
+                Value="24" />
+    </Style>
+    
     <!--AccountTextBox-->
     <Style x:Key="AccountTextBox"
            TargetType="TextBox">
@@ -715,9 +744,10 @@
         <Setter Property="FontSize"
                 Value="12" />
     </Style>
-    
-    <!---->
-    <Style x:Key="PackageSelectRadio" TargetType="control:YT_IconRadioButton">
+
+    <!--PackageSelectRadio-->
+    <Style x:Key="PackageSelectRadio" 
+           TargetType="control:YT_IconRadioButton">
         <Setter Property="IconN"
                 Value="{DynamicResource CheckToggleButton_Icon_N}" />
         <Setter Property="IconR"
