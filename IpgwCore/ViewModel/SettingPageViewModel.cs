@@ -48,7 +48,6 @@ namespace IpgwCore.ViewModel {
         }
         #endregion
 
-
         #region Constructors
         public SettingPageViewModel() {
             InitRes();

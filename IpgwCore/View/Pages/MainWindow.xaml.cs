@@ -109,7 +109,7 @@ namespace IpgwCore {
                     switch (args.Parameter.ToString())
                     {
                         case "Exit":
-                            App.Current.MainWindow.Close();
+                            App.Current.Shutdown();
                             break;
                         case "Show":
                             App.Current.MainWindow.Show();

@@ -13,15 +13,9 @@ namespace IpgwCore {
     /// </summary>
     public partial class App : Application {
         public static string RootPath = AppDomain.CurrentDomain.BaseDirectory;
-#if DEBUG
-        public const string WebConfig = @"\Web-config.xml";
-        public const string FluxLog = @"\FluxLog.xml";
-        public const string CourseData = @"\CourseData.xml";
-#else
         public const string WebConfig = @"\Configs\Web-config.xml";
         public const string FluxLog = @"\Configs\FluxLog.xml";
         public const string CourseData = @"\Configs\CourseData.xml";
-#endif
 
         #region Methods
         private void Application_Startup(object sender, StartupEventArgs e) {

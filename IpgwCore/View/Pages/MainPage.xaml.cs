@@ -94,6 +94,7 @@ namespace IpgwCore.View.Pages {
 
         #region Constructor
         public MainPage() {
+            
             InitializeComponent();
             InitAnimation();
             Formater.Instence.IpgwInfoChanged += Instence_IpgwInfoChanged;

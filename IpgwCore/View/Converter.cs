@@ -288,14 +288,20 @@ namespace IpgwCore.View {
 
 
         public static string GetMon(Flux value) {
+            if (value is null)
+                return "未知";
             return String.Format("{0:###.##}  R", value.Balance);
         }
 
         public static string GetBalance(Flux flux) {
+            if (flux is null)
+                return "未知";
             return FluxFormat(GetFluxData(flux, false));
         }
 
         public static string GetUsed(Flux flux) {
+            if (flux is null)
+                return "未知";
             return FluxFormat(GetFluxData(flux, true));
         }
 
@@ -303,6 +309,8 @@ namespace IpgwCore.View {
         /// 获取距离上次更新时间
         /// </summary>
         public static string GetLastUpdate(Flux flux) {
+            if (flux is null)
+                return "未知";
             DateTime time = DateTime.Now;
             TimeSpan span = time.Subtract(flux.InfoTime);
             if (span.TotalHours < 0.15)
@@ -318,6 +326,8 @@ namespace IpgwCore.View {
         /// 获取本月累计充值的网费
         /// </summary>
         public static string GetAllMoney(Flux flux) {
+            if (flux is null)
+                return "未知";
             double use = GetFluxData(flux, true);
             double balance = flux.Balance;
             double all;
@@ -349,6 +359,8 @@ namespace IpgwCore.View {
         /// 根据套餐获得已用流量百分比
         /// </summary>
         public static double GetFluxPercent(Flux IpgwInfo) {
+            if (IpgwInfo is null)
+                return 0;
             double used = GetFluxData(IpgwInfo, true);
             double balance = GetFluxData(IpgwInfo, false);
             double per = balance * 100 / (used + balance);

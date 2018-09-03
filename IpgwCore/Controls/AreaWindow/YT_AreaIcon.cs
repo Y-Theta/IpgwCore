@@ -29,10 +29,7 @@ namespace IpgwCore.Controls.AreaWindow {
 
         private Font _areafont;
 
-        private float _areafontsize {
-            get => Properties.Settings.Default.AreaFontSize;
-            set => Properties.Settings.Default.AreaFontSize = value;
-        }
+        private float _areafontsize;
 
         private Color _areafontcolor;
 
@@ -188,6 +185,7 @@ namespace IpgwCore.Controls.AreaWindow {
             switch (e.SettingName)
             {
                 case "AreaFontSize":
+                    _areafontsize = (float)e.NewValue;
                     _areafont = new Font(_pfc.Families[0], _areafontsize);
                     _flowicon.Icon = Drawicon(FluxConv.GetFluxPercent(Formater.Instence.IpgwInfo).ToString());
                     break;
@@ -206,6 +204,7 @@ namespace IpgwCore.Controls.AreaWindow {
         #endregion
 
         public YT_AreaIcon() {
+            _areafontsize = Properties.Settings.Default.AreaFontSize;
             _areafontcolor = Properties.Settings.Default.AreaFontColor;
             InitHock();
             InitNotifyIcon();

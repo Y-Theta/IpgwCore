@@ -84,8 +84,6 @@ namespace IpgwCore.Services.HttpServices {
         #region Methods
 
         private bool RefrashinfSet(string name) {
-            if (InfSet != null && InfSet.name.Equals(name))
-                return KeyValuePairsCheck();
             InfSet = XmlDocService.Instence.GetNode<InfoSet>(new XmlPath { Key = name });
             return KeyValuePairsCheck();
         }
@@ -213,6 +211,11 @@ namespace IpgwCore.Services.HttpServices {
                 {
                     string rest = "";
                     rest = GetString(InfSet.Uris[1], InfSet.Compressed);
+                    if (rest is null)
+                    {
+                        IpgwConnected = false;
+                        return;
+                    }
                     if (rest.Equals("not_online"))
                         App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
                         {
@@ -242,16 +245,22 @@ namespace IpgwCore.Services.HttpServices {
             {
                 Post(InfSet.Uris[0], InfSet.KeyValuePairs);
                 String rest = GetString(InfSet.Uris[1], InfSet.Compressed);
+                if (rest is null)
+                {
+                    IpgwConnected = false;
+                    PopupMessageServices.Instence.ShowContent("请确保物理网络已连接!");
+                    return false;
+                }
                 if (rest.Equals("not_online"))
                 {
                     IpgwConnected = false;
                     String ori = _response.Content.ReadAsStringAsync().Result;
                     if (ori.Contains("用户不存在"))
-                        PopupMessageServices.Instence.ShowContent("请输入正确的用户名");
+                        PopupMessageServices.Instence.ShowContent("请输入正确的用户名!");
                     else if(ori.Contains("密码错误"))
-                        PopupMessageServices.Instence.ShowContent("密码错误");
+                        PopupMessageServices.Instence.ShowContent("密码错误!");
                     else
-                        PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接并重新登录");
+                        PopupMessageServices.Instence.ShowContent("网关被占用,请先断开连接并重新登录!");
                     return IpgwConnected;
                 }
                 else
@@ -260,7 +269,9 @@ namespace IpgwCore.Services.HttpServices {
                     foreach (var kv in InfSet.KeyValuePairs)
                     {
                         if (kv.Key.Equals("username"))
-                            Properties.Settings.Default.UserID = kv.Value;
+                            Properties.Settings.Default.IPGWA =  Properties.Settings.Default.UserID = kv.Value;
+                        if (kv.Key.Equals("password"))
+                            Properties.Settings.Default.IPGWP = kv.Value;
                     }
                     PopupMessageServices.Instence.ShowContent("网络已连接.");
                     return IpgwConnected;
@@ -302,8 +313,6 @@ namespace IpgwCore.Services.HttpServices {
                     return GetString(InfSet.Uris[1], InfSet.Compressed);
                 }
             }
-            else
-                PopupMessageServices.Instence.ShowContent("请完善登录信息！");
             return null;
         }
         #endregion

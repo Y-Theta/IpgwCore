@@ -41,6 +41,10 @@ namespace IpgwCore.ViewModel {
 
         #region Methods
 
+        public void ForceUpdate() {
+            FluxData = Formater.Instence.IpgwInfo;
+        }
+
         private void InitRes() {
             Connected = LoginServices.Instence.IpgwConnected;
             _package = Properties.Settings.Default.Package;

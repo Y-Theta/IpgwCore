@@ -47,7 +47,7 @@ namespace IpgwCore.View.Pages {
                                 TestIpgwValue();
                             else
                                 EnableIpgwInput();
-                                break;
+                            break;
                     }
                     break;
                 default: break;
@@ -77,9 +77,9 @@ namespace IpgwCore.View.Pages {
         /// 保存Ipgw设置
         /// </summary>
         private void TestIpgwValue() {
-            if (IPGWA.Text.Equals(string.Empty) || IPGWP.Password.Equals(String.Empty) || IPGWA.Text.Length != 8)
+            if (IPGWA.Text.Equals(string.Empty) || IPGWP.Password.Equals(String.Empty) || IPGWA.Text.Length != 8 && IPGWA.Text.Length != 7)
             {
-                PopupMessageServices.Instence.ShowContent("请输入8位有效学号");
+                PopupMessageServices.Instence.ShowContent("请输入有效学号 7/8位");
                 return;
             }
             Properties.Settings.Default.IPGWS = true;

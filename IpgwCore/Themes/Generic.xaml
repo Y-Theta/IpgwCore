@@ -1004,12 +1004,8 @@
     </Style>
     
     <!--GridLineFolder-->
-    
+
     <Style TargetType="{x:Type controls:YT_GridFolder}">
-        <Setter Property="Background"
-                Value="{DynamicResource GridLineFloderBackground}" />
-        <Setter Property="Foreground"
-                Value="{DynamicResource GridLineFloderButtonColor}" />
         <Setter Property="BorderBrush"
                 Value="Transparent" />
         <Setter Property="BorderThickness"

@@ -354,12 +354,14 @@ namespace IpgwCore.Services.FormatServices {
                 courseSet.Courses = new List<Course>();
                 foreach (XmlNode xn in xnls)
                 {
-                    Course temp = new Course();
-                    temp.CourseName = xn.Attributes["Name"].Value;
-                    temp.CourseTeacher = xn.Attributes["Teacher"].Value;
-                    temp.CourseLoc = xn.Attributes["Loc"].Value;
-                    temp.CourseDur = xn.Attributes["Dur"].Value;
-                    temp.CourseTime = CourseTime.FromString(xn.Attributes["Time"].Value);
+                    Course temp = new Course
+                    {
+                        CourseName = xn.Attributes["Name"].Value,
+                        CourseTeacher = xn.Attributes["Teacher"].Value,
+                        CourseLoc = xn.Attributes["Loc"].Value,
+                        CourseDur = xn.Attributes["Dur"].Value,
+                        CourseTime = CourseTime.FromString(xn.Attributes["Time"].Value)
+                    };
 
                     courseSet.Courses.Add(temp);
                 }

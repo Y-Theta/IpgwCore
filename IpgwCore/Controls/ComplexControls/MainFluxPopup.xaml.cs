@@ -44,7 +44,10 @@ namespace IpgwCore.Controls.ComplexControls {
             PercentNum.Foreground = Percent.Stroke = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
             PercentEffect.BlurRadius = 20;
             App.Current.MainWindow.Show();
+
             (App.Current.Resources["MainPageVM"] as MainPageViewModel).Nvigate.Execute("MainPage.xaml");
+            (App.Current.Resources["FluxInfoVM"] as FluxInfoViewModel).ForceUpdate();
+
         }
     }
 }

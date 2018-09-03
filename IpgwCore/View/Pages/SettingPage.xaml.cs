@@ -78,7 +78,7 @@ namespace IpgwCore.View.Pages {
             Properties.Settings.Default.Reset();
             Properties.Settings.Default.Save();
             _spvm.UpdateCache();
-            PopupMessageServices.Instence.ShowContent("已恢复至出场设置");
+            PopupMessageServices.Instence.ShowContent("已恢复至初始设置");
         }
 
         public SettingPage() {

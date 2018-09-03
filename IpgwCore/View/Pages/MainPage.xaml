@@ -122,7 +122,7 @@
                 <complexcontrols:GraphItem Grid.Row="6"
                                            Padding="0,8,0,0"
                                            IconType="False"
-                                           ToolTipText="据上次更新时间"
+                                           ToolTipText="距上次更新时间"
                                            HorizontalAlignment="Left"
                                            Icon="&#xEB4B;"
                                            IconFontSize="12"
