@@ -9,7 +9,7 @@ using IpgwCore.Services.MessageServices;
 using System.IO;
 
 namespace IpgwCore.Services.SystemServices {
-   internal class SystemServices {
+   public class SystemServices {
         #region Properties
         private static SystemServices _instence;
         private static readonly object _singleton_Lock = new object();

@@ -14,7 +14,7 @@ using Color = System.Windows.Media.Color;
 
 
 namespace IpgwCore.Controls.Dialogs {
-    internal class YT_ColorPicker : YT_DialogBase {
+    public class YT_ColorPicker : YT_DialogBase {
         #region Properties
         public Int32 Argb {
             get { return (Int32)GetValue(ArgbProperty); }

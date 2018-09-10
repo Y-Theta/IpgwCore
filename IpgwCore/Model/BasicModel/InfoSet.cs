@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IpgwCore.Model.BasicModel {
-    internal class InfoSet {
+    public class InfoSet {
         #region Properties
         /// <summary>
         /// 是否需要登录信息

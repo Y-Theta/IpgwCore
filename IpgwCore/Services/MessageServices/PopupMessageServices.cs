@@ -9,7 +9,7 @@ using IpgwCore.ViewModel;
 using IpgwCore.Controls.FlowControls;
 
 namespace IpgwCore.Services.MessageServices {
-    internal class PopupMessageServices : IMessageServices {
+    public class PopupMessageServices : IMessageServices {
         #region Properties
         private static PopupMessageServices _instence;
         private static readonly object _singleton_Lock = new object();

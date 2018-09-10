@@ -124,11 +124,15 @@
     <Compile Include="Controls\AreaWindow\YT_SizeBorder.cs" />
     <Compile Include="Controls\AreaWindow\YT_TitleBar.cs" />
     <Compile Include="Controls\AreaWindow\YT_Window.cs" />
+    <Compile Include="Controls\ChartControl\IChartItem.cs" />
     <Compile Include="Controls\ComplexControls\GraphItem.xaml.cs">
       <DependentUpon>GraphItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ComplexControls\MainFluxPopup.xaml.cs">
       <DependentUpon>MainFluxPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ComplexControls\YT_Chart.xaml.cs">
+      <DependentUpon>YT_Chart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Dialogs\YT_ColorPicker.cs" />
     <Compile Include="Controls\Dialogs\YT_DialogBase.cs" />
@@ -137,9 +141,11 @@
     <Compile Include="Controls\DllFuncs.cs" />
     <Compile Include="Controls\FlowControls\YT_ContextMenu.cs" />
     <Compile Include="Controls\FlowControls\YT_Popup.cs" />
+    <Compile Include="Controls\ChartControl\YT_ChartLayout.cs" />
     <Compile Include="Controls\OtherControls\YT_GridFolder.cs" />
     <Compile Include="Controls\OtherControls\YT_Hitholder.cs" />
     <Compile Include="Controls\OtherControls\YT_TextBox.cs" />
+    <Compile Include="Model\BasicModel\ChartItem.cs" />
     <Compile Include="Model\BasicModel\Course.cs" />
     <Compile Include="Model\BasicModel\Flux.cs" />
     <Compile Include="Model\BasicModel\InfoSet.cs" />
@@ -155,8 +161,10 @@
     <Compile Include="Services\MessageServices\IMessagePoster.cs" />
     <Compile Include="Services\MessageServices\IMessageServices.cs" />
     <Compile Include="Services\MessageServices\PopupMessageServices.cs" />
+    <Compile Include="Services\SystemServices\SystemInterfaceFlux.cs" />
     <Compile Include="Services\SystemServices\SystemServices.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModel\ChartViewModel.cs" />
     <Compile Include="ViewModel\FluxInfoViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\SettingPageViewModel.cs" />
@@ -178,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ComplexControls\MainFluxPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ComplexControls\YT_Chart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

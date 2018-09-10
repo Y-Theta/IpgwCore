@@ -12,7 +12,7 @@ namespace IpgwCore.Services.FormatServices {
     /// <summary>
     /// xml文件服务
     /// </summary>
-    internal class XmlDocService : IXmlOperation {
+    public class XmlDocService : IXmlOperation {
         #region Properties
 
         private static XmlDocService _instence;
@@ -89,6 +89,23 @@ namespace IpgwCore.Services.FormatServices {
             root.RemoveAll();
             xmlDocument.Save(App.RootPath + App.FluxLog);
 
+            return true;
+        }
+
+        /// <summary>
+        /// 清空流量信息缓存
+        /// </summary>
+        /// <returns></returns>
+        public bool CleanupFluxData() {
+            StreamReader reader = new StreamReader(App.RootPath + App.CourseData, Encoding.UTF8);
+            XmlDocument xmlDocument = new XmlDocument();
+            reader = new StreamReader(App.RootPath + App.FluxLog, Encoding.UTF8);
+            xmlDocument.Load(reader);
+            reader.Close();
+
+            XmlElement root = xmlDocument.DocumentElement;
+            root.RemoveAll();
+            xmlDocument.Save(App.RootPath + App.FluxLog);
             return true;
         }
 

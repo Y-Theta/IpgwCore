@@ -65,7 +65,7 @@
                                     Grid.Column="3" />
         </Grid>
     </areawindow:YT_Window.TitleArea>
-    <Border Background="#00080808"
+    <Border Background="Transparent"
             Padding="0,0,0,0">
         <Grid x:Name="RootGrid">
             <Grid.RowDefinitions>

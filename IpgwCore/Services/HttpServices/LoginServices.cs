@@ -16,7 +16,7 @@ namespace IpgwCore.Services.HttpServices {
     /// <summary>
     /// 登录服务
     /// </summary>
-    internal class LoginServices : ILogin {
+    public class LoginServices : ILogin {
         #region Properties
 
         private static LoginServices _instence;
@@ -281,6 +281,13 @@ namespace IpgwCore.Services.HttpServices {
                 PopupMessageServices.Instence.ShowContent("请完善登录信息!");
             IpgwConnected = false;
             return IpgwConnected;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ConnectForUpdate() {
+            Post(InfSet.Uris[0], InfSet.KeyValuePairs);
         }
 
         /// <summary>

@@ -3,24 +3,43 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      DataContext="{DynamicResource FluxInfoVM}"
       xmlns:local="clr-namespace:IpgwCore.View.Pages"
+      xmlns:chart="clr-namespace:IpgwCore.Controls.ComplexControls"
       mc:Ignorable="d">
     <Grid x:Name="Rootgrid"
           Background="{DynamicResource MainPage_Bg_L}"
           Margin="0,8,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer Margin="0,0,2,0"
+        <!--<ScrollViewer Margin="0,0,2,0"
                       MaxHeight="320"
                       Style="{StaticResource SC_ScrollViewer}"
                       Background="Transparent"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled">
-            <Grid Height="1600"
-                  Width="230" />
-        </ScrollViewer>
+           
+        </ScrollViewer>-->
+        <!--<chart:YT_Chart Margin="8,4,8,4" Height="196"/>-->
+        <!--<Grid Height="120">
+            <Slider Style="{StaticResource ColorPickerSlider}"
+                    VerticalAlignment="Center"
+                    Maximum="200"
+                    Minimum="50"
+                    Value="{Binding UpdateFrequency,Converter={StaticResource SliderConv},ConverterParameter=0.1,Mode=TwoWay}" />
+            <Slider Style="{StaticResource ColorPickerSlider}"
+                    VerticalAlignment="Bottom"
+                    Maximum="100"
+                    Minimum="20"
+                    Value="{Binding MainOpacity, Source={x:Static settings:Settings.Default},Converter={StaticResource SliderConv},ConverterParameter=100,Mode=TwoWay}" />
+            <Slider Style="{StaticResource ColorPickerSlider}"
+                    VerticalAlignment="Top"
+                    Maximum="30"
+                    Minimum="2"
+                    Value="{Binding AreaFontSize, Source={x:Static settings:Settings.Default},Converter={StaticResource SliderConv},ConverterParameter=2,Mode=TwoWay}" />
+        </Grid>-->
         <Grid x:Name="FootArea"
               Background="#1E1E1E"
               Grid.Row="1">

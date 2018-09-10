@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="IpgwCore.Controls.ComplexControls.YT_Chart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IpgwCore.Controls.ComplexControls"
+             xmlns:chart="clr-namespace:IpgwCore.Controls.ChartControl"
+             xmlns:model="clr-namespace:IpgwCore.Model.BasicModel"
+             DataContext="{DynamicResource ChartVM}"
+             mc:Ignorable="d">
+    <Grid ClipToBounds="True">
+        <ListView x:Name="HTickPanel"
+                  ItemsSource="{Binding HTick}"
+                  Style="{StaticResource ChartListView}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <chart:YT_ChartLayout ChartKind="HTick" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Height="1"
+                               Fill="#40ffffff" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="VTickPanel"
+                  Visibility="Collapsed"
+                  ItemsSource="{Binding VTick}"
+                  Style="{StaticResource ChartListView}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <chart:YT_ChartLayout ChartKind="VTick" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Rectangle Width="1"
+                                   Fill="#40ffffff" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView ItemsSource="{Binding Item1}"
+                  Style="{StaticResource ChartListView}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <chart:YT_ChartLayout ChartKind="Point"
+                                          VMaxium="{Binding Maxium}"
+                                          VTickCount="{Binding VTick.Count}" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding Content}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="ItemPanel"
+                  ItemsSource="{Binding Item}"
+                  Style="{StaticResource ChartListView}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <chart:YT_ChartLayout ChartKind="Point"
+                                          VMaxium="{Binding Maxium}"
+                                          VTickCount="{Binding VTick.Count}" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding Content}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</UserControl>

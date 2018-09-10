@@ -4,6 +4,7 @@
                     xmlns:dialogs="clr-namespace:IpgwCore.Controls.Dialogs"
                     xmlns:areawindow="clr-namespace:IpgwCore.Controls.AreaWindow"
                     xmlns:flowcontrols="clr-namespace:IpgwCore.Controls.FlowControls"
+                    xmlns:chart="clr-namespace:IpgwCore.Controls.ChartControl"
                     xmlns:local="clr-namespace:IpgwCore">
 
     <!--WindowBase-->
@@ -976,7 +977,6 @@
 
 
     <!--HitHolder-->
-
     <Style TargetType="controls:YT_Hitholder">
         <Setter Property="Background"
                 Value="Transparent" />
@@ -1002,9 +1002,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <!--GridLineFolder-->
 
+    <!--GridLineFolder-->
     <Style TargetType="{x:Type controls:YT_GridFolder}">
         <Setter Property="BorderBrush"
                 Value="Transparent" />
@@ -1029,5 +1028,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 
 </ResourceDictionary>

@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 namespace IpgwCore.Controls {
-    internal class YT_TextBox : TextBox {
+    public class YT_TextBox : TextBox {
         #region Properties
         private Brush _ft;
         private Brush _bt;

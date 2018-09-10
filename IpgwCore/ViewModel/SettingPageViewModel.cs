@@ -7,7 +7,7 @@ using IpgwCore.MVVMBase;
 using IpgwCore.Services.SystemServices;
 
 namespace IpgwCore.ViewModel {
-    internal class SettingPageViewModel : ViewModelBase {
+    public class SettingPageViewModel : ViewModelBase {
         #region Properties
 
         private bool _ipgwsaved;

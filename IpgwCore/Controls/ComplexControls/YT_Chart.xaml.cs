@@ -1,8 +1,6 @@
 ﻿using IpgwCore.Controls.ChartControl;
-using IpgwCore.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,25 +14,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IpgwCore.View.Pages { 
-
+namespace IpgwCore.Controls.ComplexControls
+{
     /// <summary>
-    /// AboutPage.xaml 的交互逻辑
+    /// YT_Chart.xaml 的交互逻辑
     /// </summary>
-    public partial class AboutPage : Page
+    public partial class YT_Chart : UserControl
     {
-        FluxInfoViewModel _fivm;
-
-        public AboutPage()
+        public YT_Chart()
         {
             InitializeComponent();
-            Loaded += AboutPage_Loaded;
-          
+            Loaded += YT_Chart_Loaded;
         }
 
-        private void AboutPage_Loaded(object sender, RoutedEventArgs e) {
-            (App.Current.Resources["MainPageVM"] as MainPageViewModel).Msg = "关于软件";
-            //(App.Current.Resources["ChartVM"] as ChartViewModel).LoadData();
+        private void YT_Chart_Loaded(object sender, RoutedEventArgs e) {
+            
         }
     }
 }

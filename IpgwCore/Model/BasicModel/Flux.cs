@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace IpgwCore.Model.BasicModel {
     /// <summary>
+    /// 流量类型 
+    /// </summary>
+    public enum FluxType {
+        MB,
+        KB,
+        B,
+        Bit
+    }
+
+    /// <summary>
     /// 流量
     /// </summary>
-    internal class Flux {
+    public class Flux {
         #region Properties
         /// <summary>
         /// 流量信息
@@ -30,7 +40,7 @@ namespace IpgwCore.Model.BasicModel {
     /// <summary>
     /// 流量趋势
     /// </summary>
-    internal class FluxTrendGroup {
+    public class FluxTrendGroup {
         /// <summary>
         /// 流量组
         /// </summary>

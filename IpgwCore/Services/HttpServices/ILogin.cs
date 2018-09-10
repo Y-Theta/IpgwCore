@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IpgwCore.Services.HttpServices {
 
-    internal interface ILogin {
+    public interface ILogin {
         /// <summary>
         /// post请求
         /// </summary>

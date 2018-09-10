@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace IpgwCore.Controls
 {
-    internal class YT_GridFolder : ContentControl, ICommand {
+    public class YT_GridFolder : ContentControl, ICommand {
         #region Properties
         private double OriginGridSize;
 

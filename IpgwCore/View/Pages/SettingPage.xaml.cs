@@ -41,7 +41,7 @@ namespace IpgwCore.View.Pages {
                     Properties.Settings.Default.AreaFontColor = ColorNumConv.ToColorD(cp.Argb);
                     break;
                 case "Free":
-                    XmlDocService.Instence.ResetAll();
+                    XmlDocService.Instence.CleanupFluxData();
                     _spvm.UpdateCache();
                     PopupMessageServices.Instence.ShowContent("已清空全部缓存");
                     break;

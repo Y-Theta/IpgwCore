@@ -21,7 +21,7 @@
     <SolidColorBrush x:Key="MainPage_Bg"
                      Color="#080808" />
     <SolidColorBrush x:Key="MainPage_Bg_L"
-                     Color="#E0080808" />
+                     Color="#080808" />
     <SolidColorBrush x:Key="MainPage_Fg"
                      Color="#808080" />
     <SolidColorBrush x:Key="MainPage_Fg_L"

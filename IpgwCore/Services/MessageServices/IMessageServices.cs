@@ -9,7 +9,7 @@ namespace IpgwCore.Services.MessageServices {
     /// <summary>
     /// 用于全局消息的发送
     /// </summary>
-    internal interface IMessageServices {
+    public interface IMessageServices {
 
         IMessagePoster MessageHolder { get; set; }
 

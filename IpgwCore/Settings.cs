@@ -6,7 +6,7 @@
     //  在更改某个设置的值之后将引发 PropertyChanged 事件。
     //  在加载设置值之后将引发 SettingsLoaded 事件。
     //  在保存设置值之前将引发 SettingsSaving 事件。
-    internal sealed partial class Settings {
+    public sealed partial class Settings {
         
         public Settings() {
             // // 若要为保存和更改设置添加事件处理程序，请取消注释下列行: 

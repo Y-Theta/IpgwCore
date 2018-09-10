@@ -9,7 +9,7 @@ namespace IpgwCore.Services.MessageServices {
     /// <summary>
     /// 信息发送方所要具备的参数
     /// </summary>
-    internal interface IMessagePoster {
+    public interface IMessagePoster {
         /// <summary>
         /// 要发送的信息
         /// </summary>

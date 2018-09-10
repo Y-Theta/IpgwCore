@@ -13,7 +13,7 @@ using System.Windows.Media;
 namespace IpgwCore.Controls {
 
     [ContentProperty("Content")]
-    internal class YT_Hitholder : Control {
+    public class YT_Hitholder : Control {
         #region Properties
         private Brush _obg;
         private Brush _opg;

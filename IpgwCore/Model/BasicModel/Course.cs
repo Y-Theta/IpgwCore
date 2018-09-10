@@ -18,7 +18,7 @@ namespace IpgwCore.Model.BasicModel {
     /// <summary>
     /// 课程类
     /// </summary>
-    internal class Course {
+    public class Course {
         #region Properties
         /// <summary>
         /// 课程名称
@@ -69,7 +69,7 @@ namespace IpgwCore.Model.BasicModel {
     /// <summary>
     /// 课程时间
     /// </summary>
-    internal class CourseTime {
+    public class CourseTime {
         #region Methods
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace IpgwCore.Model.BasicModel {
     /// <summary>
     /// 课程表
     /// </summary>
-    internal class CourseSet {
+    public class CourseSet {
         #region Methods
 
         /// <summary>

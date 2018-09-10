@@ -14,7 +14,7 @@ namespace IpgwCore.Services.FormatServices {
     /// <summary>
     /// 格式化服务
     /// </summary>
-    internal class Formater {
+    public class Formater {
         #region Properties
 
         private static Formater _instence;
@@ -117,8 +117,7 @@ namespace IpgwCore.Services.FormatServices {
             Int64 a = 0;
             try { a = Convert.ToInt64(flux); }
             catch (FormatException)
-            {//
-            }
+            { }
             return a / 1000000.0;
         }
 
@@ -129,7 +128,10 @@ namespace IpgwCore.Services.FormatServices {
                 IpgwInfo = GetIpgwInfo();
             }
             else
+            {
+                LoginServices.Instence.ConnectForUpdate();
                 IpgwInfo = RefreshInfo();
+            }
         }
         #endregion
 

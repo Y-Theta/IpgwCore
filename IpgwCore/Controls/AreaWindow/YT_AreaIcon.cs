@@ -148,10 +148,10 @@ namespace IpgwCore.Controls.AreaWindow {
 
         #endregion
 
-        #region GraphUpdata -- 托盘画图
+        #region 托盘画图
 
         public Icon Drawicon(string num) {
-            int size = 32;
+            int size = 24;
             Drawing.Image bufferedimage;
             if (_ico == IntPtr.Zero)
                 bufferedimage = new Bitmap(size, size, Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -159,11 +159,11 @@ namespace IpgwCore.Controls.AreaWindow {
                 bufferedimage = Bitmap.FromHicon(_ico);
 
             Graphics g = Graphics.FromImage(bufferedimage);
-            g.Clear(Drawing.Color.FromArgb(0, 255, 255, 255));
+            g.Clear(Color.FromArgb(0, 255, 255, 255));
             g.SmoothingMode = SmoothingMode.HighSpeed;
             g.CompositingQuality = CompositingQuality.HighSpeed;
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-            Drawing.Pen pen = new Drawing.Pen(_areafontcolor, 1f);
+            Pen pen = new Pen(_areafontcolor, 1f);
             SizeF infsize = g.MeasureString(num, _areafont);
             g.DrawString(num, _areafont, pen.Brush,
                 new Drawing.Point((int)((size - infsize.Width) / 2), (int)((size - infsize.Height) / 2)));

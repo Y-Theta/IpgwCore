@@ -8,7 +8,7 @@ namespace IpgwCore.Model.BasicModel {
     /// <summary>
     /// Xml文件中的路径标识
     /// </summary>
-    internal class XmlPath {
+    public class XmlPath {
 
         /// <summary>
         /// 路径

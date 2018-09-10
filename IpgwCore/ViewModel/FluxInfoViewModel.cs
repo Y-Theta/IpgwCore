@@ -10,9 +10,12 @@ using IpgwCore.Services.MessageServices;
 using IpgwCore.Services.HttpServices;
 using IpgwCore.Controls.Dialogs;
 using System.Windows;
+using System.Collections.ObjectModel;
+using IpgwCore.View.Pages;
+using IpgwCore.Services.SystemServices;
 
 namespace IpgwCore.ViewModel {
-    internal class FluxInfoViewModel :ViewModelBase{
+    public class FluxInfoViewModel :ViewModelBase{
         #region Properties
 
         private bool _connected;
@@ -34,6 +37,16 @@ namespace IpgwCore.ViewModel {
             set => SetValue(out _package, value, PackageN, PackageChanged);
         }
 
+        private double _updatefrequency;
+        public double UpdateFrequency {
+            get => _updatefrequency;
+            set => SetValue(out _updatefrequency, value, UpdateFrequency, FrequencyChanged);
+        }
+
+        private bool FrequencyChanged(object op, object np) {
+           // SystemInterfaceFlux.Instence.Frequency = (double)np;
+            return true;
+        }
 
         public CommandBase Operation { get; set; }
 
@@ -49,8 +62,10 @@ namespace IpgwCore.ViewModel {
             Connected = LoginServices.Instence.IpgwConnected;
             _package = Properties.Settings.Default.Package;
             FluxData = Formater.Instence.IpgwInfo;
+            UpdateFrequency = SystemInterfaceFlux.Instence.Frequency;
             LoginServices.Instence.IpgwConnectedChanged += Instence_IpgwConnectedChanged;
             Formater.Instence.IpgwInfoChanged += Instence_IpgwInfoChanged;
+
         }
 
         private bool PackageChanged(object op, object np) {

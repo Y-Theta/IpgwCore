@@ -19,7 +19,7 @@ namespace IpgwCore.View {
     /// <summary>
     /// 颜色转换 无参 ->Brush else ->Color
     /// </summary>
-    internal class ColorConv : IValueConverter {
+    public class ColorConv : IValueConverter {
 
         public static int ToInt(ColorD c) {
             return c.ToArgb();
@@ -67,7 +67,7 @@ namespace IpgwCore.View {
     /// int -> color brush hex
     /// color brush hex -> int
     /// </summary>
-    internal class ColorNumConv : IValueConverter {
+    public class ColorNumConv : IValueConverter {
         public static Color ToColor(int cp) {
             int a = cp >> 24, r = (cp >> 16) & 0xff, g = (cp >> 8) & 0xff, b = cp & 0xff;
             if (a < 0)
@@ -252,7 +252,7 @@ namespace IpgwCore.View {
     /// <summary>
     /// 流量信息转换器
     /// </summary>
-    internal class FluxConv : IValueConverter {
+    public class FluxConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return (int)((double)value * 100);
@@ -260,7 +260,7 @@ namespace IpgwCore.View {
             switch (str[0])
             {
                 case "Path":
-                    return PercentToCircle(GetFluxPercent((Flux)value)/100, Int32.Parse(str[1]), Int32.Parse(str[2]));
+                    return PercentToCircle(GetFluxPercent((Flux)value) / 100, Int32.Parse(str[1]), Int32.Parse(str[2]));
                 case "Per":
                     return GetFluxPercent((Flux)value);
                 case "Used":
@@ -296,13 +296,13 @@ namespace IpgwCore.View {
         public static string GetBalance(Flux flux) {
             if (flux is null)
                 return "未知";
-            return FluxFormat(GetFluxData(flux, false));
+            return FluxFormat(GetFluxData(flux, false), FluxType.MB);
         }
 
         public static string GetUsed(Flux flux) {
             if (flux is null)
                 return "未知";
-            return FluxFormat(GetFluxData(flux, true));
+            return FluxFormat(GetFluxData(flux, true), FluxType.MB);
         }
 
         /// <summary>
@@ -369,7 +369,7 @@ namespace IpgwCore.View {
         }
 
         /// <summary>
-        /// 根据套餐获得已用/未用流量
+        /// 根据套餐获得已用/未用流量 M
         /// </summary>
         /// <param name="use">true 已使用 /false 未使用</param>
         public static double GetFluxData(Flux IpgwInfo, bool use) {
@@ -417,12 +417,42 @@ namespace IpgwCore.View {
         /// <summary>
         /// 将流量表示为 M G 的形式
         /// </summary>
-        public static string FluxFormat(double value) {
-            if (value > 1000)
-                return String.Format("{0:###.#}  G", value / 1000.0);
-            else
-                return String.Format("{0:###.#}  M", value);
+        public static string FluxFormat(double value, FluxType type = FluxType.KB) {
+            switch (type)
+            {
+                case FluxType.Bit:
+                    value *= 8;
+                    return FormatByte(value);
+                case FluxType.B:
+                    return FormatByte(value);
+                case FluxType.KB:
+                    if (value > 1000000)
+                        return String.Format("{0:###.##}  G", value / 1000000.0);
+                    else if (value > 1000)
+                        return String.Format("{0:###.##}  M", value / 1000.0);
+                    else
+                        return String.Format("{0:###.##}  K", value);
+                case FluxType.MB:
+                    if (value > 1000)
+                        return String.Format("{0:###.##}  G", value / 1000.0);
+                    else
+                        return String.Format("{0:###.##}  M", value);
+                default: return "<0>";
+            }
+
         }
+
+        private static string FormatByte(double value) {
+            if (value > 1000000000)
+                return String.Format("{0:###.##}  G", value / 1000000000.0);
+            else if (value > 1000000)
+                return String.Format("{0:###.##}  M", value / 1000000.0);
+            else if (value > 1000)
+                return String.Format("{0:###.##}  K", value / 1000.0);
+            else
+                return String.Format("{0:###.##}  B", value);
+        }
+
 
         /// <summary>
         /// 将百分比转换为圆形路径
@@ -453,14 +483,14 @@ namespace IpgwCore.View {
     /// <summary>
     /// 将Slider的值进行放缩
     /// </summary>
-    internal class SliderConv : IValueConverter {
+    public class SliderConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return value;
             if (value is Double)
                 return Math.Round((double)value * Double.Parse(parameter.ToString()), 0);
             else if (value is float)
-                return Math.Round((double)(float)value * Double.Parse(parameter.ToString()), 0);
+                return Math.Round((float)value * Double.Parse(parameter.ToString()), 0);
             else
                 return value;
         }
@@ -473,7 +503,7 @@ namespace IpgwCore.View {
     /// <summary>
     /// 对控件的位置进行修正
     /// </summary>
-    internal class OffsetConv : IValueConverter {
+    public class OffsetConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             return System.Convert.ToDouble(value) + System.Convert.ToDouble(parameter);
         }
@@ -486,7 +516,7 @@ namespace IpgwCore.View {
     /// <summary>
     /// 对Bool值进行转换，将true转换为para后的参数
     /// </summary>
-    internal class BoolConv : IValueConverter {
+    public class BoolConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return value;
@@ -517,11 +547,11 @@ namespace IpgwCore.View {
             }
         }
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
-    internal class StringConv : IValueConverter {
+    public class StringConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return value;
@@ -536,22 +566,23 @@ namespace IpgwCore.View {
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-                return value;
+            return value;
         }
     }
 
     /// <summary>
     /// 
     /// </summary>
-    internal class DoubleConv : IValueConverter {
+    public class DoubleConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return value;
             string[] str = parameter.ToString().Split('|');
-            switch (str[0]) {
+            switch (str[0])
+            {
                 case "String":
                     return String.Format("{0:##.##}", System.Convert.ToDouble(value));
-                default:return value;
+                default: return value;
             }
         }
 
@@ -575,11 +606,12 @@ namespace IpgwCore.View {
     /// <summary>
     /// 
     /// </summary>
-    internal class PackageConv : IValueConverter {
+    public class PackageConv : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter is null)
                 return value;
-            switch (parameter.ToString()) {
+            switch (parameter.ToString())
+            {
                 case "V0":
                     return (int)value == 0 ? Visibility.Visible : Visibility.Collapsed;
                 case "V1":

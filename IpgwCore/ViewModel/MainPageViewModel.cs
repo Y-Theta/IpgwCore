@@ -13,7 +13,7 @@ using IpgwCore.View;
 using PMS = IpgwCore.Services.MessageServices.PopupMessageServices;
 
 namespace IpgwCore.ViewModel {
-    internal class MainPageViewModel : ViewModelBase, IMessagePoster {
+    public class MainPageViewModel : ViewModelBase, IMessagePoster {
         #region Properties
         public object _message { get => Msg; set => Msg = value.ToString(); }
 
