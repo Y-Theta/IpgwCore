@@ -6,6 +6,7 @@
       DataContext="{DynamicResource FluxInfoVM}"
       xmlns:local="clr-namespace:IpgwCore.View.Pages"
       xmlns:chart="clr-namespace:IpgwCore.Controls.ComplexControls"
+      xmlns:settings="clr-namespace:IpgwCore.Properties"
       mc:Ignorable="d">
     <Grid x:Name="Rootgrid"
           Background="{DynamicResource MainPage_Bg_L}"
@@ -38,7 +39,7 @@
                     VerticalAlignment="Top"
                     Maximum="30"
                     Minimum="2"
-                    Value="{Binding AreaFontSize, Source={x:Static settings:Settings.Default},Converter={StaticResource SliderConv},ConverterParameter=2,Mode=TwoWay}" />
+                    Value="{Binding AreaFontSize, Source={x:Static settings:Settings.Default},Converter={StaticResource SliderConv},ConverterParameter=1,Mode=TwoWay}" />
         </Grid>-->
         <Grid x:Name="FootArea"
               Background="#1E1E1E"

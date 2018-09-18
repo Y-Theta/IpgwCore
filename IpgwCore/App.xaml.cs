@@ -35,10 +35,6 @@ namespace IpgwCore {
             IpgwCore.Properties.Settings.Default.Save();
         }
 
-        public static void UIinvoke(Action act) {
-            Current.MainWindow.Dispatcher.Invoke(DispatcherPriority.Normal, act);
-        }
-
         #endregion
 
         #region Contrustor

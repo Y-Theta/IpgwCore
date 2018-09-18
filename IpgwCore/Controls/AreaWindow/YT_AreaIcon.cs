@@ -151,7 +151,7 @@ namespace IpgwCore.Controls.AreaWindow {
         #region 托盘画图
 
         public Icon Drawicon(string num) {
-            int size = 24;
+            int size = 36;
             Drawing.Image bufferedimage;
             if (_ico == IntPtr.Zero)
                 bufferedimage = new Bitmap(size, size, Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -166,7 +166,7 @@ namespace IpgwCore.Controls.AreaWindow {
             Pen pen = new Pen(_areafontcolor, 1f);
             SizeF infsize = g.MeasureString(num, _areafont);
             g.DrawString(num, _areafont, pen.Brush,
-                new Drawing.Point((int)((size - infsize.Width) / 2), (int)((size - infsize.Height) / 2)));
+                new Drawing.Point(0, (int)((size - infsize.Height) / 2)));
             _ico = (bufferedimage as Bitmap).GetHicon();
 
             bufferedimage.Dispose();

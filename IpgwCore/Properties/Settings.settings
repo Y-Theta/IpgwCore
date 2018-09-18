@@ -33,7 +33,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="AreaFontSize" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">10.53</Value>
+      <Value Profile="(Default)">13.4</Value>
     </Setting>
     <Setting Name="AreaFontColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>

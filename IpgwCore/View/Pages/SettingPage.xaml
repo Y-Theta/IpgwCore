@@ -238,6 +238,52 @@
                 <Grid Height="36"
                       Grid.Row="2">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="288" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="4"
+                               Margin="-12,6,0,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Left"
+                               Fill="#a0ffffff" />
+                    <Rectangle Width="4"
+                               Grid.ColumnSpan="3"
+                               Margin="0,6,-12,6"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Right"
+                               Fill="#a0ffffff" />
+                    <TextBlock Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               HorizontalAlignment="Left"
+                               FontSize="12"
+                               Text="背景透明度" />
+                    <TextBlock x:Name="BgOpacityN" Style="{StaticResource MainLabel}"
+                               Foreground="{DynamicResource MainPage_Fg_L}"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
+                               Text="{Binding Value, ElementName=BgOpacity}" />
+                    <Popup x:Name="BgOpacityPanel"
+                           HorizontalOffset="-160"
+                           Placement="Relative"
+                           PlacementTarget="{Binding ElementName=BgOpacityN}">
+                        <Grid Background="{DynamicResource DefaultToolTip_Bg}">
+                            <Slider x:Name="BgOpacity"
+                                    Margin="8,4"
+                                    Style="{StaticResource ColorPickerSlider}"
+                                    Value="{Binding MainOpacity, Source={x:Static settings:Settings.Default},Converter={StaticResource SliderConv},ConverterParameter=100,Mode=TwoWay}"
+                                    Maximum="100"
+                                    Minimum="40"
+                                    Width="120"
+                                    Grid.Column="2" />
+                        </Grid>
+                    </Popup>
+
+                </Grid>
+                <Grid Height="36"
+                      Grid.Row="3">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="240" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
@@ -274,7 +320,7 @@
                                            Style="{StaticResource FluxPopupButton}" />
                 </Grid>
                 <Grid Height="36"
-                      Grid.Row="3">
+                      Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="240" />
                         <ColumnDefinition Width="auto" />
@@ -311,6 +357,7 @@
                                            Command="{Binding Operation}"
                                            Style="{StaticResource FluxPopupButton}" />
                 </Grid>
+
             </Grid>
         </Grid>
     </Grid>

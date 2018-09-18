@@ -89,6 +89,8 @@ namespace IpgwCore.View.Pages {
             Unloaded += SettingPage_Unloaded;
         }
 
-
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            BgOpacityPanel.IsOpen = true;
+        }
     }
 }
