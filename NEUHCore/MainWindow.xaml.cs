@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEUHCore.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,13 @@ namespace NEUHCore {
     public partial class MainWindow : YT_Window {
         public MainWindow() {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+            Console.WriteLine(PluginServices.Instence.ShowDomains());
+            Console.WriteLine(PluginServices.Instence.Control.ShowPlugins());
+            PluginServices.Instence.Control.AddInContracts[0].Run(NEUH_Contract.UseCase.MainWindowInit);
         }
     }
 }

@@ -9,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace NEUH_PluginControl
 {
-    public class NEUH_PluginControl:MarshalByRefObject
-    {
+    public class PluginControl : MarshalByRefObject {
         #region Properties
         [ImportMany(typeof(INEUHCoreContract), AllowRecomposition = true)]
-        private List<INEUHCoreContract> _iAddInContracts;
-        public List<INEUHCoreContract> IAddInContracts {
-            get => _iAddInContracts;
-            set => _iAddInContracts = value;
+        private List<INEUHCoreContract> _addInContracts;
+        public List<INEUHCoreContract> AddInContracts {
+            get => _addInContracts;
+            set => _addInContracts = value;
         }
 
         private CompositionContainer _container;
@@ -34,28 +33,28 @@ namespace NEUH_PluginControl
 
         private void InitPlugins(string path) {
             _pluginsPath = path;
-            _catalog = new DirectoryCatalog(_pluginsPath); 
+            _catalog = new DirectoryCatalog(_pluginsPath);
             _container = new CompositionContainer(_catalog);
             _container.ComposeExportedValue(_container);
-            _iAddInContracts = _container.GetExportedValues<INEUHCoreContract>().ToList();
+            _addInContracts = _container.GetExportedValues<INEUHCoreContract>().ToList();
         }
 
         public void UpdatePlugins() {
             _catalog.Refresh();
             _container.ComposeExportedValue(_catalog.Parts);
-            _iAddInContracts = _container.GetExportedValues<INEUHCoreContract>().ToList();
+            _addInContracts = _container.GetExportedValues<INEUHCoreContract>().ToList();
         }
 
         public string ShowPlugins() {
             string str = "All Plugins \n";
-            foreach (var plugin in _iAddInContracts)
+            foreach (var plugin in _addInContracts)
                 str += String.Format("{0}\n", plugin.InfoStringFormat());
             return str;
         }
         #endregion
 
         #region Constructors
-        public NEUH_PluginControl() { }
+        public PluginControl() { }
         #endregion
     }
 }

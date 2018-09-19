@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace NEUH_Contract {
 
     public enum UseCase {
-
+        MainWindowInit
     }
 
     /// <summary>
@@ -48,5 +48,31 @@ namespace NEUH_Contract {
         /// 运行插件并带回必要值
         /// </summary>
         void Run(UseCase c, out object t);
+    }
+
+    /// <summary>
+    /// 插件基类
+    /// </summary>
+    public class CoreContractBase : MarshalByRefObject, INEUHCoreContract {
+        public string Name { get; set; }
+        public string Author { get; set; }
+        public string Edition { get; set; }
+        public string Description { get; set; }
+        public UseCase[] Usage { get; set; }
+
+        public virtual string InfoStringFormat() {
+            return String.Format($"Name        :  {Name}\n" +
+                                 $"Author      :  {Author}\n" +
+                                 $"Edition     :  {Edition}\n" +
+                                 $"Description :  {Description}\n");
+        }
+
+        public virtual void Run(UseCase c) {
+
+        }
+
+        public virtual void Run(UseCase c, out object t) {
+            t = null;
+        }
     }
 }

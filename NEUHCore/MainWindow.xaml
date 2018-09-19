@@ -5,12 +5,13 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:YT="clr-namespace:YControls;assembly=YControls"
               xmlns:local="clr-namespace:NEUHCore"
-              DragingMode="FullWindow"
+              ExtendToTitleBar="True"
+              DragingMode="TitleBar"
               BorderThickness="2"
               BorderBrush="Transparent"
               Width="360"
               Height="420">
-    <Border>
+    <Border Background="#C0000000">
 
     </Border>
 </YT:YT_Window>
