@@ -32,8 +32,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\NEUHCore1.0\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -75,6 +75,10 @@
       <HintPath>..\NEUHCore1.0\Data\Bin\YControls.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="YMvvmBase">
+      <HintPath>..\NEUHCore1.0\Data\Bin\YMvvmBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -82,7 +86,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\PluginServices.cs" />
-    <Compile Include="Services\SettingService.cs" />
+    <Compile Include="Services\SerializeService.cs" />
+    <Compile Include="UserSetting\ILocalSetting.cs" />
+    <Compile Include="UserSetting\CommonSetting.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

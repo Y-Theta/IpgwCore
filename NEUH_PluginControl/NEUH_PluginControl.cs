@@ -48,7 +48,7 @@ namespace NEUH_PluginControl
         public string ShowPlugins() {
             string str = "All Plugins \n";
             foreach (var plugin in _addInContracts)
-                str += String.Format("{0}\n", plugin.InfoStringFormat());
+                str += String.Format("-{0}-\n{1}\n", _addInContracts.IndexOf(plugin), plugin.InfoStringFormat());
             return str;
         }
         #endregion

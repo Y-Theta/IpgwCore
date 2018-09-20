@@ -182,6 +182,7 @@ namespace IpgwCore.Controls.AreaWindow {
 
         #region 设置更新
         private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e) {
+            
             switch (e.SettingName)
             {
                 case "AreaFontSize":

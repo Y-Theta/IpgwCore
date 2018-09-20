@@ -4,14 +4,31 @@
               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:YT="clr-namespace:YControls;assembly=YControls"
+              xmlns:Setting="clr-namespace:NEUHCore.UserSetting"
               xmlns:local="clr-namespace:NEUHCore"
               ExtendToTitleBar="True"
-              DragingMode="TitleBar"
+              DragingMode="FullWindow"
               BorderThickness="2"
               BorderBrush="Transparent"
               Width="360"
               Height="420">
+    <YT:YT_Window.TitleArea>
+        <Grid>
+            
+        </Grid>
+    </YT:YT_Window.TitleArea>
     <Border Background="#C0000000">
-
+        <Grid x:Name="RootGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="24" />
+            </Grid.RowDefinitions>
+            <TextBox FontSize="16"
+                       Foreground="White"
+                       Background="Transparent"
+                       Text="{Binding Package, Source={x:Static Setting:CommonSetting.Instence},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Row="2" Click="Button_Click">Save</Button>
+        </Grid>
     </Border>
 </YT:YT_Window>

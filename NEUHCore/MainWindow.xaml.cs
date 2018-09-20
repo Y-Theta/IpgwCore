@@ -1,4 +1,5 @@
 ﻿using NEUHCore.Services;
+using NEUHCore.UserSetting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,10 @@ namespace NEUHCore {
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             Console.WriteLine(PluginServices.Instence.ShowDomains());
             Console.WriteLine(PluginServices.Instence.Control.ShowPlugins());
-            PluginServices.Instence.Control.AddInContracts[0].Run(NEUH_Contract.UseCase.MainWindowInit);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            CommonSetting.Instence.Save();
         }
     }
 }
