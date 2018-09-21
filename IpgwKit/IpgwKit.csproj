@@ -15,8 +15,8 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\NEUHCore1.0\Data\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -52,12 +52,17 @@
       <HintPath>..\NEUHCore1.0\Data\Bin\YControls.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="YFrameworkBase">
+      <HintPath>..\NEUHCore1.0\Data\Bin\YFrameworkBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AreaIconServices.cs" />
     <Compile Include="IpgwKit.cs">
       <SubType>Code</SubType>
     </Compile>

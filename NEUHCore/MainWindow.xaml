@@ -14,7 +14,7 @@
               Height="420">
     <YT:YT_Window.TitleArea>
         <Grid>
-            
+
         </Grid>
     </YT:YT_Window.TitleArea>
     <Border Background="#C0000000">
@@ -25,10 +25,25 @@
                 <RowDefinition Height="24" />
             </Grid.RowDefinitions>
             <TextBox FontSize="16"
-                       Foreground="White"
-                       Background="Transparent"
-                       Text="{Binding Package, Source={x:Static Setting:CommonSetting.Instence},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            <Button Grid.Row="2" Click="Button_Click">Save</Button>
+                     Foreground="White"
+                     Background="Transparent"
+                     Text="{Binding DisabledPlugins.Count, Source={x:Static Setting:CommonSettings.Instence},Mode=OneWay}" />
+            <Frame Grid.Row="1">
+
+            </Frame>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Click="Button_Click">save</Button>
+                <Button Grid.Column="1"
+                        Click="Button_Click_1">Unload</Button>
+                <Button Grid.Column="2"
+                        Click="Button_Click_2">Work</Button>
+            </Grid>
         </Grid>
     </Border>
 </YT:YT_Window>

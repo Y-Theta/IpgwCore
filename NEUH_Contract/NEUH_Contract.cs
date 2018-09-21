@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace NEUH_Contract {
 
-    public enum UseCase {
-        MainWindowInit
-    }
-
     /// <summary>
     /// NEUH核心程序的插件接口
     /// </summary>
@@ -33,9 +29,18 @@ namespace NEUH_Contract {
         /// <summary>
         /// 插件的使用位置，决定插件在载入主程序后何时使用
         /// </summary>
-        UseCase[] Usage { get; set; }
+        Dictionary<CaseName, int> Usage { get; set; }
+        /// <summary>
+        /// 控件的某些行为需要核心程序作出响应回调
+        /// </summary>
+        event PluginActionEventHandler ActionCallBack;
 
-
+        /// <summary>
+        /// 触发ActionCallBack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        void Invoke(object sender, PluginActionArgs args);
         /// <summary>
         /// 获取插件信息的字符描述
         /// </summary>
@@ -43,22 +48,28 @@ namespace NEUH_Contract {
         /// <summary>
         /// 运行插件
         /// </summary>
-        void Run(UseCase c);
+        void Run(CaseName c);
         /// <summary>
         /// 运行插件并带回必要值
         /// </summary>
-        void Run(UseCase c, out object t);
+        void Run(CaseName c, out object t);
     }
 
     /// <summary>
     /// 插件基类
     /// </summary>
     public class CoreContractBase : MarshalByRefObject, INEUHCoreContract {
+        public event PluginActionEventHandler ActionCallBack;
+
         public string Name { get; set; }
+
         public string Author { get; set; }
+
         public string Edition { get; set; }
+
         public string Description { get; set; }
-        public UseCase[] Usage { get; set; }
+
+        public Dictionary<CaseName, int> Usage { get; set; }
 
         public virtual string InfoStringFormat() {
             return String.Format($"Name        :  {Name}\n" +
@@ -67,12 +78,16 @@ namespace NEUH_Contract {
                                  $"Description :  {Description}\n");
         }
 
-        public virtual void Run(UseCase c) {
+        public virtual void Run(CaseName c) {
 
         }
 
-        public virtual void Run(UseCase c, out object t) {
+        public virtual void Run(CaseName c, out object t) {
             t = null;
+        }
+
+        public void Invoke(object sender, PluginActionArgs args) {
+            ActionCallBack?.Invoke(sender, args);
         }
     }
 }

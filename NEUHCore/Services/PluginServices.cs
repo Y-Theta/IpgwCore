@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using NEUH_PluginControl;
@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using mscoree;
 using System.Security.Permissions;
+using NEUHCore.UserSetting;
+using NEUH_Contract;
+using System.Reflection;
 
 namespace NEUHCore.Services {
     public class PluginServices {
@@ -23,13 +26,15 @@ namespace NEUHCore.Services {
             }
         }
 
-        private AppDomain _pluginsDomain;
+        public event PluginChangedEventHandler OnPluginChanged;
 
         private PluginControl _control;
         public PluginControl Control {
             get => _control;
             set => _control = value;
         }
+
+        private AppDomain _pluginsDomain;
 
         private FileSystemWatcher _updatewatcher;
 
@@ -43,27 +48,54 @@ namespace NEUHCore.Services {
                 ShadowCopyFiles = "true",
                 ShadowCopyDirectories = App.Root + App.Plugin
             };
-
             _pluginsDomain = AppDomain.CreateDomain("HostAdapter", AppDomain.CurrentDomain.Evidence, _pluginsDomainsetup);
-            _pluginsDomain.AssemblyResolve += App.MyResolveEventHandler;
+            _pluginsDomain.SetData(App.LibsPath, new string[] {
+                App.Root + App.Component,
+                App.Root + App.Plugin
+                });
+            AssemblyServices.HockResolve(_pluginsDomain);
             _control = (PluginControl)_pluginsDomain.CreateInstanceAndUnwrap(typeof(PluginControl).Assembly.FullName, typeof(PluginControl).FullName);
             _control.PluginsPath = App.Root + App.Plugin;
+            foreach (var item in CommonSettings.Instence.DisabledPlugins)
+                _control.EnabledPlugins.Remove(item);
+            _control.UpdatePlugins();
             InitFloderWatcher();
         }
 
-        private async void ReLoad() {
+        private async Task ReLoad() {
             await App.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() => {
                 var tempdomain = AppDomain.CreateDomain("HostAdapter", AppDomain.CurrentDomain.Evidence, _pluginsDomainsetup);
+                tempdomain.SetData(App.LibsPath, new string[] {
+                App.Root + App.Component,
+                App.Root + App.Plugin
+                });
+                AssemblyServices.HockResolve(tempdomain);
                 var tempcontrol = (PluginControl)tempdomain.CreateInstanceAndUnwrap(typeof(PluginControl).Assembly.FullName, typeof(PluginControl).FullName);
                 tempcontrol.PluginsPath = App.Root + App.Plugin;
+                foreach (var item in CommonSettings.Instence.DisabledPlugins)
+                    tempcontrol.EnabledPlugins.Remove(item);
+                tempcontrol.UpdatePlugins();
                 AppDomain.Unload(_pluginsDomain);
                 _pluginsDomain = tempdomain;
                 _control = tempcontrol;
             }));
         }
 
-        public void Update() {
-            ReLoad();
+        public async void Update() {
+            await ReLoad();
+        }
+
+        public async void Unload(string name) {
+            CommonSettings.Instence.DisabledPlugins.Add(name);
+            await ReLoad();
+            OnPluginChanged?.Invoke(this, new PluginChangedArgs(name, PluginAction.Unload));
+        }
+
+        public async void Load(string name) {
+            if (CommonSettings.Instence.DisabledPlugins.Contains(name))
+                CommonSettings.Instence.DisabledPlugins.Remove(name);
+            await ReLoad();
+            OnPluginChanged?.Invoke(this, new PluginChangedArgs(name, PluginAction.Load));
         }
 
         public string ShowDomains() {
@@ -85,7 +117,6 @@ namespace NEUHCore.Services {
             finally {
                 host.CloseEnum(handle);
             }
-
             foreach (var domain in appDomains)
                 str += $"{appDomains.IndexOf(domain)} : {domain.FriendlyName.PadRight(20)} \n";
             return str;
@@ -105,12 +136,15 @@ namespace NEUHCore.Services {
         }
 
         private void _updatewatcher_Deleted(object sender, FileSystemEventArgs e) {
+            App.Current.Dispatcher.Invoke(new Action(() => {
+                OnPluginChanged?.Invoke(this, new PluginChangedArgs(Assembly.LoadFrom(App.Root + App.Plugin + e.Name).GetName().Name, PluginAction.Unload));
+            }), System.Windows.Threading.DispatcherPriority.Normal);
             _control.UpdatePlugins();
         }
 
-        private void _updatewatcher_Changed(object sender, FileSystemEventArgs e) {
+        private async void _updatewatcher_Changed(object sender, FileSystemEventArgs e) {
             _updatewatcher.EnableRaisingEvents = false;
-            ReLoad();
+            await ReLoad();
             _updatewatcher.EnableRaisingEvents = true;
         }
         #endregion
