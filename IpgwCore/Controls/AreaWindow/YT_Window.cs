@@ -43,7 +43,7 @@ namespace IpgwCore.Controls.AreaWindow {
 
         #region override
         protected override void OnInitialized(EventArgs e) {
-            SourceInitialized += new EventHandler(WSInitialized);
+            SourceInitialized += WSInitialized; ;
             base.OnInitialized(e);
         }
 

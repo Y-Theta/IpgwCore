@@ -4,15 +4,17 @@ using System;
 using System.ComponentModel.Composition;
 using System.Collections.Generic;
 using NEUHCore.Services;
+using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
-namespace IpgwKit {
+namespace IpgwCore {
     [Export(typeof(INEUHCoreContract))]
     public class IpgwPlugin : CoreContractBase {
 
         public override void Run(CaseName c) {
             switch (c) {
                 case CaseName.UnLoad:
-                    Invoke(this, new PluginActionArgs(Name, CaseName.UnLoad, null));
+                    InvokeCallback();
                     return;
                 default:
                     return;
@@ -22,7 +24,7 @@ namespace IpgwKit {
         public override void Run(CaseName c, out object t) {
             switch(c) {
                 case CaseName.AreaIcon:
-                    t = AreaIconServices.Instence.Drawicon();
+                    t = new ObservableCollection<String>() { "0" ,"23"};
                     return;
                 default:
                     t = null;

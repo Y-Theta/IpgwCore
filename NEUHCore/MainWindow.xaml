@@ -10,6 +10,7 @@
               DragingMode="FullWindow"
               BorderThickness="2"
               BorderBrush="Transparent"
+              SizeToContent="WidthAndHeight"
               Width="360"
               Height="420">
     <YT:YT_Window.TitleArea>
@@ -17,7 +18,7 @@
 
         </Grid>
     </YT:YT_Window.TitleArea>
-    <Border Background="#C0000000">
+    <!--<Border Background="#C0000000">
         <Grid x:Name="RootGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -41,9 +42,135 @@
                         Click="Button_Click">save</Button>
                 <Button Grid.Column="1"
                         Click="Button_Click_1">Unload</Button>
-                <Button Grid.Column="2"
-                        Click="Button_Click_2">Work</Button>
+                <Button x:Name="button" Grid.Column="2">Work</Button>
             </Grid>
         </Grid>
-    </Border>
+    </Border>-->
+    <Grid MinWidth="200"
+          MinHeight="200"
+          Background="#80000000">
+        <Viewport3D>
+            <Viewport3D.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <!--<Point3DAnimationUsingKeyFrames Storyboard.TargetProperty="Position"
+                                                            Storyboard.TargetName="camera">
+                                <SplinePoint3DKeyFrame KeyTime="0:0:1"
+                                                       Value="5 0 0" />
+                                <LinearPoint3DKeyFrame KeyTime="0:0:2"
+                                                       Value="0 0 -5" />
+                                <LinearPoint3DKeyFrame KeyTime="0:0:3"
+                                                       Value="-5 0 0" />
+                                <LinearPoint3DKeyFrame KeyTime="0:0:4"
+                                                       Value="0 0 5" />
+                            </Point3DAnimationUsingKeyFrames>
+                            <Vector3DAnimationUsingKeyFrames Storyboard.TargetProperty="LookDirection"
+                                                             Storyboard.TargetName="camera">
+                                <LinearVector3DKeyFrame KeyTime="0:0:1"
+                                                        Value="-1 0 0" />
+                                <LinearVector3DKeyFrame KeyTime="0:0:2"
+                                                        Value="0 0 1" />
+                                <LinearVector3DKeyFrame KeyTime="0:0:3"
+                                                        Value="1 0 0" />
+                                <LinearVector3DKeyFrame KeyTime="0:0:4"
+                                                        Value="0 0 -1" />
+                            </Vector3DAnimationUsingKeyFrames>
+                            <Vector3DAnimationUsingKeyFrames Storyboard.TargetProperty="Direction"
+                                                             Storyboard.TargetName="light">
+                                <LinearVector3DKeyFrame KeyTime="0:0:1"
+                                                        Value="-1 0 0" />
+                                <LinearVector3DKeyFrame KeyTime="0:0:2"
+                                                        Value="0 0 1" />
+                                <LinearVector3DKeyFrame KeyTime="0:0:3"
+                                                        Value="1 0 0" />
+                                <LinearVector3DKeyFrame KeyTime="0:0:4"
+                                                        Value="0 0 -1" />
+                            </Vector3DAnimationUsingKeyFrames>-->
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BallRotateTransform3D"
+                                                           Storyboard.TargetProperty="Angle">
+                                <LinearDoubleKeyFrame KeyTime="0:0:4"
+                                                      Value="360" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Viewport3D.Triggers>
+            <Viewport3D.Camera>
+                <PerspectiveCamera  x:Name="camera"
+                                    Position="12 12 12"
+                                    LookDirection="-1 -1 -1" />
+            </Viewport3D.Camera>
+
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+                        <DirectionalLight Direction="0 0 -10"
+                                          Color="White" />
+                        <DirectionalLight Direction="0 -10 0"
+                                          Color="White" />
+                        <GeometryModel3D x:Name="Ball">
+                            <GeometryModel3D.Transform>
+                                <RotateTransform3D CenterX="0"
+                                                   CenterY="0"
+                                                   CenterZ="0">
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D x:Name="BallRotateTransform3D"
+                                                             Axis="0,1,0"
+                                                             Angle="0" />
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </GeometryModel3D.Transform>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D Normals="0.47140399,0.333334,-0.81649601 0.471405,0.333334,-0.81649601 0.471405,0.333334,-0.81649601 0.47140399,0.333334,-0.81649601 0.471405,0.33333299,-0.81649703 0.471405,0.33333299,-0.81649703 0,0,0 0,0,0 0,0,0 -0.94280899,0.33333501,0 -0.94280797,0.33333501,0 -0.94280899,0.33333501,0 -0.94280899,0.33333501,0
+-0.94280899,0.33333299,0 -0.94280899,0.33333299,0 0.471405,0.333334,0.81649601 0.47140399,0.33333501,0.81649601 0.47140399,0.33333501,0.81649601 0.471405,0.333334,0.81649601 0.471405,0.33333299,0.81649703 0.471405,0.33333299,0.81649703 -2E-06,-1,-3.0000001E-06 3.0000001E-06,-1,0 3.0000001E-06,-1,0 -2E-06,-1,-3.0000001E-06 -2E-06,-1,3.0000001E-06
+-2E-06,-1,3.0000001E-06 0.81650102,0.577344,0 0.81650102,0.577344,0 0.81650102,0.577344,0 0.81650102,0.577344,0 -0.40824899,0.57734698,0.70710897 -0.40824899,0.57734698,0.70710897 -0.40824899,0.57734698,0.70710897 -0.40824899,0.57734698,0.70710897 0.40824899,-0.57735002,0.70710701 0.40824899,-0.57735002,0.70710701 0.40824899,-0.57735002,0.70710701 0.40824899,-0.57735002,0.70710701
+0.40825,-0.57735002,-0.70710599 0.40825,-0.57735002,-0.70710599 0.40825,-0.57735002,-0.70710599 0.40825,-0.57735002,-0.70710599 -0.40824899,0.57734698,-0.70710897 -0.40824899,0.57734698,-0.70710897 -0.40824899,0.57734698,-0.70710897 -0.40824899,0.57734698,-0.70710897 -0.81649703,-0.57735002,0 -0.81649703,-0.57735002,0 -0.81649703,-0.57735002,0 -0.81649703,-0.57735002,0 0.471407,0.33333001,0.81649703
+0.471407,0.33333001,0.81649703 0.471407,0.33333001,0.81649703 0,-1,1E-06 0,-1,1E-06 0,-1,1E-06 -0.94281203,0.33332601,0 -0.94281203,0.33332601,0 -0.94281203,0.33332601,0 0.471407,0.33333001,-0.81649601 0.471407,0.33333001,-0.81649601 0.471407,0.33333001,-0.81649601"
+                                                Positions="4.6188021,-3.265986,0 -2.309401,-3.265986,-4 -1.539601,-2.7216549,-3.3333321 3.656549,-2.7216549,-0.33333299 0,3.265986,0 0.19245,2.177326,-0.33333299 -2.309401,-3.265986,-4 -2.309401,-3.265986,4 0,3.265986,0 -2.309401,-3.265986,-4 -2.309401,-3.265986,4 -2.1169491,-2.7216561,2.9999981 -2.1169479,-2.7216549,-2.999999
+0,3.265986,0 -0.38490099,2.1773269,0 -2.309401,-3.265986,4 4.6188021,-3.265986,0 3.656549,-2.7216549,0.33333299 -1.539603,-2.7216549,3.3333311 0,3.265986,0 0.19245,2.1773269,0.33333299 -2.309401,-3.265986,-4 4.6188021,-3.265986,0 3.464102,-3.26599,0 -1.732052,-3.26599,-2.999999 -2.309401,-3.265986,4
+-1.732052,-3.26599,2.9999981 -2.1169479,-2.7216549,-2.999999 -2.1169491,-2.7216561,2.9999981 -1.732052,-3.26599,2.9999981 -1.732052,-3.26599,-2.999999 3.656549,-2.7216549,-0.33333299 -1.539601,-2.7216549,-3.3333321 -1.732052,-3.26599,-2.999999 3.464102,-3.26599,0 -1.539601,-2.7216549,-3.3333321 0.19245,2.177326,-0.33333299 -0.38490099,2.1773269,0 -2.1169479,-2.7216549,-2.999999
+-2.1169491,-2.7216561,2.9999981 -0.38490099,2.1773269,0 0.19245,2.1773269,0.33333299 -1.539603,-2.7216549,3.3333311 -1.539603,-2.7216549,3.3333311 3.656549,-2.7216549,0.33333299 3.464102,-3.26599,0 -1.732052,-3.26599,2.9999981 0.19245,2.177326,-0.33333299 3.656549,-2.7216549,-0.33333299 3.656549,-2.7216549,0.33333299 0.19245,2.1773269,0.33333299 -1.732052,-3.26599,-2.999999
+-1.539601,-2.7216549,-3.3333321 -2.1169479,-2.7216549,-2.999999 -0.38490099,2.1773269,0 0.19245,2.177326,-0.33333299 0.19245,2.1773269,0.33333299 3.464102,-3.26599,0 3.656549,-2.7216549,0.33333299 3.656549,-2.7216549,-0.33333299 -1.732052,-3.26599,2.9999981 -2.1169491,-2.7216561,2.9999981 -1.539603,-2.7216549,3.3333311"
+                                                TextureCoordinates="0.58333302,0.5 0.75,0.5 0.75,0.5 0.58333302,0.5 0.5,0 0.5,0 0.25,0.5 0.41666701,0.5 0.5,0 0.25,0.5 0.41666701,0.5 0.41666701,0.5 0.25,0.5 0.5,0 0.5,0 0.41666701,0.5 0.58333302,0.5 0.58333302,0.5 0.41666701,0.5 0.5,0 0.5,0 0.375,0.966506 0.75,0.75
+0.75,0.75 0.375,0.966506 0.375,0.533494 0.375,0.533494 0.25,0.5 0.41666701,0.5 0.375,0.533494 0.375,0.966506 0.58333302,0.5 0.75,0.5 0.375,0.966506 0.75,0.75 0.75,0.5 0.5,0 0.5,0 0.25,0.5 0.41666701,0.5 0.5,0 0.5,0 0.41666701,0.5 0.41666701,0.5 0.58333302,0.5 0.75,0.75
+0.375,0.533494 0.5,0 0.58333302,0.5 0.58333302,0.5 0.5,0 0.375,0.966506 0.75,0.5 0.25,0.5 0.5,0 0.5,0 0.5,0 0.75,0.75 0.58333302,0.5 0.58333302,0.5 0.375,0.533494 0.41666701,0.5 0.41666701,0.5"
+                                                TriangleIndices="0 1 2 0 2 3 1 4 5 1 5 2 4 0 3 4 3 5 6 7 7 6 7 6 7 8 8 7 8 7 8 6 6 8 6 8 9 10 11 9 11 12 10 13 14 10 14 11 13 9 12 13 12 14 15 16 17 15 17 18 16 19 20 16 20 17 19 15 18 19 18 20 21 22 23 21 23 24 22 25 26 22 26 23 25 21 24 25 24 26 27 28 29 27 29 30 31 32 33 31 33 34 35 36 37 35 37 38 39 40 41 39 41 42 43 44 45 43 45 46 47 48 49 47 49 50 51 52 53 54 55 56 57 58 59 60 61 62" />
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <MaterialGroup>
+                                    <EmissiveMaterial Brush="White" />
+                                    <DiffuseMaterial Brush="White" />
+                                    <SpecularMaterial Brush="#80000000"
+                                                      SpecularPower="0" />
+                                </MaterialGroup>
+                            </GeometryModel3D.Material>
+                        </GeometryModel3D>
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <Viewport2DVisual3D>
+                <!-- Give the plane a slight rotation -->
+                <Viewport2DVisual3D.Transform>
+                    <TranslateTransform3D  OffsetY="-1" />
+                </Viewport2DVisual3D.Transform>
+
+                <!-- The Geometry, Material, and Visual for the Viewport2DVisual3D -->
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Normals="0,0,1 0,0,1 0,0,1 0,0,1 0,1,0 0,1,0 0,1,0 0,1,0 0,0,-1 0,0,-1 0,0,-1 0,0,-1 0,-1,0
+0,-1,0 0,-1,0 0,-1,0 1,0,0 1,0,0 1,0,0 1,0,0 -1,0,0 -1,0,0 -1,0,0 -1,0,0"
+                                    Positions="-0.5,-0.5,0.5 0.5,-0.5,0.5 0.5,0.5,0.5 -0.5,0.5,0.5 -0.5,0.5,0.5 0.5,0.5,0.5 0.5,0.5,-0.5 -0.5,0.5,-0.5 -0.5,0.5,-0.5 0.5,0.5,-0.5 0.5,-0.5,-0.5 -0.5,-0.5,-0.5 -0.5,-0.5,-0.5
+0.5,-0.5,-0.5 0.5,-0.5,0.5 -0.5,-0.5,0.5 0.5,-0.5,0.5 0.5,-0.5,-0.5 0.5,0.5,-0.5 0.5,0.5,0.5 -0.5,-0.5,-0.5 -0.5,-0.5,0.5 -0.5,0.5,0.5 -0.5,0.5,-0.5"
+                                    TextureCoordinates="0.375,1 0.625,1 0.625,0.75 0.375,0.75 0.375,0.75 0.625,0.75 0.625,0.5 0.375,0.5 0.375,0.5 0.625,0.5 0.625,0.25 0.375,0.25 0.375,0.25 0.625,0.25 0.625,0 0.375,0 0.625,1 0.875,1 0.875,0.75 0.625,0.75 0.125,1 0.375,1 0.375,0.75
+0.125,0.75"
+                                    TriangleIndices="0 1 2 0 2 3 4 5 6 4 6 7 8 9 10 8 10 11 12 13 14 12 14 15 16 17 18 16 18 19 20 21 22 20 22 23" />
+                </Viewport2DVisual3D.Geometry>
+                <Viewport2DVisual3D.Material>
+                    <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"
+                                     Brush="White" />
+                </Viewport2DVisual3D.Material>
+                <Button BorderBrush="Transparent" BorderThickness="0">Tseee</Button>
+            </Viewport2DVisual3D>
+        </Viewport3D>
+    </Grid>
 </YT:YT_Window>

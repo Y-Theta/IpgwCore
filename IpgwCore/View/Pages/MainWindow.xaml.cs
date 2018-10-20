@@ -47,6 +47,7 @@ namespace IpgwCore {
         }
 
         private void CloseCommand_Execution(object para = null) {
+            GC.Collect(2, GCCollectionMode.Forced);
             if (!Properties.Settings.Default.ExitAsk)
             {
                 _oa = Properties.Settings.Default.ExitAsk;

@@ -62,15 +62,22 @@ namespace NEUH_PluginControl
                 AddInContracts = _container.GetExportedValues<INEUHCoreContract>().ToList();
             else {
                 AddInContracts = new List<INEUHCoreContract>();
-                foreach (var plugins in _container.GetExportedValues<INEUHCoreContract>().ToList())
-                    if (_enabledPlugins.Contains(plugins.Name))
+                foreach (var plugins in _container.GetExportedValues<INEUHCoreContract>().ToList()) {
+                    plugins.ActionCallBack += Plugins_ActionCallBack;
+
+                    if (_enabledPlugins.Contains(plugins.Name)) {
                         AddInContracts.Add(plugins);
+                    }
+                }
             }
             if(AddInContracts.Count > 0)
                 foreach (Assembly asy in AppDomain.CurrentDomain.GetAssemblies()) {
-                    Console.WriteLine(asy.GetName().Name + "   " + asy.Location);
                     PluginNameReflection.Add(asy.Location, asy.GetName().Name);
                 }
+        }
+
+        private void Plugins_ActionCallBack() {
+            Console.WriteLine("UnLoaded");
         }
 
         public string ShowPlugins() {

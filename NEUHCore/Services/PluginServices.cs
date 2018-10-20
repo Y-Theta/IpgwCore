@@ -98,29 +98,29 @@ namespace NEUHCore.Services {
             OnPluginChanged?.Invoke(this, new PluginChangedArgs(name, PluginAction.Load));
         }
 
-        public string ShowDomains() {
-            string str = "AppDomains \n";
-            List<AppDomain> appDomains = new List<AppDomain>();
+        //public string ShowDomains() {
+        //    string str = "AppDomains \n";
+        //    List<AppDomain> appDomains = new List<AppDomain>();
 
-            IntPtr handle = IntPtr.Zero;
-            CorRuntimeHost host = new CorRuntimeHost();
-            try {
-                host.EnumDomains(out handle);
-                while (true) {
-                    object domain;
-                    host.NextDomain(handle, out domain);
-                    if (domain == null)
-                        break;
-                    appDomains.Add((AppDomain)domain);
-                }
-            }
-            finally {
-                host.CloseEnum(handle);
-            }
-            foreach (var domain in appDomains)
-                str += $"{appDomains.IndexOf(domain)} : {domain.FriendlyName.PadRight(20)} \n";
-            return str;
-        }
+        //    IntPtr handle = IntPtr.Zero;
+        //    CorRuntimeHost host = new CorRuntimeHost();
+        //    try {
+        //        host.EnumDomains(out handle);
+        //        while (true) {
+        //            object domain;
+        //            host.NextDomain(handle, out domain);
+        //            if (domain == null)
+        //                break;
+        //            appDomains.Add((AppDomain)domain);
+        //        }
+        //    }
+        //    finally {
+        //        host.CloseEnum(handle);
+        //    }
+        //    foreach (var domain in appDomains)
+        //        str += $"{appDomains.IndexOf(domain)} : {domain.FriendlyName.PadRight(20)} \n";
+        //    return str;
+        //}
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         private void InitFloderWatcher() {
@@ -137,7 +137,7 @@ namespace NEUHCore.Services {
 
         private void _updatewatcher_Deleted(object sender, FileSystemEventArgs e) {
             App.Current.Dispatcher.Invoke(new Action(() => {
-                OnPluginChanged?.Invoke(this, new PluginChangedArgs(Assembly.LoadFrom(App.Root + App.Plugin + e.Name).GetName().Name, PluginAction.Unload));
+                OnPluginChanged?.Invoke(this, new PluginChangedArgs(e.Name.Split('.').First(), PluginAction.Unload));
             }), System.Windows.Threading.DispatcherPriority.Normal);
             _control.UpdatePlugins();
         }
@@ -153,5 +153,4 @@ namespace NEUHCore.Services {
         public PluginServices() { Load(); }
         #endregion
     }
-
 }

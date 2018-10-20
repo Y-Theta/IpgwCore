@@ -33,14 +33,14 @@ namespace NEUH_Contract {
         /// <summary>
         /// 控件的某些行为需要核心程序作出响应回调
         /// </summary>
-        event PluginActionEventHandler ActionCallBack;
+        event CrossAppDomainDelegate ActionCallBack;
 
         /// <summary>
         /// 触发ActionCallBack
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        void Invoke(object sender, PluginActionArgs args);
+        void InvokeCallback();
         /// <summary>
         /// 获取插件信息的字符描述
         /// </summary>
@@ -59,7 +59,7 @@ namespace NEUH_Contract {
     /// 插件基类
     /// </summary>
     public class CoreContractBase : MarshalByRefObject, INEUHCoreContract {
-        public event PluginActionEventHandler ActionCallBack;
+        public event CrossAppDomainDelegate ActionCallBack;
 
         public string Name { get; set; }
 
@@ -86,8 +86,8 @@ namespace NEUH_Contract {
             t = null;
         }
 
-        public void Invoke(object sender, PluginActionArgs args) {
-            ActionCallBack?.Invoke(sender, args);
+        public void InvokeCallback() {
+            ActionCallBack?.Invoke();
         }
     }
 }

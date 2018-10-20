@@ -67,10 +67,6 @@ namespace IpgwCore.Services.HttpServices {
         /// 模拟登录的类
         /// </summary>
         private HttpClient _httpClient { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private HttpClientHandler _clientHandler { get; set; }
 
         /// <summary>

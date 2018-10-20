@@ -9,8 +9,8 @@ using YFrameworkBase;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 
-namespace IpgwKit {
-   public class AreaIconServices :SingletonBase<AreaIconServices> {
+namespace IpgwCore {
+    public class AreaIconServices : SingletonBase<AreaIconServices> {
         #region Properties
         private IntPtr _ico = IntPtr.Zero;
 
