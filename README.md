@@ -5,3 +5,7 @@
 
 - IpgwCore为最初版本
 - 后续将用MEF修改
+
+
+**本项目已经放弃**
+**AreaIconCore为重新编写的项目**
